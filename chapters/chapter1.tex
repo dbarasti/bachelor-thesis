@@ -1,0 +1,92 @@
+%!TEX root = ../dissertation.tex
+\begin{savequote}[75mm]
+L’avvento e la crescita di internet hanno rivoluzionato il modo di fare impresa in particolare quella industriale. 
+Ciò che prima era un impianto isolato, con operatori  e responsabili, ora è parte di una catena produttrice interconnessa che genera non solo beni tangibili ma anche dati che, se ben gestiti, possono diventare informazione utilizzata per aumentare l’efficienza dell'intera impresa in un delicato ciclo di feedback.
+\end{savequote}
+
+\chapter{Il contesto}
+
+Prima di affrontare il problema oggetto di questa tesi è doveroso fornire una panoramica del contesto aziendale che ha caratterizzato lo stage svolto. In questo modo i capitoli successivi risulteranno più chiari e inseriti in una propria logica.
+
+\section{Sanmarco Informatica SpA}\label{smi}
+
+L’azienda \acrfull{smi} dal 1984 si occupa di consulenza e sviluppo \textit{software}. Si è specializzata nella progettazione, realizzazione e installazione di soluzioni a supporto dei processi aziendali di duemila aziende con numerose installazioni oltre confine.\\
+L’azienda ha tra i suoi punti di forza quello della vicinanza ai clienti, che si traduce in diverse sedi di proprietà in Veneto, Lombardia, Emilia-Romagna e Friuli-Venezia Giulia con 450 dipendenti totali.\\
+
+Il \acrfull{crs} è situato a Grisignano di Zocco (VI), sede di lavoro per oltre 150 dipendenti. Questo è il fulcro dello sviluppo e della manutenzione dei prodotti \textit{software}. Team di sviluppatori e sistemisti sono coordinati per garantire stabilità di servizio per i clienti, e un’alta personalizzazione dei prodotti offerti.\\
+La ricerca e l’innovazione sono di grande valore per \acrshort{smi}, con una media del 20\% di fatturato investito annualmente in ricerca e sviluppo.
+Sono anche numerose le risorse impiegate nella formazione e ricerca di talenti provenienti dall'Università di Padova. Un esempio di questo è il progetto \textit{Academy} che viene descritto nel seguente modo: "Lo scopo è quello di educare giovani allievi da inserire direttamente nel mondo lavorativo, attraverso un percorso di eccellenza che forma figure professionali altamente qualificate."\footnote{\href{www.sanmarcoacademy.com}{www.sanmarcoacademy.com}}.\\
+Il \acrshort{crs} è anche responsabile per l’erogazione dei servizi \textit{cloud} forniti da \acrshort{smi}. È infatti presente una sala server amministrata da tecnici sistemisti.\\
+Tutta la proprietà operativa di \acrshort{smi} rimane in azienda, senza il bisogno di \textit{\gls{outsourcing}} ad aziende esterne.\\
+
+L’azienda è organizzata in \textit{\acrfull{bu}}, un sottoinsieme dell'impresa che rappresenta un \textit{business} specifico concentrato su una particolare linea di prodotti.
+\begin{wrapfigure}{r}[1pt]{0.25\textwidth}
+	\caption{Logo \acrshort{bu} Jmes}
+	\centering
+	\includegraphics[width=0.25\textwidth]{figures/logo_jmes}
+\end{wrapfigure}
+La {\acrshort{bu} interessata dallo stage è JMES, composta da 20 persone tra sistemisti e sviluppatori, che si occupa dell'omonimo applicativo utilizzato nell'ambito della \textit{\gls{digital industry}}. Questo software serve a gestire e supervisionare l'avanzamento della produzione all'interno della fabbrica.\\
+%\begin{wrapfigure}{l}{0.3\textwidth}
+%	\caption{Albero delle \gls{business unit} di \acrshort{smi}}
+%	\centering
+%	\includegraphics[width=0.3\textwidth]{figures/albero_prodotti_smi}
+%\end{wrapfigure}
+Altre \acrshort{bu} si occupano invece di \textit{Business Process Management} (JPA), gestione contenuti aziendali come manuali e documenti della qualità (Discovery ECM), \textit{marketing} (nextBI), sviluppo di applicazioni e siti per aziende (4words) e molto altro.
+\begin{figure}[h]
+	\includegraphics[width=0.25\textwidth]{figures/albero_prodotti_smi}
+	\centering
+\end{figure}
+
+Ulteriori informazioni riguardanti le \acrshort{bu} o l'azienda in generale possono essere trovate sul sito ufficiale di  \href{https://www.sanmarcoinformatica.com}{Sanmarco Informatica}.
+
+\clearpage
+
+\section{Manufacturing execution system}
+
+L'avvento e la crescita di internet hanno rivoluzionato il modo di fare impresa in particolare quella industriale. \\
+Ciò che prima era un impianto isolato, con operatori  e responsabili, ora è parte di una catena produttrice interconnessa che genera non solo beni tangibili ma anche dati che, se ben gestiti, possono diventare informazione utilizzata per aumentare l’efficienza dell'intera impresa in un delicato ciclo di \textit{feedback}.\\
+La corretta gestione di questa informazione diventa fondamentale per il successo dell'impresa mantenendo alta la competitività.
+
+Nasce quindi la necessità di un software che trasformi il dato in informazione e che faccia uso di questa per migliorare le \textit{performance} supportando e gestendo a sua volta tutta la linea di produzione con indicazioni precise e in tempo reale.\\
+Questo strumento prende il nome di \textit{\acrfull{mes}}. \\
+Un software \acrshort{mes} in pratica si occupa di raccogliere, elaborare e condividere informazioni provenienti direttamente dall'industria che normalmente restano disaggregate per diversi motivi: si trovano in formato non elettronico, sono poco precise o si trovano in ambienti isolati tra loro.
+
+Il controllo e la gestione dell'informazione consentono non solo di mantenere un piano generale del processo produttivo aziendale, ma anche di evidenziare possibili problemi in anticipo e ottenere quindi una migliore resa di produzione.\\
+Vediamo quali sono i principali benefici di un sistema \acrshort{mes}\footnote{[\textit{Five benefits of a MES}], \href{https://www.industryweek.com/companies-amp-executives/five-benefits-mes}{www.industryweek.com/companies-amp-executives/five-benefits-mes}}:
+\begin{enumerate}
+	\item \textbf{Riduzione di scarti e sprechi}. Grazie ad una visione in tempo reale della produzione, è possibile individuare con piccoli margini situazioni in cui le unità prodotte non sono conformi, fermando la produzione e limitando gli sprechi.
+	\item \textbf{Precisione nella definizione dei costi}. Con un sistema \acrshort{mes}, i tempi di lavoro, gli sprechi, i tempi di inattività, la manutenzione sono monitorati e registrati in tempo reale direttamente dalla fabbrica. Questo rende innanzitutto l’informazione più affidabile, e utilizzabile per riclassificare i costi e valutare criticamente situazioni con alto tasso di sprechi.
+	\item \textbf{Ridurre i tempi di inattività}. Siccome una produzione ferma difficilmente porta a un guadagno, un \acrshort{mes} deve essere in grado di pianificare la produzione in modo che le risorse necessarie siano quelle disponibili, integrando anche i piani dei turni dei dipendenti, in modo da aumentare ulteriormente l’efficienza, riducendo quindi i costi.
+	\item \textbf{Riduzione del magazzino}. Le giacenze in magazzino costano, perché aumentano i costi logistici di gestione, oltre ai costi per produrre tali giacenze. Con un \acrshort{mes} si ha uno stato aggiornato della nuova produzione, degli scarti e dei prodotti non conformi. In questo modo chi si occupa di acquisto, spedizione e pianificazione sa esattamente cosa è disponibile e cosa bisogna ordinare.
+	\item \textbf{Riduzione di costi}. Con un controllo più stretto sui tempi e i costi necessari per la produzione, è possibile snellire ulteriormente processi a supporto, come la gestione logistica del magazzino, quindi ottenendo un disimpegno di persone e attrezzature.
+	
+\end{enumerate}
+
+
+\section{Le squadre JMES}
+
+Come accennato nel paragrafo \ref{smi} esistono due squadre che lavorano in maniera sinergica per lo sviluppo e l’installazione del prodotto JMES:  sviluppatori e sistemisti.
+\begin{enumerate}
+	\item \textbf{Sviluppatori}. Sono raggruppati all'interno del team di JMES e si occupano di implementare le funzionalità aggiuntive richieste dai clienti. Queste funzionalità possono essere richieste da un singolo cliente o essere inserite in distribuzioni di aggiornamento per tutte le installazioni. La differenza sta nel valore monetario dell'\textit{upgrade}. La figura a cui fanno riferimento è lo Scrum Master. All'attivo il team è composto da 8 persone.
+	\item \textbf{Sistemisti}. Effettuano un’analisi tecnica presso le sedi dei clienti evidenziando possibili problemi di compatibilità con le attrezzature presenti, propongono le possibili configurazioni del software JMES in base ai requisiti e ai vincoli posti dal cliente, organizzano l’installazione e la configurazione del prodotto. La figura a cui fanno riferimento è il capo progetto. All'attivo il gruppo è composto da 10 persone.
+\end{enumerate}
+
+
+
+
+
+Per il periodo dello stage sono stato inserito nel team di sviluppo JMES.
+
+La prima installazione di JMES risale a maggio 2018. È quindi un prodotto giovane che però è stato già apprezzato da 19 clienti attivi, ci sono inoltre 27 analisi per l’installazione in corso e altre 19 da pianificare.
+
+
+
+\section{Way of working}
+\subsection{Sviluppo agile e framework Scrum}
+\subsection{Strumenti di lavoro}
+\subsection{Tecnologie di sviluppo}
+
+
+\section{JMES e JDI}
+
+
