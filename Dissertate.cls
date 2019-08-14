@@ -61,6 +61,9 @@
     {\begin{spacing}{\dcompressedspacing}\oldenumerate}
     {\endoldenumerate\end{spacing}}
 
+%graphs
+\usepackage{pgfplots}
+\pgfplotsset{width=7cm,compat=1.8}
 %new commands
 \newcommand{\smi}[0]{Sanmarco Informatica}
 %figures
