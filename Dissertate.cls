@@ -70,11 +70,12 @@
 \usepackage{wrapfig}
 %glossary
 \usepackage[acronym, toc]{glossaries}
-
-
 \include{glossary_terms}
-
+\renewcommand*{\acronymname}{Acronimi}
+\renewcommand*{\glossaryname}{Glossario}
 \makeglossaries
+%language
+\usepackage[italian]{babel}
 
 
 % Text layout.
@@ -100,7 +101,7 @@
 \AtBeginEnvironment{tabular}{\addfontfeature{RawFeature=+tnum}}
 \widowpenalty=300
 \clubpenalty=300
-\setromanfont[Numbers=OldStyle, Ligatures={Common, TeX}, Scale=1.0]{EB Garamond}
+\setromanfont[Numbers=OldStyle, Ligatures={Common, TeX}, Scale=1.1]{EB Garamond}
 \newfontfamily{\smallcaps}[RawFeature={+c2sc,+scmp}]{EB Garamond}
 \setsansfont[Scale=MatchLowercase, BoldFont={Lato Bold}]{Lato Regular}
 \setmonofont[Scale=MatchLowercase]{Source Code Pro}
@@ -264,13 +265,13 @@
 	\clearpage
 
 	% figure listing - required if you have any figures
-	\addcontentsline{toc}{chapter}{Elenco delle figure}
+	%\addcontentsline{toc}{chapter}{Elenco delle figure}
 	\listoffigures
 	\phantomsection
 	\cleardoublepage
 
 	% table listing - required if you have any tables
-	\addcontentsline{toc}{chapter}{Elenco delle tabelle}
+	%\addcontentsline{toc}{chapter}{Elenco delle tabelle}
 	\listoftables
 	\phantomsection
 	\cleardoublepage
@@ -303,7 +304,7 @@
 
 	\scshape{\Large{\bfseries{Università degli Studi di Padova}}} \\
 	\line(1, 0){400} \\
-	\scshape{\large{Dipartimento di Matematica}} \\
+	\scshape{\large{Dipartimento di Matematica "Tullio Levi-Civita"}} \\
 
 	\vspace{5pt}
 	\small{\textit{}}
@@ -326,7 +327,7 @@
 	  \@advisor \hfill \@author\\
 	  Università di Padova \\
 	  \vspace{6pt}
-	  \textit{Supervisore} \\
+	  \textit{Tutor esterno} \\
 	  \@coadvisorOne \\
 	  \@coadvisorOneUniversity
 	  \vspace{10pt}
@@ -394,7 +395,7 @@
 \newcommand{\abstractpage}{
 	\phantomsection
 	\setcounter{page}{5}
-	\addcontentsline{toc}{chapter}{Abstract}
+%	\addcontentsline{toc}{chapter}{Abstract}
 	\chapter*{Abstract}
 	\input{frontmatter/abstract}
 }

@@ -1,0 +1,70 @@
+%!TEX root = ../dissertation.tex
+%\begin{savequote}[75mm]
+%\qauthor{Quoteauthor Lastname}
+%\end{savequote}
+
+\chapter{Analisi, progettazione e sviluppo}\label{analisi_progettazione_sviluppo}
+
+\section{Studio della versione precedente}
+Nonostante il primo sviluppo di JDI non avesse avuto un risultato positivo una volta messo in produzione, le funzionalità di base di questa dovevano essere presenti anche nella nuova versione.\\
+Come visto nel capitolo precedente, i problemi stavano nella scarsa soddisfazione di requisiti non funzionali, non nel soddisfacimento di quelli funzionali.
+
+Parlerò poi dell'uso di librerie esterne fatto in questa versione (e.g. Google Guice, ReactiveX...)
+
+In questa sezione si sottolineerà l'approccio di distribuzione della vecchia versione. Nelle seguenti sezioni invece apparirà chiaro come la distribuzione sia stata messa da parte sostituendola con un puro approccio concorrente.
+
+Sarà quindi descritta la fase di analisi durata circa due settimane. 
+
+
+\section{I requisiti del progetto}
+In questa sezione vengono raccolti i requisiti estrapolati dall'analisi della vecchia versione.
+
+Particolare attenzione sarà posta sui requisiti non  funzionali. Come detto sono stati il punto debole della versione precedente.
+
+\section{Tecnologie e strumenti impiegati}
+Saranno qui elencate e descritte le tecnologie e gli strumenti scelti per lo sviluppo del progetto.
+
+Saranno giustificate alcune scelte, come la riduzione quasi a zero di librerie esterne, e l'approccio "chiuso" di Sanmarco Informatica verso il fare affidamento a prodotti esterni.\\
+Ho notato infatti che un ragionamento spesso fatto dai responsabili tecnici è "preferiamo reinventare la ruota sviluppando internamente librerie anche già esistenti, per avere pieno controllo sullo svuluppo e sulla manutenzione". Cercherò di analizzare criticamente questo ragionamento.\\
+DI SEGUITO UNA PRIMA STESURA DELLE TECNOLOGIE E DEGLI STRUMENTI IMPIEGATI.
+
+Come vedremo nei capitoli successivi, il lavoro da me svolto non è integrato in JMES ma è un modulo esterno che ampia le sue funzionalità. Questo mi ha permesso di avere libertà nella scelta degli strumenti di lavoro, prediligendo tecnologie che ero curioso di conoscere più nel dettaglio.
+
+I principali strumenti per lo sviluppo da me utilizzati sono stati i seguenti:
+
+\begin{itemize}
+	\item IDE: Intellij IDEA. Un ambiente di sviluppo per Java prodotto da \textit{JetBrains} che mi ha permesso, grazie anche a numerosi \textit{plug-in}, di integrare in un solo ambiente lo sviluppo \textit{software}, i test automatici, la \textit{build} e il versionamento del codice;
+	
+	\item \textit{Build tool}: Gradle. Un sistema per l'automazione di \textit{build} che prende spunto da i classici Apache Maven e Apache Ant che permette di specificare la configurazione del progetto con un linguaggio specifico basato su Groovy.
+	
+	\item \textit{VCS}: git. Sistema di versionamento distribuito utilizzato in questo progetto assieme a GitHub che ha fornito il servizio di \textit{repository} remoto.\\ Il suo uso è stato fondamentale in quanto sono state create, sopratutto nel primo periodo di sviluppo, diverse possibili soluzioni al problema. Git ha permesso di mantenere in parallelo ogni soluzione sviluppata, grazie all'uso di \textit{branch}.
+	
+	\item \textit{ITS}: GitHub ITS. Integrato nelle \textit{repository} di GitHub, ha permesso di tenere traccia dei cambiamenti durante il progetto. Le \textit{issue} sono state inserite nel \textit{kanban board} integrata in GitHub per avere ben visibile la situazione del progetto in ogni momento della progettazione e dello sviluppo.
+\end{itemize}
+
+Per quanto riguarda invece gli strumenti che sono tornati utili durante lo sviluppo abbiamo i seguenti:
+\begin{itemize}
+	\item Wireshark: strumento per la cattura e l'analisi di pacchetti utilizzato per la comprensione della comunicazione con protocollo TCP/IP tra PLC e computer.  
+\end{itemize}
+
+Lo strumento per la comunicazione interna utilizzato dal team JMES è SLACK, mentre per la comunicazione più formale interna ed esterna all'azienda mi è stato fornito un account di posta elettronica.
+
+
+\section{Metodologia di lavoro}
+Way of working utilizzato durante il progetto, interazione con il team JMES di cui ero parte ecc..
+
+\section{Tracer bullet development}
+Definire questo progetto un prototipo sarebbe errato, infatti spesso questi sviluppi servono solo a dimostrare la fattibilità di un progetto e il codice utilizzato viene quasi sempre scartato.\\
+Il lavoro svolto invece è stato mirato alla creazione e all'implementazione di un'architettura solida, scalabile e affidabile della nuova versione di JDI, l'opposto quindi di un prototipo! \\
+Questo tipo di sviluppo mira a utilizzare la maggior percentuale possibile di tecnologie per stendere una prima strada verso lo sviluppo completo.
+Questa metodo prende il nome di \textit{tracer bullet development}.
+
+
+Si parlerà principalmente di: 
+\begin{itemize}
+	\item lavoro di integrazione iniziale delle tecnologie e degli strumenti utilizzati durante lo sviluppo. 
+	\item la progettazione di prototipi e l'analisi di prestazione con benchmark per testare le prestazioni prima ancora di iniziare lo sviluppo intensivo;
+	\item la scelta del prototipo
+	\item lo sviluppo 
+\end{itemize}
+

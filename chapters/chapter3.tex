@@ -1,10 +1,32 @@
 %!TEX root = ../dissertation.tex
 \begin{savequote}[75mm]
-Nulla facilisi. In vel sem. Morbi id urna in diam dignissim feugiat. Proin molestie tortor eu velit. Aliquam erat volutpat. Nullam ultrices, diam tempus vulputate egestas, eros pede varius leo.
-\qauthor{Quoteauthor Lastname}
+JDI era organizzato a nodi \textit{router-client} che potenzialmente potevano permettere di distribuire il prodotto in zone fisiche
+diverse, comunicando poi tramite \textit{WebSocket}.
+Nella realtà però gli \textit{stakeholder} di JMES hanno constatato che gli svantaggi introdotti
+dalla soluzione sviluppata superavano possibili vantaggi commerciali del prodotto.
 \end{savequote}
 
-\chapter{Consectetuer adipiscing elit}
+\chapter{Le problematiche}
+In questo capitolo si analizzerà brevemente la situazione che ha portato al primo sviluppo di JDI, gli errori commessi durante lo sviluppo e la progettazione, il sorgere dei primi problemi arrivati in produzione e i propositi per la nuova versione di JDI, oggetto della tesi.
+
+\section{Il primo sviluppo di JDI}
+L'idea di ridurre gli errori commessi durante l'interazione operatore-JMES tramite l'utilizzo di un middleware in grado di comunicare con i PLC e che effettuasse il recupero di dati che l'operatore inseriva solitamente manualmente (e.g. la conta dei pezzi prodotti da una macchina, la segnalazione di un guasto o di un fermo, ecc).
+
+Si parla poi dello sviluppo della prima versione: poche indicazioni sulle tecnologie, nessuna restrizione sui requisiti non funzionali ecc.\\
+
+Inoltre si discute della scelta architetturale che avrebbe permesso di distribuire i nodi di JDI ovunque nel mondo.
 
 
 
+
+\section{I problemi con JDI}
+Si discute della mancanza di test di affidabilità e di scalabilità del prodotto sviluppato, dell'inutilità della possibilità di distribuire fisicamente JDI e dei drawback a cui l'architettura scelta portava e della scarsa manutenibilità del codice.\\
+Di questi problemi ci si è accorti solo arrivati in produzione, cioè quando JDI è stato installato nelle fabbriche di alcuni clienti.
+
+
+
+
+\section{Il nuovo sviluppo}
+
+Gli obiettivi che il nuovo JDI deve raggiungere, il cambiamento di architettura che puntava a eliminare la distribuzione del codice e che prediligeva la concorrenza.\\
+Le garanzie di affidabilità e scalabilità ecc.
