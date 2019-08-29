@@ -3,7 +3,7 @@
 
 \end{savequote}
 
-\chapter{Background tecnologico}
+\chapter{Background Tecnologico}\label{ch:background}
 In questo capitolo si fornirà una introduzione alle tecnologie che risulterà utile per comprendere al meglio i capitoli successivi.\\
 Gli argomenti trattati saranno principalmente JMES, JDI e alcuni standard della digital industry (e.g. protocollo Modbus)
 
@@ -25,7 +25,7 @@ Vediamo quali sono i benefici che JMES, l'implementazione MES di \acrshort{smi} 
 	\item Progetto carta zero. Grazie alla gestione software della produzione, si riduce la carta circolante che molto spesso veniva utilizzata per tracciare le fasi degli impianti, per registrare le interazioni operatore-macchina e per le stampe di documenti tecnici di assemblaggio.
 \end{enumerate}
 
-Parlare ora più nel dettaglio di JMES.
+Parlare ora più nel dettaglio dell'architettura JMES.
 
 \clearpage
 
@@ -55,3 +55,32 @@ Questi dati sono accuratamente gestiti e resi disponibili ad altre applicazioni 
 \end{figure}
 
 \clearpage
+
+\section{Tecnologie e strumenti impiegati}
+Saranno qui elencate e descritte le tecnologie e gli strumenti scelti per lo sviluppo del progetto.
+
+Saranno giustificate alcune scelte, come la riduzione quasi a zero di librerie esterne, e l'approccio "chiuso" di \acrshort{smi} verso il fare affidamento a prodotti esterni.\\
+Ho notato infatti che un ragionamento spesso fatto dai responsabili tecnici è "preferiamo reinventare la ruota sviluppando internamente librerie anche già esistenti, per avere pieno controllo sullo svuluppo e sulla manutenzione". Cercherò di analizzare criticamente questo ragionamento.\\
+
+Come vedremo nei capitoli successivi, il lavoro da me svolto non è integrato in JMES ma è un modulo esterno che ampia le sue funzionalità. Questo mi ha permesso di avere libertà nella scelta degli strumenti di lavoro, prediligendo tecnologie che ero curioso di conoscere più nel dettaglio.
+
+I principali strumenti per lo sviluppo da me utilizzati sono stati i seguenti:
+
+\begin{itemize}
+	\item IDE: Intellij IDEA. Un ambiente di sviluppo per Java prodotto da \textit{JetBrains} che mi ha permesso, grazie anche a numerosi \textit{plug-in}, di integrare in un solo ambiente lo sviluppo \textit{software}, i test automatici, la \textit{build} e il versionamento del codice;
+	
+	\item \textit{Build tool}: Gradle. Un sistema per l'automazione di \textit{build} che prende spunto da i classici Apache Maven e Apache Ant che permette di specificare la configurazione del progetto con un linguaggio specifico basato su Groovy;
+	
+	\item \textit{VCS}: git. Sistema di versionamento distribuito utilizzato in questo progetto assieme a GitHub che ha fornito il servizio di \textit{repository} remoto.\\ Il suo uso è stato fondamentale in quanto sono state create, sopratutto nel primo periodo di sviluppo, diverse possibili soluzioni al problema. Git ha permesso di mantenere in parallelo ogni soluzione sviluppata, grazie all'uso di \textit{branch};
+	
+	\item \textit{ITS}: GitHub ITS. Integrato nelle \textit{repository} di GitHub, ha permesso di tenere traccia dei cambiamenti durante il progetto. Le \textit{issue} sono state inserite nel \textit{kanban board} integrata in GitHub per avere ben visibile la situazione del progetto in ogni momento della progettazione e dello sviluppo.
+\end{itemize}
+
+Per quanto riguarda invece gli strumenti non prettamente legati allo sviluppo ma hanno supportato alcune attività abbiamo:
+\begin{itemize}
+	\item Wireshark: strumento per la cattura e l'analisi di pacchetti utilizzato per la comprensione della comunicazione con protocollo TCP/IP tra PLC e computer;  
+	\item Modbus PLC simulator;
+	\item SoMachine Basic.
+\end{itemize}
+
+Per la comunicazione interna al team JMES è stato utilizzato lo strumento di messaggistica SLACK, mentre per la comunicazione più formale interna ed esterna all'azienda mi è stato fornito un account di posta elettronica.
