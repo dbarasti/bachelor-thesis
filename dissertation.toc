@@ -1,33 +1,34 @@
 \babel@toc {italian}{}
 \babel@toc {italian}{}
-\contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}% 
-\contentsline {section}{\numberline {1.1}Sanmarco Informatica SpA}{1}{section.1.1}% 
-\contentsline {section}{\numberline {1.2}La Digital Industry}{3}{section.1.2}% 
-\contentsline {subsection}{\numberline {1.2.1}L'industria 4.0}{3}{subsection.1.2.1}% 
-\contentsline {subsection}{\numberline {1.2.2}Manufacturing execution system}{4}{subsection.1.2.2}% 
-\contentsline {section}{\numberline {1.3}Le squadre JMES}{6}{section.1.3}% 
-\contentsline {section}{\numberline {1.4}Metodologia di lavoro}{7}{section.1.4}% 
-\contentsline {subsection}{\numberline {1.4.1}Sviluppo agile e framework Scrum}{7}{subsection.1.4.1}% 
-\contentsline {subsection}{\numberline {1.4.2}Tecnologie di sviluppo del team}{7}{subsection.1.4.2}% 
-\contentsline {subsection}{\numberline {1.4.3}Strumenti di lavoro del team}{8}{subsection.1.4.3}% 
-\contentsline {section}{\numberline {1.5}Outline della tesi}{9}{section.1.5}% 
-\contentsline {chapter}{\numberline {2}Background Tecnologico}{11}{chapter.2}% 
-\contentsline {section}{\numberline {2.1}JMES}{11}{section.2.1}% 
-\contentsline {section}{\numberline {2.2}L'interazione macchina-MES: JDI}{13}{section.2.2}% 
-\contentsline {section}{\numberline {2.3}Gli standard della Digital Industry}{15}{section.2.3}% 
-\contentsline {subsection}{\numberline {2.3.1}ModBus}{15}{subsection.2.3.1}% 
-\contentsline {section}{\numberline {2.4}Tecnologie e strumenti impiegati}{16}{section.2.4}% 
-\contentsline {chapter}{\numberline {3}Le Problematiche}{19}{chapter.3}% 
-\contentsline {section}{\numberline {3.1}Il primo sviluppo di JDI}{19}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}I problemi con JDI}{20}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Il nuovo sviluppo}{20}{section.3.3}% 
-\contentsline {chapter}{\numberline {4}Analisi, Progettazione e Sviluppo}{21}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Studio della versione precedente}{21}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}I requisiti del progetto}{21}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Metodologia di lavoro}{22}{section.4.3}% 
-\contentsline {section}{\numberline {4.4}Tracer bullet development}{22}{section.4.4}% 
-\contentsline {chapter}{\numberline {5}Retrospettiva}{23}{chapter.5}% 
-\contentsline {chapter}{Riferimenti}{24}{chapter.5}% 
-\contentsline {chapter}{Glossario}{25}{section*.18}% 
-\contentsline {chapter}{Acronimi}{27}{section*.20}% 
-\contentsline {chapter}{Appendice \numberline {A}Nota sui PLC}{29}{Appendice.1.Alph1}% 
+\contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Sanmarco Informatica SpA}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}La Digital Industry}{3}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}L'industria 4.0}{3}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Manufacturing execution system}{4}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}Le squadre JMES}{5}{section.1.3}
+\contentsline {section}{\numberline {1.4}Metodologia di lavoro}{6}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Sviluppo agile e framework Scrum}{6}{subsection.1.4.1}
+\contentsline {subsection}{\numberline {1.4.2}Tecnologie di sviluppo del team}{6}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}Strumenti di lavoro del team}{7}{subsection.1.4.3}
+\contentsline {section}{\numberline {1.5}Outline del documento}{8}{section.1.5}
+\contentsline {chapter}{\numberline {2}Background Tecnologico}{11}{chapter.2}
+\contentsline {section}{\numberline {2.1}JMES}{11}{section.2.1}
+\contentsline {section}{\numberline {2.2}Controllori a Logica Programmabile}{13}{section.2.2}
+\contentsline {section}{\numberline {2.3}L'interazione macchina-MES: JDI}{14}{section.2.3}
+\contentsline {section}{\numberline {2.4}Gli standard della Digital Industry}{16}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Modbus}{16}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Modbus TCP/IP}{17}{subsection.2.4.2}
+\contentsline {section}{\numberline {2.5}Tecnologie e strumenti impiegati}{18}{section.2.5}
+\contentsline {chapter}{\numberline {3}Le Problematiche}{21}{chapter.3}
+\contentsline {section}{\numberline {3.1}Il primo sviluppo di JDI}{21}{section.3.1}
+\contentsline {section}{\numberline {3.2}I problemi con JDI}{21}{section.3.2}
+\contentsline {section}{\numberline {3.3}Il nuovo sviluppo}{22}{section.3.3}
+\contentsline {chapter}{\numberline {4}Analisi, Progettazione e Sviluppo}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}Studio della versione precedente}{23}{section.4.1}
+\contentsline {section}{\numberline {4.2}I requisiti del progetto}{23}{section.4.2}
+\contentsline {section}{\numberline {4.3}Metodologia di lavoro}{24}{section.4.3}
+\contentsline {section}{\numberline {4.4}Tracer bullet development}{24}{section.4.4}
+\contentsline {chapter}{\numberline {5}Retrospettiva}{25}{chapter.5}
+\contentsline {chapter}{Riferimenti}{26}{chapter.5}
+\contentsline {chapter}{Glossario}{27}{section*.21}
+\contentsline {chapter}{Acronimi}{29}{section*.23}

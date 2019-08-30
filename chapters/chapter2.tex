@@ -36,16 +36,44 @@ L'applicazione JMES presenta un'architettura a \textit{layer} schematizzata in f
 Poiché l'applicazione oggetto di questa tesi non è logicamente legata al software JMES, non risulta utile ai fini della comprensione analizzare dettagliatamente la sua composizione.\\
 Dalla prossima sezione si sottolineerà la mancanza in JMES di un collegamento alle macchine industriali, che fino ad ora è stato dato per scontato. Scopriremo invece che questo elemento non è fondamentale in un sistema MES, e non è quindi sempre presente, ma può aumentarne l'efficienza e l'usabilità.
 
+\section{Controllori a Logica Programmabile}
+
+PLC sta per \textit{Programmable Logic Controller}, controllore a logica programmata. Si tratta di un computer ideato per il mondo industriale. Controlla differenti processi ed è programmato in base ai requisiti del processo a cui viene applicato.
+\newline
+
+Molte industrie mettono in pratica processi produttivi specifici, ad esempio per la creazione di un certo bene. Modificare questo processo richiede il rifacimento di gran parte dell'apparato produttivo utilizzato, ad un costo estremamente elevato.
+
+Per superare questo problema una prima versione del PLC fu inventata da \textit{Dick Morley}, che al tempo lavorava per \textit{Modicon}, nel 1968 \footnote{[https://library.automationdirect.com/history-of-the-plc/]}. Un PLC può essere in breve descritto come un sistema di controllo che contiene la definizione di una sequenza programmata. 
+
+\begin{wrapfigure}{l}{0.6\textwidth}
+	\label{fig:schema_plc}
+	\includegraphics[width=0.6\textwidth]{figures/plc_overview}
+	\centering
+	\caption{Schema di un classico PLC e dei suoi moduli. (Dall'articolo \textit{Engineering Essentials}. Disponibile su  https://www.machinedesign.com/engineering-essentials/engineering-essentials-what-programmable-logic-controller)}
+\end{wrapfigure}
+
+I PLC sono modulari, quindi componibili in diverse configurazioni. I moduli fondamentali sono quelli di \textit{input} e di \textit{output}. Entrambi sono in grado di gestire segnali analogici e digitali. Sono progettati per essere robusti e per resistere a forti condizioni atmosferiche.
+
+Sono programmabili con linguaggi di programmazione ad alto livello che sono facilmente comprensibili. Il linguaggio più comune è \textit{Ladder Diagram}. I programmi sono scritti su normali computer per poi essere trasferiti ai PLC via cavo o via rete.\\
+
+Questi controllori sono stati ideati per sostituire i componenti elettrici (sopratutto relé e \textit{timer}) con collegamenti fissi che caratterizzavano i vecchi impianti elettrici nei processi industriali, rendendo più semplice riconfigurare un impianto.\\
+
+I PLC hanno anche degli svantaggi. Non sono generalmente in grado di gestire dati complessi, non sostituiscono quindi i computer. Hanno inoltre bisogno di moduli ulteriori per permettere la visualizzazione di dati.
 
 
-\section{L'interazione macchina-MES: JDI}
+
+
+
+
+\section{L'interazione macchina-MES: JDI}\label{jdi}
 
 Con un sistema \acrshort{mes} tradizionale esistono due tipi di interazione: uomo-macchina e uomo-\acrshort{mes}. La prima consiste nell'insieme di azioni che l’operatore svolge sulla macchina per avanzare nel processo produttivo, la seconda consiste nella dichiarazione delle azioni svolte dall'operatore al sistema \acrshort{mes}.
 
-Si consideri ad esempio l'azione che un operatore può svolgere su una macchina per il taglio laser: l'operaio o l'operaia effettua una o più operazioni di taglio. Una volta terminate deve dichiarare al sistema \acrshort{mes} utilizzato nello stabilimento che ha terminato il lavoro e ha portato a termine $X$ tagli validi, ha prodotto $Y$ scarti e che il macchinario si è bloccato $Z$ volte.\\
+Si consideri ad esempio l'azione che un operatore può svolgere su una macchina per il taglio laser: l'operaio o l'operaia effettua una o più operazioni di taglio. Una volta terminate deve dichiarare al sistema \acrshort{mes} utilizzato nello stabilimento che ha terminato il lavoro e ha portato a termine $X$ tagli validi, ha prodotto $Y$ scarti e che il macchinario si è bloccato $Z$ volte.
 
-\label{fig:interazioni_operatore}
-\begin{wrapfigure}{l}[1pt]{0.5\textwidth}
+\setlength\intextsep{0pt}
+\begin{wrapfigure}{r}[1pt]{0.5\textwidth}
+	\label{fig:interazioni_operatore}
 	\includegraphics[width=0.5\textwidth]{figures/interazioni_operatore}
 	\centering
 	\caption{Interazioni tra operatore e JMES}
@@ -57,12 +85,14 @@ Per questo il mercato ha richiesto a \acrshort{smi} una soluzione in grado di pe
 \clearpage
 
 L’elaborazione di questo bisogno ha portato a considerare l’introduzione di una terza interazione ai fini di ridurre quando possibile l’interazione operatore-\acrshort{mes}. In una visione semplicistica dello scenario questa interazione può essere definita come tra la macchina e il sistema JMES. Nella pratica però  si tratta di inserire un terzo attore che si occupi di fornire a JMES tutti i dati ricavati dalla macchina. Questo attore si chiama JDI (acronimo ideato da \acrshort{smi} che significa \textit{Java Digital Industry}).
-
+\newline
+\newline
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{figures/plc-jdi-jmes}
 	\caption{Rappresentazione di come JDI si integra nei sistemi di produzione e con JMES}
 	\centering
 \end{figure}
+\newline
 
 Alle macchine industriali moderne è quasi sempre collegato un PLC che si occupa di comandare la macchina a cui e connesso ed elabora e immagazzina i dati che vengono generati, relativi ad esempio al numero di pezzi prodotti, lo stato degli allarmi o l'interruzione di funzionamento della macchina.
 
@@ -72,39 +102,81 @@ JDI è un prodotto a se stante, indipendente da JMES. L'idea alla base di questo
 
 
 \section{Gli standard della Digital Industry}
-Esistono decine di produttori  di PLC..
-\subsection{ModBus}
+Esistono decine di produttori  di PLC e spesso ognuno implementa i propri protocolli\footnote{https://en.wikipedia.org/wiki/List\_of\_automation\_protocols}. Le aziende clienti di \acrshort{smi} presentano una grande variegatura di tipologie di PLC e relative politiche di comunicazione. Di seguito una lista con degli esempi di protocolli supportati da \acrshort{smi} per i suoi clienti:
+
+\begin{itemize}
+	\item S7;
+	\item Modbus TCP/IP;
+	\item OPC UA;
+	\item MTConnect;
+	\item MQTT.
+\end{itemize}
+Ogni protocollo definisce specifiche proprie di comunicazione con una certa complessità. Dato il tempo limitato a disposizione durante lo stage ho circoscritto il dominio dell'applicazione per gestire una sola tipologia di protocollo: Modbus TCP/IP. È stata posta particolare attenzione durante lo studio dell'architettura in modo che sia possibile estendere le capacità dell'applicazione per gestire ulteriori protocolli.
+
+\subsection{Modbus}
+
+Modbus è un protocollo di comunicazione seriale sviluppato inizialmente da \textit{Modicon}. È stato concepito per operare con i PLC. È un protocollo del livello applicativo, che opera al settimo strato della scala OSI e permette una comunicazione \textit{client-server} su differenti tipi di rete. Definisce un modo di accedere e controllare un dispositivo tramite un altro senza dipendere dalla rete fisica coinvolta nella comunicazione.
+
+Il protocollo descrive la modalità con cui un dispositivo accede ad un altro, come l'informazione è ricevuta e come devono essere strutturate le risposte alle \textit{query}.
+In caso di errore, il protocollo definisce un meccanismo per inviare il corretto comando a chi ha richiesto l'operazione. 
+
+\begin{wrapfigure}{l}{0.65
+		\textwidth}
+	%	\vspace{-20pt}
+	\includegraphics[width=0.6\textwidth]{figures/modbus_communication_stack}
+	\centering
+	\caption{\textit{Stack} di comunicazione di Modbus. (Da MODBUS, Application Protocol Specification, vol. 1.1b, 28 dicembre 2006. Disponibile su www.modbus.org/docs/Modbus\_Application\_Protocol\_V1\_1b.pdf.)}
+\end{wrapfigure}
+
+La comunicazione può avvenire su diversi tipi di rete (ad esempio \textit{Ethernet}) incorporando il protocollo Modbus in pacchetti dati nel protocollo che si intende utilizzare. Ci sono quindi diversi modi di implementare Modbus. Uno di questi è con \textit{TCP/IP over Ethernet}.
+\newline
+\newline
+
+\subsection{Modbus TCP/IP}\label{sec:modbus_tcp}
+\setlength\intextsep{0pt}
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\includegraphics[width=0.65\textwidth]{figures/modbus_layers_frame}
+	\caption{(a) \textit{layer} di Modbus TCP/IP; (b) \textit{frame} Modbus TCP/IP. (Da \textit{Fieldbus and Networking in Process Automation}, S.K. Sen. CRC Press, 2017)}
+	\centering
+	\label{fig:modbustcp_layers_frame}
+\end{wrapfigure}
+La specifica Modbus TCP/IP è stata introdotta nel 1999. Ci sono dei vantaggi nell'utilizzare questo protocollo, tra cui la semplicità di utilizzo, l'uso di \textit{Ethernet} e il fatto che sia una specifica aperta.
+
+Modbus TCP/IP è un protocollo internet. Consiste nel protocollo Modbus inserito in un contenitore TCP. In pratica quindi i dispositivi Modbus possono comunicare su Modbus TCP/IP. L'unico vincolo è quello di un \textit{gateway} che effettui le conversioni adatte per passare i dati dallo strato fisico a quello \textit{Ethernet} e da Modbus a Modbus TCP/IP.\\
+La figura \ref{fig:modbustcp_layers_frame} mostra gli strati del protocollo Modbus TCP/IP affianco allo standard OSI e il \textit{frame} Modbus contenuto nel \textit{frame} Modbus TCP/IP.
 
 \clearpage
 
 
 
 \section{Tecnologie e strumenti impiegati}
-Saranno qui elencate e descritte le tecnologie e gli strumenti scelti per lo sviluppo del progetto.
+Saranno qui elencate e descritte le tecnologie e gli strumenti scelti per lo sviluppo del progetto e altri a supporto delle diverse attività.
 
 Saranno giustificate alcune scelte, come la riduzione quasi a zero di librerie esterne, e l'approccio "chiuso" di \acrshort{smi} verso il fare affidamento a prodotti esterni.\\
-Ho notato infatti che un ragionamento spesso fatto dai responsabili tecnici è "preferiamo reinventare la ruota sviluppando internamente librerie anche già esistenti, per avere pieno controllo sullo svuluppo e sulla manutenzione". Cercherò di analizzare criticamente questo ragionamento.\\
+Ho notato infatti che un ragionamento spesso fatto dai responsabili tecnici è "preferiamo reinventare la ruota sviluppando internamente librerie anche già esistenti, per avere pieno controllo sullo sviluppo e sulla manutenzione". Cercherò di analizzare criticamente questo ragionamento.\\
 
-Come vedremo nei capitoli successivi, il lavoro da me svolto non è integrato in JMES ma è un modulo esterno che ampia le sue funzionalità. Questo mi ha permesso di avere libertà nella scelta degli strumenti di lavoro, prediligendo tecnologie che ero curioso di conoscere più nel dettaglio.
+Come accennato in \ref{jdi}, il lavoro da me svolto non è integrato in JMES ma è un modulo esterno che permette di ampliare le sue funzionalità. Questo mi ha permesso di avere un certo grado di libertà nella scelta degli strumenti di lavoro, prediligendo tecnologie che ero curioso di conoscere più nel dettaglio.
 
 I principali strumenti per lo sviluppo da me utilizzati sono stati i seguenti:
 
 \begin{itemize}
-	\item IDE: Intellij IDEA. Un ambiente di sviluppo per Java prodotto da \textit{JetBrains} che mi ha permesso, grazie anche a numerosi \textit{plug-in}, di integrare in un solo ambiente lo sviluppo \textit{software}, i test automatici, la \textit{build} e il versionamento del codice;
+	\item Intellij IDEA. Un ambiente di sviluppo per Java prodotto da \textit{JetBrains} che mi ha permesso, grazie anche a numerosi \textit{plug-in}, di integrare in un solo ambiente lo sviluppo \textit{software}, i test automatici, la \textit{build} e il versionamento del codice;
 	
-	\item \textit{Build tool}: Gradle. Un sistema per l'automazione di \textit{build} che prende spunto da i classici Apache Maven e Apache Ant che permette di specificare la configurazione del progetto con un linguaggio specifico basato su Groovy;
+	\item Gradle. Un sistema per l'automazione di \textit{build} che prende spunto da i classici Apache Maven e Apache Ant che permette di specificare la configurazione del progetto con un linguaggio specifico basato su Groovy;
 	
-	\item \textit{VCS}: git. Sistema di versionamento distribuito utilizzato in questo progetto assieme a GitHub che ha fornito il servizio di \textit{repository} remoto.\\ Il suo uso è stato fondamentale in quanto sono state create, sopratutto nel primo periodo di sviluppo, diverse possibili soluzioni al problema. Git ha permesso di mantenere in parallelo ogni soluzione sviluppata, grazie all'uso di \textit{branch};
+	\item Git. Sistema di versionamento distribuito utilizzato in questo progetto assieme a GitHub che ha fornito il servizio di \textit{repository} remoto.\\ Il suo uso è stato fondamentale in quanto sono state create, sopratutto nel primo periodo di sviluppo, diverse possibili soluzioni al problema. Git ha permesso di mantenere in parallelo ogni soluzione sviluppata, grazie all'uso di \textit{branch};
 	
-	\item \textit{ITS}: GitHub ITS. Integrato nelle \textit{repository} di GitHub, ha permesso di tenere traccia dei cambiamenti durante il progetto. Le \textit{issue} sono state inserite nel \textit{kanban board} integrata in GitHub per avere ben visibile la situazione del progetto in ogni momento della progettazione e dello sviluppo.
+	\item GitHub ITS. \textit{Issue tracking system} integrato in GitHub, ha permesso di tenere traccia dei cambiamenti durante il progetto. Le \textit{issue} sono state inserite nel \textit{kanban board} integrata in GitHub per avere ben visibile la situazione del progetto in ogni momento della progettazione e dello sviluppo.
 \end{itemize}
+
+\clearpage
 
 Per quanto riguarda invece gli strumenti e le tecnologie non prettamente legate allo sviluppo ma che hanno supportato alcune attività abbiamo:
 \begin{itemize}
-	\item Wireshark: strumento per la cattura e l'analisi di pacchetti utilizzato per la comprensione della comunicazione con protocollo TCP/IP tra PLC e computer;  
-	\item Modbus PLC simulator;
-	\item SoMachine Basic.
-	\item Ladder
+	\item Wireshark: strumento per la cattura e l'analisi di pacchetti utilizzato per la comprensione della comunicazione con protocollo Modbus TCP/IP, di cui si è parlato in \ref{sec:modbus_tcp}, tra PLC e computer;  
+	\item Modbus PLC simulator: programma di simulazione di PLC Modbus che supporta diversi protocolli, tra cui TCP/IP. Utilizzato per i test di scalabilità e di consumo risorse dell'applicazione realizzata;
+	\item SoMachine Basic: gran parte dei test sono stati eseguiti con PLC fisici. Questo software ha permesso di visualizzare e modificare la configurazione interna dei PLC utilizzati;
+	\item Ladder Diagram: linguaggio grafico per la programmazione di PLC. Utilizzato quando necessario per modificare il comportamento di un PLC durante i test.
 \end{itemize}
 
 Per la comunicazione interna al team JMES è stato utilizzato lo strumento di messaggistica SLACK, mentre per la comunicazione più formale interna ed esterna all'azienda mi è stato fornito un account di posta elettronica.
