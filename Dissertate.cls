@@ -77,7 +77,6 @@
 %language
 \usepackage[italian]{babel}
 
-
 % Text layout.
 \RequirePackage[outer=1in, inner=1.55in, twoside, a4paper]{geometry}
 \usepackage{ragged2e}

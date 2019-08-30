@@ -25,28 +25,38 @@ Vediamo quali sono i benefici che JMES, l'implementazione MES di \acrshort{smi} 
 	\item Progetto carta zero. Grazie alla gestione software della produzione, si riduce la carta circolante che molto spesso veniva utilizzata per tracciare le fasi degli impianti, per registrare le interazioni operatore-macchina e per le stampe di documenti tecnici di assemblaggio.
 \end{enumerate}
 
-Parlare ora più nel dettaglio dell'architettura JMES.
+\label{fig:layer_jmes}
+\begin{wrapfigure}[11]{r}[1pt]{0.22\textwidth}
+	\vspace{-25pt}
+	\includegraphics[width=0.16\textwidth]{figures/layer_jmes}
+	\centering
+	\caption{Rappresentazione dei \textit{layer} di JMES}
+\end{wrapfigure}
+L'applicazione JMES presenta un'architettura a \textit{layer} schematizzata in figura \ref{fig:layer_jmes}. Si tratta di un'applicazione che utilizza \textit{AngularJS} per l'interfaccia grafica e si affida a servizi web esposti da un'applicazione Java su web server \textit{Apache Tomcat} per gestire i flussi di dati \textit{front-end} - \textit{back-end}.\\
+Poiché l'applicazione oggetto di questa tesi non è logicamente legata al software JMES, non risulta utile ai fini della comprensione analizzare dettagliatamente la sua composizione.\\
+Dalla prossima sezione si sottolineerà la mancanza in JMES di un collegamento alle macchine industriali, che fino ad ora è stato dato per scontato. Scopriremo invece che questo elemento non è fondamentale in un sistema MES, e non è quindi sempre presente, ma può aumentarne l'efficienza e l'usabilità.
 
-\clearpage
-
-\section{Gli standard della Digital Industry}
-\subsection{ModBus}
-
-\clearpage
 
 
 \section{L'interazione macchina-MES: JDI}
-Con un sistema \acrshort{mes} tradizionale esistono due tipi di interazione: uomo-macchina e uomo-\acrshort{mes}. La prima consiste nell'insieme di azioni che l’operatore svolge sulla macchina per avanzare nel processo produttivo, la seconda consiste nella dichiarazione delle azioni svolte dall'operatore al sistema \acrshort{mes}. 
 
-Questa approccio può generare un bias che consiste nella differenza tra quanto effettivamente svolto durante la prima interazione e quanto dichiarato nella seconda in quanto l’operatore può accidentalmente compiere degli errori durante le dichiarazioni manuali.\\
-Per questo il mercato ha richiesto una soluzione in grado di permettere una maggiore precisione delle rilevazioni di produzione. \\
-L’elaborazione di questo bisogno ha portato a considerare l’introduzione di una terza interazione ai fini di ridurre quando possibile l’interazione operatore-\acrshort{mes}. 
+Con un sistema \acrshort{mes} tradizionale esistono due tipi di interazione: uomo-macchina e uomo-\acrshort{mes}. La prima consiste nell'insieme di azioni che l’operatore svolge sulla macchina per avanzare nel processo produttivo, la seconda consiste nella dichiarazione delle azioni svolte dall'operatore al sistema \acrshort{mes}.
 
-Alle macchine industriali moderne è quasi sempre collegato un PLC che si occupa di comandare la macchina a cui e connesso ed elabora e immagazzina i dati che vengono generati, relativi ad esempio al numero di pezzi prodotti, lo stato degli allarmi o l'interruzione di funzionamento della macchina.
+Si consideri ad esempio l'azione che un operatore può svolgere su una macchina per il taglio laser: l'operaio o l'operaia effettua una o più operazioni di taglio. Una volta terminate deve dichiarare al sistema \acrshort{mes} utilizzato nello stabilimento che ha terminato il lavoro e ha portato a termine $X$ tagli validi, ha prodotto $Y$ scarti e che il macchinario si è bloccato $Z$ volte.\\
 
-La nuova interazione è integrata in un prodotto a se stante, indipendente da JMES, chiamato JDI. L'idea alla base di questo prodotto è un software che si interfacci con i PLC nelle aziende dei clienti per intercettare i dati immagazzinati.
+\label{fig:interazioni_operatore}
+\begin{wrapfigure}{l}[1pt]{0.5\textwidth}
+	\includegraphics[width=0.5\textwidth]{figures/interazioni_operatore}
+	\centering
+	\caption{Interazioni tra operatore e JMES}
+\end{wrapfigure}
 
-Questi dati sono accuratamente gestiti e resi disponibili ad altre applicazioni della famiglia \acrshort{smi}.
+Questa approccio può generare un bias che consiste nella differenza tra quanto effettivamente svolto durante la prima interazione e quanto dichiarato nella seconda, in quanto l’operatore può accidentalmente compiere degli errori durante le dichiarazioni manuali.\\
+Per questo il mercato ha richiesto a \acrshort{smi} una soluzione in grado di permettere una maggiore precisione delle rilevazioni di produzione.
+
+\clearpage
+
+L’elaborazione di questo bisogno ha portato a considerare l’introduzione di una terza interazione ai fini di ridurre quando possibile l’interazione operatore-\acrshort{mes}. In una visione semplicistica dello scenario questa interazione può essere definita come tra la macchina e il sistema JMES. Nella pratica però  si tratta di inserire un terzo attore che si occupi di fornire a JMES tutti i dati ricavati dalla macchina. Questo attore si chiama JDI (acronimo ideato da \acrshort{smi} che significa \textit{Java Digital Industry}).
 
 \begin{figure}[h]
 	\includegraphics[width=1\textwidth]{figures/plc-jdi-jmes}
@@ -54,7 +64,20 @@ Questi dati sono accuratamente gestiti e resi disponibili ad altre applicazioni 
 	\centering
 \end{figure}
 
+Alle macchine industriali moderne è quasi sempre collegato un PLC che si occupa di comandare la macchina a cui e connesso ed elabora e immagazzina i dati che vengono generati, relativi ad esempio al numero di pezzi prodotti, lo stato degli allarmi o l'interruzione di funzionamento della macchina.
+
+JDI è un prodotto a se stante, indipendente da JMES. L'idea alla base di questo prodotto è un software che si interfacci con i PLC nelle aziende dei clienti per intercettare i dati immagazzinati. Questi dati sono accuratamente gestiti e resi disponibili oltre a JMES, ad altre applicazioni della famiglia \acrshort{smi}.
+
 \clearpage
+
+
+\section{Gli standard della Digital Industry}
+Esistono decine di produttori  di PLC..
+\subsection{ModBus}
+
+\clearpage
+
+
 
 \section{Tecnologie e strumenti impiegati}
 Saranno qui elencate e descritte le tecnologie e gli strumenti scelti per lo sviluppo del progetto.
@@ -76,11 +99,12 @@ I principali strumenti per lo sviluppo da me utilizzati sono stati i seguenti:
 	\item \textit{ITS}: GitHub ITS. Integrato nelle \textit{repository} di GitHub, ha permesso di tenere traccia dei cambiamenti durante il progetto. Le \textit{issue} sono state inserite nel \textit{kanban board} integrata in GitHub per avere ben visibile la situazione del progetto in ogni momento della progettazione e dello sviluppo.
 \end{itemize}
 
-Per quanto riguarda invece gli strumenti non prettamente legati allo sviluppo ma hanno supportato alcune attività abbiamo:
+Per quanto riguarda invece gli strumenti e le tecnologie non prettamente legate allo sviluppo ma che hanno supportato alcune attività abbiamo:
 \begin{itemize}
 	\item Wireshark: strumento per la cattura e l'analisi di pacchetti utilizzato per la comprensione della comunicazione con protocollo TCP/IP tra PLC e computer;  
 	\item Modbus PLC simulator;
 	\item SoMachine Basic.
+	\item Ladder
 \end{itemize}
 
 Per la comunicazione interna al team JMES è stato utilizzato lo strumento di messaggistica SLACK, mentre per la comunicazione più formale interna ed esterna all'azienda mi è stato fornito un account di posta elettronica.

@@ -11,9 +11,9 @@
 \BOOKMARK [1][-]{section.1.5}{Outline\040della\040tesi}{chapter.1}% 11
 \BOOKMARK [0][-]{chapter.2}{Background\040Tecnologico}{}% 12
 \BOOKMARK [1][-]{section.2.1}{JMES}{chapter.2}% 13
-\BOOKMARK [1][-]{section.2.2}{Gli\040standard\040della\040Digital\040Industry}{chapter.2}% 14
-\BOOKMARK [2][-]{subsection.2.2.1}{ModBus}{section.2.2}% 15
-\BOOKMARK [1][-]{section.2.3}{L'interazione\040macchina-MES:\040JDI}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.2}{L'interazione\040macchina-MES:\040JDI}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.3}{Gli\040standard\040della\040Digital\040Industry}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.3.1}{ModBus}{section.2.3}% 16
 \BOOKMARK [1][-]{section.2.4}{Tecnologie\040e\040strumenti\040impiegati}{chapter.2}% 17
 \BOOKMARK [0][-]{chapter.3}{Le\040Problematiche}{}% 18
 \BOOKMARK [1][-]{section.3.1}{Il\040primo\040sviluppo\040di\040JDI}{chapter.3}% 19
@@ -26,5 +26,6 @@
 \BOOKMARK [1][-]{section.4.4}{Tracer\040bullet\040development}{chapter.4}% 26
 \BOOKMARK [0][-]{chapter.5}{Retrospettiva}{}% 27
 \BOOKMARK [0][-]{chapter.5}{Riferimenti}{}% 28
-\BOOKMARK [0][-]{section*.16}{Glossario}{}% 29
-\BOOKMARK [0][-]{section*.18}{Acronimi}{}% 30
+\BOOKMARK [0][-]{section*.18}{Glossario}{}% 29
+\BOOKMARK [0][-]{section*.20}{Acronimi}{}% 30
+\BOOKMARK [0][-]{Appendice.1.Alph1}{Appendice\040Nota\040sui\040PLC}{}% 31
