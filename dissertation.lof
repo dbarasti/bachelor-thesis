@@ -11,5 +11,6 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces \textit {Stack} di comunicazione di Modbus. (Da MODBUS, Application Protocol Specification, vol. 1.1b, 28 dicembre 2006. Disponibile su www.modbus.org/docs/Modbus\_Application\_Protocol\_V1\_1b.pdf.)\relax }}{17}{figure.caption.18}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces (a) \textit {layer} di Modbus TCP/IP; (b) \textit {frame} Modbus TCP/IP. (Da \textit {Fieldbus and Networking in Process Automation}, S.K. Sen. CRC Press, 2017)\relax }}{17}{figure.caption.19}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architettura a nodi \textit {Router}/\textit {Client} della prima versione di JDI\relax }}{23}{figure.caption.20}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.8.28)  31 AUG 2019 00:22
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.8.28)  31 AUG 2019 17:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2290,12 +2290,42 @@ male interna ed esterna all’azienda
 
 ]
 Capitolo 3.
-[21]) [22]
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--18
+
+ []
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 31--33
+
+ []
+
+File: figures/nodi_jdi.png Graphic file (type bmp)
+<figures/nodi_jdi.png>
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--46
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 47--51
+
+ []
+
+[22] [23]
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
+
+ []
+
+) [24]
 \openout2 = `chapters/chapter4.aux'.
 
  (./chapters/chapter4.tex
 Capitolo 4.
-[23
+[25
 
 
 
@@ -2305,25 +2335,25 @@ Overfull \hbox (26.72607pt too wide) in paragraph at lines 29--33
  e all’implementazione di un’architettura
  []
 
-) [24]
+) [26]
 \openout2 = `chapters/conclusion.aux'.
 
  (./chapters/conclusion.tex
 Capitolo 5.
-) [25
+) [27
 
 
 
-] (./dissertation.bbl) [26
+] (./dissertation.bbl) [28
 
 
 ] (./dissertation.gls) (./dissertation.acr
-[27
+[29
 
 
-] [28
+] [30
 
-]) [29
+]) [31
 
 ]
 \openout2 = `chapters/appendixA.aux'.
@@ -2338,7 +2368,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 53.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 53.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 53.
 Package rerunfilecheck Info: File `dissertation.out' has not changed.
-(rerunfilecheck)             Checksum: 31AB09049C5776E553C8995A38A50AFC.
+(rerunfilecheck)             Checksum: 5D7BBA6FE60BDA138AF65381C221521F.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2349,12 +2379,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 ### simple group (level 1) entered at line 29 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 50555 strings out of 494907
- 1094543 string characters out of 6175952
- 1366174 words of memory out of 5000000
- 53560 multiletter control sequences out of 15000+600000
+ 50560 strings out of 494907
+ 1094642 string characters out of 6175952
+ 1366228 words of memory out of 5000000
+ 53564 multiletter control sequences out of 15000+600000
  541018 words of font info for 90 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 85i,12n,138p,2002b,796s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 85i,12n,138p,2002b,800s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on dissertation.pdf (41 pages).
+Output written on dissertation.pdf (43 pages).

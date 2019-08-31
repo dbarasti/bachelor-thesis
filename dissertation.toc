@@ -21,14 +21,14 @@
 \contentsline {section}{\numberline {2.5}Tecnologie e strumenti impiegati}{18}{section.2.5}
 \contentsline {chapter}{\numberline {3}Le Problematiche}{21}{chapter.3}
 \contentsline {section}{\numberline {3.1}Il primo sviluppo di JDI}{21}{section.3.1}
-\contentsline {section}{\numberline {3.2}I problemi con JDI}{21}{section.3.2}
-\contentsline {section}{\numberline {3.3}Il nuovo sviluppo}{22}{section.3.3}
-\contentsline {chapter}{\numberline {4}Analisi, Progettazione e Sviluppo}{23}{chapter.4}
-\contentsline {section}{\numberline {4.1}Studio della versione precedente}{23}{section.4.1}
-\contentsline {section}{\numberline {4.2}I requisiti del progetto}{23}{section.4.2}
-\contentsline {section}{\numberline {4.3}Metodologia di lavoro}{24}{section.4.3}
-\contentsline {section}{\numberline {4.4}Tracer bullet development}{24}{section.4.4}
-\contentsline {chapter}{\numberline {5}Retrospettiva}{25}{chapter.5}
-\contentsline {chapter}{Riferimenti}{26}{chapter.5}
-\contentsline {chapter}{Glossario}{27}{section*.21}
-\contentsline {chapter}{Acronimi}{29}{section*.23}
+\contentsline {section}{\numberline {3.2}I problemi con JDI}{22}{section.3.2}
+\contentsline {section}{\numberline {3.3}Il nuovo sviluppo}{24}{section.3.3}
+\contentsline {chapter}{\numberline {4}Analisi, Progettazione e Sviluppo}{25}{chapter.4}
+\contentsline {section}{\numberline {4.1}Studio della versione precedente}{25}{section.4.1}
+\contentsline {section}{\numberline {4.2}I requisiti del progetto}{25}{section.4.2}
+\contentsline {section}{\numberline {4.3}Metodologia di lavoro}{26}{section.4.3}
+\contentsline {section}{\numberline {4.4}Tracer bullet development}{26}{section.4.4}
+\contentsline {chapter}{\numberline {5}Retrospettiva}{27}{chapter.5}
+\contentsline {chapter}{Riferimenti}{28}{chapter.5}
+\contentsline {chapter}{Glossario}{29}{section*.22}
+\contentsline {chapter}{Acronimi}{31}{section*.24}

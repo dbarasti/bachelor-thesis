@@ -84,7 +84,7 @@ Per questo il mercato ha richiesto a \acrshort{smi} una soluzione in grado di pe
 
 \clearpage
 
-L’elaborazione di questo bisogno ha portato a considerare l’introduzione di una terza interazione ai fini di ridurre quando possibile l’interazione operatore-\acrshort{mes}. In una visione semplicistica dello scenario questa interazione può essere definita come tra la macchina e il sistema JMES. Nella pratica però  si tratta di inserire un terzo attore che si occupi di fornire a JMES tutti i dati ricavati dalla macchina. Questo attore si chiama JDI (acronimo ideato da \acrshort{smi} che significa \textit{Java Digital Industry}).
+L’elaborazione di questo bisogno ha portato a considerare l’introduzione di una terza interazione ai fini di ridurre quando possibile l’interazione operatore-\acrshort{mes}. In una visione semplicistica dello scenario questa interazione può essere definita come tra la macchina e il sistema JMES. Nella pratica però  si tratta di inserire un terzo attore che si occupi di fornire a JMES tutti i dati ricavati dalla macchina (o meglio, come vedremo, dal PLC collegato alla macchina). Questo attore si chiama JDI, acronimo ideato da \acrshort{smi} che significa \textit{Java Digital Industry}.
 \newline
 \newline
 \begin{figure}[h]
@@ -94,7 +94,7 @@ L’elaborazione di questo bisogno ha portato a considerare l’introduzione di 
 \end{figure}
 \newline
 
-Alle macchine industriali moderne è quasi sempre collegato un PLC che si occupa di comandare la macchina a cui e connesso ed elabora e immagazzina i dati che vengono generati, relativi ad esempio al numero di pezzi prodotti, lo stato degli allarmi o l'interruzione di funzionamento della macchina.
+Alle macchine industriali moderne è quasi sempre collegato un PLC che si occupa di comandare la macchina a cui e connesso. Inoltre elabora e immagazzina i dati che vengono generati relativi ad esempio al numero di pezzi prodotti, lo stato degli allarmi o l'interruzione di funzionamento della macchina.
 
 JDI è un prodotto a se stante, indipendente da JMES. L'idea alla base di questo prodotto è un software che si interfacci con i PLC nelle aziende dei clienti per intercettare i dati immagazzinati. Questi dati sono accuratamente gestiti e resi disponibili oltre a JMES, ad altre applicazioni della famiglia \acrshort{smi}.
 
