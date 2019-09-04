@@ -1,7 +1,7 @@
 %!TEX root = ../dissertation.tex
 \begin{savequote}[75mm]
-La prima versione di JDI era organizzata a nodi \textit{router-client} che potenzialmente potevano permettere di distribuire il prodotto in zone fisiche
-diverse, comunicando poi tramite \textit{WebSocket}.
+La prima versione di JDI era organizzata a nodi \textit{router-link} che potenzialmente potevano permettere di distribuire il prodotto in zone fisiche
+diverse, comunicando poi tramite \textit{\gls{websocket}}.
 Nella realtà però gli \textit{stakeholder} di JMES hanno constatato che gli svantaggi introdotti
 dalla soluzione sviluppata superavano possibili vantaggi commerciali del prodotto.
 \end{savequote}
@@ -18,9 +18,9 @@ Per sottolineare ulteriormente la separazione logica tra JMES e JDI è utile ric
 
 Lo sviluppo è stato eseguito da un solo programmatore a cui non erano stati posti vincoli precisi per la progettazione dell'applicazione, se non l'utilizzo del linguaggio Java. Questo ha dato piena libertà sulla scelta delle tecnologie di sviluppo.
 
-Architetturalmente JDI si presentava nel seguente modo: un software a servizi con compatibilità Windows. I servizi rappresentavano nodi che potevano essere \textit{Router} o \textit{Client}. Ogni nodo veniva avviato come servizio Windows. I \textit{Client} erano servizi che utilizzavano un file di configurazione per effettuare la connessione con i PLC. Ognuno stabiliva una connessione con i PLC utilizzando il protocollo adatto (ricavato dal file di configurazione) e una connessione verso il nodo \textit{Router} tramite \textit{WebSocket}. Quest'ultima serviva a comunicare i risultati delle operazioni svolte dai nodi \textit{Client} su i PLC. Nella figura \ref{fig:nodi_jdi} sono rappresentate queste connessioni.
+Architetturalmente JDI si presentava nel seguente modo: un software a servizi con compatibilità Windows. I servizi rappresentavano nodi che potevano essere \textit{Router} o \textit{Link}. Ogni nodo veniva avviato come servizio Windows. I \textit{Link} erano servizi che utilizzavano un file di configurazione per effettuare la connessione con i PLC. Ognuno stabiliva una connessione con i PLC utilizzando il protocollo adatto (ricavato dal file di configurazione) e una connessione verso il nodo \textit{Router} tramite \textit{\gls{websocket}}. Quest'ultima serviva a comunicare i risultati delle operazioni svolte dai nodi \textit{Link} su i PLC. Nella figura \ref{fig:nodi_jdi} sono rappresentate queste connessioni.
 
-Il nodo \textit{Router} effettuava delle chiamate http verso JMES per comunicare le variazioni dei dati rilevati dai nodi \textit{Client}. A quali dati fosse interessato JMES era specificato nei file di configurazione che ogni client utilizzava per determinare le richieste da fare ai PLC.
+Il nodo \textit{Router} effettuava delle chiamate http verso JMES per comunicare le variazioni dei dati rilevati dai nodi \textit{Link}. A quali dati fosse interessato JMES era specificato nei file di configurazione che ogni link utilizzava per determinare le richieste da fare ai PLC.
 
 Le richieste erano principalmente
 \begin{itemize}
@@ -28,14 +28,14 @@ Le richieste erano principalmente
 	\item Scrittura di registri \textit{general purpose}, per resettare determinati stati, o per attivare/disattivare funzioni sulla macchina.
 \end{itemize}
 
-La soluzione sviluppata aveva un primo visibile vantaggio: la struttura a nodi poteva essere distribuita in punti fisici diversi. L'importante era che la comunicazione tra nodi \textit{Client} e \textit{Router} potesse avvenire. Questo era garantito dalla connessione \textit{WebSocket} stabilita, che era indipendente dalla posizione dei nodi.
+La soluzione sviluppata aveva un primo visibile vantaggio: la struttura a nodi poteva essere distribuita in punti fisici diversi. L'importante era che la comunicazione tra nodi \textit{Link} e \textit{Router} potesse avvenire. Questo era garantito dalla connessione \textit{WebSocket} stabilita, che era indipendente dalla posizione dei nodi.
 \newline
 
 \label{fig:nodi_jdi}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{figures/nodi_jdi}
-	\caption{Architettura a nodi \textit{Router}/\textit{Client} della prima versione di JDI}
+	\caption{Architettura a nodi \textit{Router}/\textit{Link} della prima versione di JDI}
 \end{figure}
 
 
@@ -51,7 +51,7 @@ dinamica sul consumo di risorse.\\
 
 I primi problemi sono emersi in produzione, quando dopo pochi giorni di utilizzo il sistema presentava dei cali prestazionali e delle interruzioni impreviste.
 
-A seguito di questi eventi avvenuti presso la sede di un cliente sono intervenuti i tecnici sistemisti del team JMES che hanno tentato di effettuare il \textit{debug} del codice scoprendo numerosi problemi legati all'utilizzo di librerie esterne che rendevano inoltre difficoltoso analizzare le zone del codice in cui si verificavano degli errori.
+A seguito di questi eventi avvenuti presso la sede di un cliente sono intervenuti i tecnici sistemisti di JMES che hanno tentato di effettuare il \textit{debug} del codice scoprendo numerosi problemi legati all'utilizzo di librerie esterne che rendevano inoltre difficoltoso analizzare le zone del codice in cui si verificavano degli errori.
 
 Le problematiche emerse hanno sottolineato carenze che si riassumono in:
 \begin{itemize}
@@ -71,18 +71,18 @@ Le problematiche emerse hanno sottolineato carenze che si riassumono in:
 
 Data l'esperienza precedente, la nuova versione di JDI, oggetto di questa tesi, è stata sottoposta a vincoli più rigidi. 
 
-A differenza della versione precedente, che avviava un servizio Windows per ogni nodo, il programma doveva essere eseguibile su un \textit{web server} Apache Tomcat, limitare in consumo di risorse impiegate sopratutto dopo lunghi periodi di esecuzione, poter gestire un numero ragionevolmente alto di flussi di dati.
+A differenza della versione precedente, che avviava un servizio Windows per ogni nodo, il programma doveva essere eseguibile su un \textit{web server} Apache Tomcat, doveva limitare in consumo di risorse impiegate sopratutto dopo lunghi periodi di esecuzione e poter gestire un numero ragionevolmente alto di flussi di dati.
 
 Inoltre visto lo scarso successo della versione distribuita di JDI, la nuova versione doveva sfruttare la concorrenza su singola JVM per adempiere ai compiti di gestione dei diversi flussi da e verso i PLC.
 
-Un importante punto per JDI è che potesse essere facilmente manutenibile e che facesse uso il meno possibile di librerie esterne che invece regnavano nella prima versione.\\
+Un importante punto per JDI è che potesse essere facilmente manutenibile e che facesse uso il meno possibile di librerie esterne che hanno reso la manutenzione complicata 56nella prima versione.\\
 
 Lo scopo in pratica era di raggruppare le funzionalità di base che vecchia versione offriva sotto forma di servizi Windows, in un ambiente \textit{multi-threadded} e:
 \begin{itemize}
 	\item garantirne la scalabilità;
 	\item valutare quantitativamente le sue caratteristiche, attraverso \textit{benchmark} di prototipi;
 	\item rendere disponibile i dati ricavati con servizi web. Principalmente a JMES ma in generale a chi ne possa trarre vantaggio;
-	\item storicizzare i dati.
+	\item storicizzare i dati raccolti.
 \end{itemize}
 Gli ultimi due punti sono obiettivi più a lungo termine per JDI, che non rientrano nel dominio dello stage svolto.
 

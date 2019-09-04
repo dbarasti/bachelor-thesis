@@ -2,7 +2,7 @@
 \babel@toc {italian}{}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Logo \acrshort {bu} Jmes\relax }}{2}{figure.caption.11}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Una visione temporale delle rivoluzioni industriali fino ad oggi\relax }}{3}{figure.caption.13}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Una visione temporale delle rivoluzioni industriali fino ad oggi\relax }}{4}{figure.caption.13}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Rappresentazione dei \textit {layer} di JMES\relax }}{12}{figure.caption.14}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Schema di un classico PLC e dei suoi moduli. (Dall'articolo \textit {Engineering Essentials}. Disponibile su https://www.machinedesign.com/engineering-essentials/engineering-essentials-what-programmable-logic-controller)\relax }}{13}{figure.caption.15}
@@ -11,6 +11,7 @@
 \contentsline {figure}{\numberline {2.5}{\ignorespaces \textit {Stack} di comunicazione di Modbus. (Da MODBUS, Application Protocol Specification, vol. 1.1b, 28 dicembre 2006. Disponibile su www.modbus.org/docs/Modbus\_Application\_Protocol\_V1\_1b.pdf.)\relax }}{17}{figure.caption.18}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces (a) \textit {layer} di Modbus TCP/IP; (b) \textit {frame} Modbus TCP/IP. (Da \textit {Fieldbus and Networking in Process Automation}, S.K. Sen. CRC Press, 2017)\relax }}{17}{figure.caption.19}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Architettura a nodi \textit {Router}/\textit {Client} della prima versione di JDI\relax }}{23}{figure.caption.20}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architettura a nodi \textit {Router}/\textit {Link} della prima versione di JDI\relax }}{23}{figure.caption.20}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Interfaccia di GitKraken che mostra come ho tenuto traccia dei diversi \textit {benchmark} effettuati\relax }}{36}{figure.caption.21}
 \addvspace {10\p@ }

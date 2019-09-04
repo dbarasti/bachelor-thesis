@@ -8,9 +8,9 @@ In questo capitolo si fornirà una introduzione alle tecnologie che risulterà u
 Gli argomenti trattati saranno principalmente JMES, JDI e alcuni standard della digital industry (e.g. protocollo Modbus)
 
 
-\section{JMES}
+\section{Il software JMES}
 
-Nella sezione \ref{mes} sono stati individuati i principali benefici che l'utilizzo di un \textit{software} \acrshort{mes} porta.\\
+Nella sezione \ref{mes} sono stati individuati i principali benefici che l'utilizzo di un software \acrshort{mes} porta.\\
 Vediamo quali sono i benefici che JMES, l'implementazione MES di \acrshort{smi} intende portare ai clienti con il suo prodotto: 
 \begin{enumerate}
 	\item Avanzamento processi produttivi. L’informazione sull'avanzamento della produzione è disponibile in tempo reale, permettendo una gestione più flessibile del lavoro. Ad esempio gli uffici commerciali che si trovano in sede distaccata dal centro produttivo possono avere informazioni dettagliate sullo stato di avanzamento di un ordine in breve tempo, senza nemmeno interpellare gli operatori o i responsabili di produzione;
@@ -34,7 +34,7 @@ Vediamo quali sono i benefici che JMES, l'implementazione MES di \acrshort{smi} 
 \end{wrapfigure}
 L'applicazione JMES presenta un'architettura a \textit{layer} schematizzata in figura \ref{fig:layer_jmes}. Si tratta di un'applicazione che utilizza \textit{AngularJS} per l'interfaccia grafica e si affida a servizi web esposti da un'applicazione Java su web server \textit{Apache Tomcat} per gestire i flussi di dati \textit{front-end} - \textit{back-end}.\\
 Poiché l'applicazione oggetto di questa tesi non è logicamente legata al software JMES, non risulta utile ai fini della comprensione analizzare dettagliatamente la sua composizione.\\
-Dalla prossima sezione si sottolineerà la mancanza in JMES di un collegamento alle macchine industriali, che fino ad ora è stato dato per scontato. Scopriremo invece che questo elemento non è fondamentale in un sistema MES, e non è quindi sempre presente, ma può aumentarne l'efficienza e l'usabilità.
+Dalla sezione \ref{jdi} si sottolineerà la mancanza in JMES di un collegamento alle macchine industriali, che fino ad ora è stato dato per scontato. Scopriremo invece che questo elemento non è fondamentale in un sistema MES, e non è quindi sempre presente, ma può aumentarne l'efficienza e l'usabilità.
 
 \section{Controllori a Logica Programmabile}
 
@@ -153,7 +153,7 @@ La figura \ref{fig:modbustcp_layers_frame} mostra gli strati del protocollo Modb
 Saranno qui elencate e descritte le tecnologie e gli strumenti scelti per lo sviluppo del progetto e altri a supporto delle diverse attività.
 
 Saranno giustificate alcune scelte, come la riduzione quasi a zero di librerie esterne, e l'approccio "chiuso" di \acrshort{smi} verso il fare affidamento a prodotti esterni.\\
-Ho notato infatti che un ragionamento spesso fatto dai responsabili tecnici è "preferiamo reinventare la ruota sviluppando internamente librerie anche già esistenti, per avere pieno controllo sullo sviluppo e sulla manutenzione". Cercherò di analizzare criticamente questo ragionamento.\\
+%Ho notato infatti che un ragionamento spesso fatto dai responsabili tecnici è "preferiamo reinventare la ruota sviluppando internamente librerie anche già esistenti, per avere pieno controllo sullo sviluppo e sulla manutenzione". Cercherò di analizzare criticamente questo ragionamento.\\
 
 Come accennato in \ref{jdi}, il lavoro da me svolto non è integrato in JMES ma è un modulo esterno che permette di ampliare le sue funzionalità. Questo mi ha permesso di avere un certo grado di libertà nella scelta degli strumenti di lavoro, prediligendo tecnologie che ero curioso di conoscere più nel dettaglio.
 

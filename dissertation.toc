@@ -2,17 +2,16 @@
 \babel@toc {italian}{}
 \contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Sanmarco Informatica SpA}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}La Digital Industry}{3}{section.1.2}
+\contentsline {section}{\numberline {1.2}La Digital Industry}{2}{section.1.2}
 \contentsline {subsection}{\numberline {1.2.1}L'industria 4.0}{3}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}Manufacturing execution system}{4}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.2}Manufacturing execution system}{3}{subsection.1.2.2}
 \contentsline {section}{\numberline {1.3}Le squadre JMES}{5}{section.1.3}
 \contentsline {section}{\numberline {1.4}Metodologia di lavoro}{6}{section.1.4}
 \contentsline {subsection}{\numberline {1.4.1}Sviluppo agile e framework Scrum}{6}{subsection.1.4.1}
-\contentsline {subsection}{\numberline {1.4.2}Tecnologie di sviluppo del team}{6}{subsection.1.4.2}
-\contentsline {subsection}{\numberline {1.4.3}Strumenti di lavoro del team}{7}{subsection.1.4.3}
+\contentsline {subsection}{\numberline {1.4.2}Strumenti e tecnologie di sviluppo del team}{6}{subsection.1.4.2}
 \contentsline {section}{\numberline {1.5}Outline del documento}{8}{section.1.5}
 \contentsline {chapter}{\numberline {2}Background Tecnologico}{11}{chapter.2}
-\contentsline {section}{\numberline {2.1}JMES}{11}{section.2.1}
+\contentsline {section}{\numberline {2.1}Il software JMES}{11}{section.2.1}
 \contentsline {section}{\numberline {2.2}Controllori a Logica Programmabile}{13}{section.2.2}
 \contentsline {section}{\numberline {2.3}L'interazione macchina-MES: JDI}{14}{section.2.3}
 \contentsline {section}{\numberline {2.4}Gli standard della Digital Industry}{16}{section.2.4}
@@ -25,10 +24,12 @@
 \contentsline {section}{\numberline {3.3}Il nuovo sviluppo}{24}{section.3.3}
 \contentsline {chapter}{\numberline {4}Analisi, Progettazione e Sviluppo}{25}{chapter.4}
 \contentsline {section}{\numberline {4.1}Studio della versione precedente}{25}{section.4.1}
-\contentsline {section}{\numberline {4.2}I requisiti del progetto}{25}{section.4.2}
-\contentsline {section}{\numberline {4.3}Metodologia di lavoro}{26}{section.4.3}
-\contentsline {section}{\numberline {4.4}Tracer bullet development}{26}{section.4.4}
-\contentsline {chapter}{\numberline {5}Retrospettiva}{27}{chapter.5}
-\contentsline {chapter}{Riferimenti}{28}{chapter.5}
-\contentsline {chapter}{Glossario}{29}{section*.22}
-\contentsline {chapter}{Acronimi}{31}{section*.24}
+\contentsline {section}{\numberline {4.2}I requisiti del progetto}{27}{section.4.2}
+\contentsline {section}{\numberline {4.3}Organizzazione temporale}{33}{section.4.3}
+\contentsline {section}{\numberline {4.4}Tracer bullet development}{34}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Integrazione iniziale}{34}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Benchmark}{36}{subsection.4.4.2}
+\contentsline {chapter}{\numberline {5}Retrospettiva}{37}{chapter.5}
+\contentsline {chapter}{Riferimenti}{38}{chapter.5}
+\contentsline {chapter}{Glossario}{39}{section*.23}
+\contentsline {chapter}{Acronimi}{41}{section*.25}
