@@ -3,7 +3,7 @@
 %\qauthor{Quoteauthor Lastname}
 %\end{savequote}
 
-\chapter{Analisi, Progettazione e Sviluppo}\label{ch:analisi_progettazione_sviluppo}
+\chapter{Analisi, Progettazione e Codifica}\label{ch:analisi_progettazione_sviluppo}
 
 \section{Studio della versione precedente}
 Nonostante il primo sviluppo di JDI non avesse avuto un risultato positivo una volta messo in produzione, le funzionalità di base di questo dovevano essere presenti anche nella nuova versione.\\
@@ -96,35 +96,37 @@ dove la prima opzione specificata indica un requisito rispettivamente funzionale
 		\hline
 		RF4 & Operazioni di scrittura & Il sistema deve essere in grado di eseguire operazioni di scrittura verso i PLC collegati. La scrittura può avvenire solo se l'area di memoria interessata ha i permessi appropriati, specificati nel file di configurazione. Non può quindi avvenire la scrittura di una locazione di memoria per cui non si dispongano i permessi nel file di configurazione.\\
 		\hline
-		RF3 & Richiesta scrittura & le API del prodotto devono permettere di richiedere la scrittura di un valore su una specifica area di memoria di uno specifico PLC. La richiesta deve rispettare i permessi definiti nel file di configurazione. Non può quindi avvenire la scrittura in una locazione di memoria per cui non si dispongano i permessi nel file di configurazione.\\
+		RF5 & Richiesta scrittura & le API del prodotto devono permettere di richiedere la scrittura di un valore su una specifica area di memoria di uno specifico PLC. La richiesta deve rispettare i permessi definiti nel file di configurazione. Non può quindi avvenire la scrittura in una locazione di memoria per cui non si dispongano i permessi nel file di configurazione.\\
 		\hline
-		RF3 & Salvataggio dati & Il sistema deve mantenere in memoria i valori aggiornati dei dati letti ad ogni ciclo di lettura. Ogni dato deve avere un identificativo univoco. I dati dovranno poter essere individuati come una coppia ID-ValoreLetto\\
+		RF6 & Salvataggio dati & Il sistema deve mantenere in memoria i valori aggiornati dei dati letti ad ogni ciclo di lettura. Ogni dato deve avere un identificativo univoco. I dati dovranno poter essere individuati come una coppia ID-ValoreLetto\\
 		\hline
-		RF3 & Rilevazione malfunzionamento PLC (watchdog)& Per rilevare il malfunzionamento di un PLC il sistema deve gestire un particolare bit all'interno di ogni PLC con cui è collegato: prima di effettuare un'operazione di lettura, il sistema verifica (con una lettura) che il bit si trovi al valore 1. In tal caso il sistema provvede a resettare tale bit a 0. In caso contrario invece il sistema segnala la situazione anomala. Questa funzionalità presuppone che il programma all'interno del PLC sia istruito per gestire questo bit.\\
+		RF7 & Rilevazione malfunzionamento PLC (watchdog)& Per rilevare il malfunzionamento di un PLC il sistema deve gestire un particolare bit all'interno di ogni PLC con cui è collegato: prima di effettuare un'operazione di lettura, il sistema verifica (con una lettura) che il bit si trovi al valore 1. In tal caso il sistema provvede a resettare tale bit a 0. In caso contrario invece il sistema segnala la situazione anomala. Questa funzionalità presuppone che il programma all'interno del PLC sia istruito per gestire questo bit.\\
 		\hline
-		RF3 & Stato PLC & Il sistema deve fornire a comando lo stato attuale dei PLC collegati. Deve quindi essere in grado di rilevare se accade una disconnessione, se il PLC è connesso o se è in corso una riconnessione. \\
+		RF8 & Stato PLC & Il sistema deve fornire a comando lo stato attuale dei PLC collegati. Deve quindi essere in grado di rilevare se accade una disconnessione, se il PLC è connesso o se è in corso una riconnessione. \\
 		\hline
-		RF3 & Ultima lettura & Il sistema deve poter fornire, per ogni macchina collegata, informazioni riguardanti l'ultima lettura avvenuta. Il formato di questa informazione deve essere l'orario dell'ultima lettura effettuata nel formato dd/mm/yyyy, mm:ss\\
+		RF9 & Ultima lettura & Il sistema deve poter fornire, per ogni macchina collegata, informazioni riguardanti l'ultima lettura avvenuta. Il formato di questa informazione deve essere l'orario dell'ultima lettura effettuata nel formato dd/mm/yyyy, mm:ss\\
 		\hline
-		RV1 & Linguaggi & Il linguaggio per lo sviluppo del sistema JDI deve essere Java. Non sono posti vincoli sulla versione\\
+		RV10 & Linguaggi & Il linguaggio per lo sviluppo del sistema JDI deve essere Java. Non sono posti vincoli sulla versione\\
 		\hline
-		RV2 & Concorrenza & Deve essere utilizzato un approccio concorrente per realizzare il prodotto\\
+		RV11 & Concorrenza & Deve essere utilizzato un approccio concorrente per realizzare il prodotto\\
 		\hline
-		RQ1 & Reattività scrittura & Quando avviene una richiesta di scrittura, il sistema deve prendere in carico la gestione di questa nel più breve tempo possibile\\
+		RQ12 & Reattività scrittura & Quando avviene una richiesta di scrittura, il sistema deve prendere in carico la gestione di questa nel più breve tempo possibile\\
 		\hline
-		RF3 & Richieste multiple di scrittura & Se vengono richieste nel breve periodo multiple scritture, il sistema deve soddisfarle tutte (quando sono disponibili i giusti permessi) mantenendo l'ordine di arrivo delle richieste \\
+		RF13 & Richieste multiple di scrittura & Se vengono richieste nel breve periodo multiple scritture, il sistema deve soddisfarle tutte (quando sono disponibili i giusti permessi) mantenendo l'ordine di arrivo delle richieste \\
 		\hline
-		RQ2 & Scritture sicure & Se ci sono diverse richieste pendenti per un PLC e viene persa la connessione con questo, la coda di richieste deve essere eliminata. Nel periodo di disconnessione le richieste di scrittura per quel PLC devono essere rifiutate\\
+		RF14 & Riconnessione &  Nel caso in cui avvenga la disconnessione di un PLC, il sistema deve effettuare tentativi di riconnessione utilizzando un algoritmo che allunghi gli intervalli tra un tentativo e il successivo fino al raggiungimento di un minuto di attesa\\
 		\hline
-		RV3 & Librerie & Le dipendenze del progetto devono limitarsi allo stretto necessario per portare a termine gli obiettivi fissati. L'introduzione di una libreria deve essere approvata da un responsabile\\
+		RQ14 & Scritture sicure & Se ci sono diverse richieste pendenti per un PLC e viene persa la connessione con questo, la coda di richieste deve essere eliminata. Nel periodo di disconnessione le richieste di scrittura per quel PLC devono essere rifiutate\\
 		\hline
-		RQ5 & Consumo memoria & Il sistema deve occupare non più di 2GB di memoria in una situazione reale: 5 PLC collegati con diverse operazioni di lettura e scrittura che occorrono a intervalli di pochi secondi\\
+		RV15 & Librerie & Le dipendenze del progetto devono limitarsi allo stretto necessario per portare a termine gli obiettivi fissati. L'introduzione di una libreria deve essere approvata da un responsabile\\
 		\hline
-		RV5 & Compatibilità PLC & Il sistema deve poter funzionare con dispositivi \textit{Schneider} che utilizzano il protocollo \textit{ModbusTCP} \\ 
+		RQ16 & Consumo memoria & Il sistema deve occupare non più di 2GB di memoria in una situazione reale: 5 PLC collegati con diverse operazioni di lettura e scrittura che occorrono a intervalli di pochi secondi\\
 		\hline
-		RV6 & Svolgimento test \#1 & Il sistema deve essere testato con almeno un dispositivo PLC \textit{Schneider} M221 \\ 
+		RV17 & Compatibilità PLC & Il sistema deve poter funzionare con dispositivi \textit{Schneider} che utilizzano il protocollo \textit{ModbusTCP} \\ 
 		\hline
-		RV6 & Svolgimento test \#2 & Per i test di scalabilità del sistema devono essere simulati dei dispositivi PLC con protocollo \textit{ModbusTCP} con l'uso del software \textit{Modbus PLC Simulator} \\ [1ex] 
+		RV18 & Svolgimento test \#1 & Il sistema deve essere testato con almeno un dispositivo PLC \textit{Schneider} M221 \\ 
+		\hline
+		RV19 & Svolgimento test \#2 & Per i test di scalabilità del sistema devono essere simulati dei dispositivi PLC con protocollo \textit{ModbusTCP} con l'uso del software \textit{Modbus PLC Simulator} \\ [1ex] 
 		\hline
 		\caption{Tabella requisiti}
 		\label{tab:requisiti}
@@ -225,9 +227,9 @@ Queste conseguenze sono state comunque largamente colmate dalle decine di ore di
 \subsection{Benchmark}
 
 Sapendo di poter effettuare le operazioni di base sul PLC di test ho proseguito con la creazione del primo prototipo per effettuare i \textit{benchmark} sulle prestazioni.
-
 \newline
 
+Avendo realizzato svariati prototipi per determinare la soluzione migliore a diversi problemi è risultato utile utilizzare il versionamento di git per fermare nel tempo le diverse versioni sviluppate. In figura \ref{fig:gitkraken_benchmark} è presente una vista del software GitKraken che mostra come ogni versione di \textit{benchmark} abbia una \textit{tag} associata.
 
 \label{fig:gitkraken_benchmark}
 \begin{figure}[h]
@@ -237,8 +239,124 @@ Sapendo di poter effettuare le operazioni di base sul PLC di test ho proseguito 
 \end{figure}
 
 
+Un test particolarmente interessante e importante che ho effettuato riguarda la gestione dei dati letti. Dove memorizzare i dati relativi alle aree di memoria lette?\\
+La ricerca ha portato a considerare una struttura dati che doveva necessariamente essere \textit{thread safe} per supportare in sicurezza accessi concorrenti senza causare cali prestazionali.
+
+Grazie alla collaborazione del professor Bujari la scelta è ricaduta su una \textit{ConcurrentHashMap}. Dalla documentazione Oracle\footnote{\href{https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html}{https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html}}:
+\begin{quote}
+	A hash table supporting full concurrency of retrievals and high expected concurrency for updates.
+\end{quote} 
+
+Un test di scalabilità eseguito con l'utilizzo di questa struttura dati ha confermato la sua presenza all'interno del progetto. Di seguito viene descritto il test:\\
+
+La simulazione prevede un numero variabile di \textit{thread} che accedono concorrentemente alla mappa per aggiornare dei valori generati casualmente. Ogni \textit{thread} genera per ogni ciclo 150 valori. Vengono eseguiti 10 cicli di aggiornamento alla fine dei quali vengono rilevati i tempi di esecuzione. Questo \textit{benchmark} è eseguito 5 volte e viene infine fatta la media dei tempi di esecuzione. Il numero di \textit{thread} varia da 10 a 1000.
+
+Il vincolo per l'approvazione della struttura dati era che i tempi di esecuzione crescessero linearmente fino all'esecuzione con 100 \textit{thread}.
+
+La tabella in \ref{tab:benchmark_1} mostra i tempi di esecuzione in relazione al numero  di \textit{thread}.
+
+Il grafico in figura \ref{fig:grafico_benchmark_1} mostra i risultati.
 
 
+
+\begin{center}
+	\begin{longtable}{||c|c||} 
+		\hline
+		Thread & Tempo di esecuzione medio (ms) \\ [0.5ex] 
+		\hline\hline
+		10 & 4835 \\ 
+		\hline
+		20 & 4969 \\
+		\hline
+		30 & 5848 \\
+		\hline
+		40 & 5033 \\
+		\hline
+		50 & 5086 \\
+		\hline
+		60 & 5123 \\
+		\hline
+		70 & 5143 \\
+		\hline
+		80 & 5098 \\
+		\hline
+		90 & 5181 \\
+		\hline
+		100 & 5236 \\
+		\hline
+		200 & 6805 \\
+		\hline
+		400 & 12612 \\
+		\hline
+		800 & 24126\\
+		\hline
+		1000 & 29896 \\
+		\hline
+		\caption{Risultati benchmark per la scelta della struttura dati}
+		\label{tab:benchmark_1}
+	\end{longtable}
+\end{center}
+
+
+I risultati ottenuti dal \textit{benchmark} hanno superato le aspettative. I tempi di esecuzione rimangono pressoché stabili fino a 100 \textit{thread}. Il vincolo posto inizialmente sulle prestazioni attese è quindi stato rispettato.
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{figures/benchmark_1_grafico}
+	\caption{Grafico scalabilità concorrenza di \textit{ConcurrentHashMap}}
+	\label{fig:grafico_benchmark_1}
+\end{figure}
+
+
+\subsection{Progettazione e codifica}
+
+L'attività di progettazione ha portato alla definizione di un'architettura composta principalmente dai componenti esposti di seguito. Dopo una breve descrizione verranno analizzati in dettaglio.
+ 
+
+\begin{itemize}
+	\item \textit{Configurators}: gerarchia di classi che si occupano di elaborare il file JSON contenente la configurazione delle macchine. La loro interfaccia permette di creare separatamente i \textit{thread} di lettura e quelli di scrittura. Uno per ogni PLC specificato nella configurazione. In figura \ref{fig:json} un esempio del file che il sistema è in grado di elaborare;
+	
+	\item \textit{Engines}: contiene le classi che definiscono i \textit{task} che i \textit{thread} devono svolgere. Queste sono \textit{TagUpdater} e \textit{TagPoller}. La prima definisce il \textit{task} per la scrittura, la seconda il \textit{task} di lettura. \textit{Tag} è l'oggetto che rappresenta i dettagli dell'area di memoria e il valore associato;
+
+	\item \textit{Request\_handlers}: classi che astraggono i dettagli per portare a termine le richieste di lettura e scrittura. Vengono utilizzate da \textit{TagUpdater} e \textit{TagPoller};
+	
+	\item Store: Classi per la gestione dei valori letti e scritti. 
+\end{itemize}
+
+%Il requisito RQ22 che richiedeva una rapida reazione alle richieste di scrittura
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{figures/json}
+	\caption{Esempio di file di configurazione}
+	\label{fig:json}
+\end{figure}
+
+\clearpage
+
+\paragraph{Configurators}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{figures/configurators}
+	\caption{Diagramma delle classi del componente \textit{Configurators}}
+	\label{fig:configurators}
+\end{figure}
+
+Il componente \textit{Configurators} racchiude le classi che effettuano le operazioni di creazione dei \textit{thread} per la lettura e per la scrittura. Utilizzano la libreria \textit{Jackson} per processare il file JSON di configurazione.
+
+La classe base \textit{Configuration} effettua le operazioni di basso livello con il file JSON per ottenere, per ogni PLC specificato, il driver adatto. Ricava poi le configurazioni delle \textit{Tag}, cioè delle aree di memoria interessate da lettura e scrittura.
+
+\textit{ReadingConfiguration} grazie al lavoro svolto dalla classe padre \textit{Configuration} estrae i \textit{thread} per la lettura fornendo loro la lista di configurazioni con i permessi di lettura.
+
+\textit{WritingConfiguration} fornisce lo stesso servizio ma ricavando le configurazioni sulla base dei permessi di scrittura.
+
+\paragraph{Engines}
+
+In questo componente sono definite le classi che implementano l'interfaccia \textit{Runnable}. Rappresentano i \textit{task} che i \textit{thread} (di lettura o scrittura) devono svolgere. Utilizzano la classe \textit{ConnectionHandler} per delegare la gestione della connessione con il proprio driver.
+
+%\texttt{}
 %Si parlerà principalmente di: 
 %\begin{itemize}
 %	\item lavoro di integrazione iniziale delle tecnologie e degli strumenti utilizzati durante lo sviluppo. 
