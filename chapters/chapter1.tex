@@ -8,10 +8,13 @@ Ciò che prima era un impianto isolato, con operatori  e responsabili, ora è pa
 
 Prima di affrontare il problema oggetto di questa tesi è doveroso fornire una panoramica del contesto aziendale che ha caratterizzato lo stage svolto. In questo modo i capitoli successivi risulteranno più chiari e inseriti in una propria logica.
 
-\section{Sanmarco Informatica SpA}\label{smi}
+\section{Sanmarco Informatica SpA}
 
-L’azienda \acrfull{smi} dal 1984 si occupa di consulenza e sviluppo software. Si è specializzata nella progettazione, realizzazione e installazione di soluzioni a supporto dei processi aziendali di duemila aziende con numerose installazioni oltre confine.\\
-L’azienda ha tra i suoi punti di forza quello della vicinanza ai clienti, che si traduce in diverse sedi di proprietà in Veneto, Lombardia, Emilia-Romagna e Friuli-Venezia Giulia con 450 dipendenti totali.\\
+\subsection{L'azienda}
+
+L’azienda \acrfull{smi} dal 1984 si occupa di consulenza e sviluppo software. Si è specializzata nella progettazione, realizzazione e installazione di soluzioni a supporto dei processi aziendali di duemila aziende con numerose installazioni oltre confine.
+
+L’azienda ha tra i suoi punti di forza quello della vicinanza ai clienti, che si traduce in diverse sedi di proprietà in Veneto, Lombardia, Emilia-Romagna e Friuli-Venezia Giulia con 450 dipendenti totali.
 
 Il \acrfull{crs} è situato a Grisignano di Zocco (VI), sede di lavoro per oltre 150 dipendenti. Questo è il fulcro dello sviluppo e della manutenzione dei prodotti software. Team di sviluppatori e sistemisti sono coordinati per garantire stabilità di servizio per i clienti, e un’alta personalizzazione dei prodotti offerti.\\
 La ricerca e l’innovazione sono di grande valore per \acrshort{smi}, con una media del 20\% di fatturato investito annualmente in ricerca e sviluppo.
@@ -26,7 +29,7 @@ L’azienda è organizzata in \textit{\acrfull{bu}}, un sottoinsieme dell'impres
 	\includegraphics[width=0.25\textwidth]{figures/logo_jmes}
 	\caption{Logo \acrshort{bu} Jmes}
 \end{wrapfigure}
-La {\acrshort{bu} interessata dallo stage è JMES, composta da 20 persone tra sistemisti e sviluppatori, che si occupa dell'omonimo applicativo utilizzato nell'ambito della \textit{\gls{digital industry}}. Questo software serve a gestire e supervisionare l'avanzamento della produzione all'interno della fabbrica.\\
+La {\acrshort{bu} interessata dallo stage è JMES, composta da 20 persone tra sistemisti e sviluppatori, che si occupa dell'omonimo applicativo MES utilizzato nell'ambito della \textit{\gls{digital industry}}. Questo software serve a gestire e supervisionare l'avanzamento della produzione all'interno della fabbrica.
 %\begin{wrapfigure}{l}{0.3\textwidth}
 %	\caption{Albero delle \gls{business unit} di \acrshort{smi}}
 %	\centering
@@ -45,6 +48,50 @@ Ulteriori informazioni riguardanti le \acrshort{bu} o l'azienda in generale poss
 
 \clearpage
 
+\subsection{Il team di sviluppo}
+Come accennato nella sezione precedente esistono due squadre che lavorano in maniera sinergica per lo sviluppo e l’installazione del prodotto JMES:
+\begin{itemize}
+	\item \textbf{Sviluppatori}. Sono raggruppati all'interno del team di JMES e si occupano di implementare le funzionalità aggiuntive richieste dai clienti. Le richieste possono provenire da un singolo cliente o essere inserite in distribuzioni di aggiornamento per tutte le installazioni. La differenza sta nel valore monetario dell' \textit{update}. La figura a cui fanno riferimento è lo \textit{Scrum Master}. Ad agosto 2019 il team è composto da otto persone;
+	\item \textbf{Sistemisti}. Effettuano un’analisi tecnica presso le sedi dei clienti evidenziando possibili problemi di compatibilità con le attrezzature presenti, propongono le diverse configurazioni del software JMES in base a requisiti e vincoli posti dal cliente e organizzano l’installazione e la configurazione del prodotto. La figura a cui fanno riferimento è il capo progetto. Ad agosto 2019 il gruppo è composto da dieci persone.
+\end{itemize}
+
+Per il periodo dello stage sono stato inserito nel team di sviluppo JMES.\\
+
+La prima installazione di JMES risale a maggio 2018. È quindi un prodotto giovane che però è stato già apprezzato da 19 clienti attivi, ci sono inoltre 27 analisi per l’installazione in corso e altre 19 in via di pianificazione.
+
+
+\subsubsection{Sviluppo agile e framework Scrum}
+Indipendentemente dalle \acrshort{bu} aziendali, la metodologia di lavoro per la gestione del ciclo di  sviluppo del software è Agile, implementata con il \textit{framework} Scrum.
+
+Agile è una disciplina per lo sviluppo di software che pone al primo posto tra i suoi principi la soddisfazione e il coinvolgimento del cliente e la distribuzione di software funzionante in maniera regolare e a distanza di brevi periodi, dalle due settimane ai due mesi.
+
+Il \textit{framework} Scrum prevede di suddividere un periodo di lavoro, chiamato \textit{sprint cycle} in tre fasi principali:
+\begin{itemize}
+	\item \textit{Planning}: il team comunica con gli \textit{stakeholder} (rappresentati dal \textit{product owner}), analizza e comprende i requisiti creando lo \textit{sprint backlog}, composto di requisiti che il prodotto deve soddisfare entro la fine dello \textit{sprint}. Questi prendono il nome di \textit{story} se sono completabili entro uno sprint. Un insieme correlato di \textit{story} si chiama \textit{epic};
+	\item \textit{Implementation}: durante questa fase dello \textit{sprint} il team crea delle porzioni complete di prodotto. Le funzionalità implementate in uno \textit{sprint} provengono dallo \textit{sprint backlog}. La durata di questa fase è, nel caso del team JMES, quattro settimane;
+	\item \textit{Review}: ci si riunisce per revisionare il lavoro svolto e pianificare ciò che non è stato possibile portare a termine nella fase di \textit{implementation}. Ogni membro del team mostra una \textit{demo} delle funzionalità sviluppate nella fase precedente;
+	\item \textit{Retrospective}: vengono analizzate in modo retrospettivo le fasi precedenti in un’ottica di miglioramento continuo dei processi al fine di renderli più efficienti negli sprint successivi. Si discute di strumenti e metodologie utilizzate e di come queste abbiano influito nello sviluppo. Se vengono ritenute poco utili, la loro pratica viene dismessa.
+\end{itemize}
+
+
+
+\subsubsection{Strumenti e tecnologie di sviluppo del team}
+
+%Per lo sviluppo dell'applicazione è stato utilizzato il linguaggio Java. \\
+%Per l'interfacciamento con i PLC è stato utilizzato il protocollo ModBusTCP in un'implementazione proprietaria di \acrshort{smi}.\\
+Descritte le tecnologie di sviluppo del team JMES. \\
+Principalmente si paralerà del linguaggio Java e del framework sviluppato da \acrshort{smi} per lo sviluppo: \textit{Synergy}.
+
+Al centro degli strumenti per la gestione del flusso di lavoro del team JMES c'è uno strumento sviluppato da IBM, \acrfull{rtc}. Questo offre le seguenti funzionalità:
+\begin{itemize}
+	\item versionamento del codice;
+	\item gestione dei \textit{work item} provenienti dallo \textit{sprint backlog} (\textit{issue tracking system});
+	\item \textit{build tool}.
+\end{itemize}
+\acrshort{rtc} si integra all'interno dell'ambiente di sviluppo del team grazie a un \textit{plug-in} completo per l'\acrshort{ide} Eclipse;\\
+
+\clearpage
+
 \section{La Digital Industry}
 
 \subsection{L'industria 4.0}
@@ -52,7 +99,7 @@ L'avvento e la crescita di internet hanno rivoluzionato il modo di fare impresa 
 Ciò che prima era un impianto isolato, con operatori  e responsabili, ora è parte di una catena produttrice interconnessa che genera non solo beni tangibili ma anche dati che, se ben gestiti, possono diventare informazione utilizzata per aumentare l’efficienza dell'intera impresa in un delicato ciclo di \textit{feedback}.\\
 La corretta gestione di questa informazione diventa fondamentale per il successo dell'impresa poiché mantiene alta la competitività.
 
-Questi nuovi aspetti vengono spesso riassunti nel termine \textit{quarta rivoluzione industriale}, un altro termine comune in questo ambito è infatti \textit{Industry 4.0}.
+Questi nuovi aspetti vengono spesso riassunti nel termine \textit{quarta rivoluzione industriale}, un altro termine comune in questo ambito è infatti \textit{Industry 4.0}.\\
 
 \begin{figure}[h]
 	\centering
@@ -78,72 +125,86 @@ Vediamo quali sono i principali benefici di un sistema \acrshort{mes}\footnote{[
 	
 \end{enumerate}
 
-\section{Le squadre JMES}
+\section{La proposta di stage}
 
-Come accennato nel paragrafo \ref{smi} esistono due squadre che lavorano in maniera sinergica per lo sviluppo e l’installazione del prodotto JMES:
-\begin{itemize}
-	\item \textbf{Sviluppatori}. Sono raggruppati all'interno del team di JMES e si occupano di implementare le funzionalità aggiuntive richieste dai clienti. Le richieste possono provenire da un singolo cliente o essere inserite in distribuzioni di aggiornamento per tutte le installazioni. La differenza sta nel valore monetario dell' \textit{update}. La figura a cui fanno riferimento è lo \textit{Scrum Master}. Ad agosto 2019 il team è composto da otto persone;
-	\item \textbf{Sistemisti}. Effettuano un’analisi tecnica presso le sedi dei clienti evidenziando possibili problemi di compatibilità con le attrezzature presenti, propongono le diverse configurazioni del software JMES in base a requisiti e vincoli posti dal cliente e organizzano l’installazione e la configurazione del prodotto. La figura a cui fanno riferimento è il capo progetto. Ad agosto 2019 il gruppo è composto da dieci persone.
-\end{itemize}
+\subsection{Il progetto}
 
-Per il periodo dello stage sono stato inserito nel team di sviluppo JMES.\\
+\acrshort{smi} nel 2018 ha sviluppato un applicativo per il collegamento dei dispositivi PLC all'attuale software \acrshort{mes}. L'applicativo è stato sviluppato pensando ad una distribuzione su più stabilimenti e quindi realizzato come sistema a servizi controllati e sincronizzati a loro volta da un ulteriore servizio.
 
-La prima installazione di JMES risale a maggio 2018. È quindi un prodotto giovane che però è stato già apprezzato da 19 clienti attivi, ci sono inoltre 27 analisi per l’installazione in corso e altre 19 in via di pianificazione.
+La realtà dei fatti ha però dimostrato che tale applicativo viene installato solo ed esclusivamente su un unico server per azienda. Questo ha evidenziato come la struttura a servizi portasse ad un consumo eccessivo di risorse condivise ma replicate.
 
-\clearpage
+Il progetto in cui sono stato inserito, una volta raccolti i requisiti, ha avuto come obiettivo la trasformazione di tale infrastruttura in un unico pacchetto installabile all'interno di un \textit{web server} \textit{Apache Tomcat}. Il principale vincolo posto è stato l'utilizzo di un approccio puramente concorrente, in contraddizione con la versione precedentemente sviluppata.
 
-\section{Metodologia di lavoro}
-\subsection{Sviluppo agile e framework Scrum}
-Indipendentemente dalle \acrshort{bu} aziendali, la metodologia di lavoro per la gestione del ciclo di  sviluppo del software è Agile, implementata con il \textit{framework} Scrum.
+\subsection{Gli obiettivi}
 
-Agile è una disciplina per lo sviluppo di software che pone al primo posto tra i suoi principi la soddisfazione e il coinvolgimento del cliente e la distribuzione di software funzionante in maniera regolare e a distanza di brevi periodi, dalle due settimane ai due mesi.
+Durante le riunioni di definizione del piano di lavoro dello stage sono emersi diversi punti evidenziati dal tutor dell'azienda come critici. Questi sono stati classificati in obbligatori e desiderabili. Obbligatori per indicare che il mancato soddisfacimento di tali bersagli porterebbe ad una valutazione non soddisfacente dell'esperienza. Desiderabili vengono intesi gli obiettivi che aiuterebbero ad elevare l'importanza del progetto.\\
+Per comodità sono raccolti nella seguente tabella.
 
-Il \textit{framework} Scrum prevede di suddividere un periodo di lavoro, chiamato \textit{sprint cycle} in tre fasi principali:
-\begin{itemize}
-	\item \textit{Planning}: il team comunica con gli \textit{stakeholder} (rappresentati dal \textit{product owner}), analizza e comprende i requisiti creando lo \textit{sprint backlog}, composto di requisiti che il prodotto deve soddisfare entro la fine dello \textit{sprint}. Questi prendono il nome di \textit{story} se sono completabili entro uno sprint. Un insieme correlato di \textit{Story} si chiama \textit{Epic};
-	\item \textit{Implementation}: durante questa fase dello \textit{sprint} il team crea delle porzioni complete di prodotto. Le funzionalità implementate in uno \textit{sprint} provengono dallo \textit{sprint backlog}. La durata di questa fase è, nel caso del team JMES, quattro settimane;
-	\item \textit{Review}: ci si riunisce per revisionare il lavoro svolto e pianificare ciò che non è stato possibile portare a termine nella fase di \textit{implementation}. Ogni membro del team mostra una \textit{demo} delle funzionalità sviluppate nella fase precedente;
-	\item \textit{Retrospective}: vengono analizzate in modo retrospettivo le fasi precedenti in un’ottica di miglioramento continuo dei processi al fine di renderli più efficienti negli sprint successivi. Si discute di strumenti e metodologie utilizzate e di come queste abbiano influito nello sviluppo. Se vengono ritenute poco utili, la loro pratica viene dismessa.
-\end{itemize}
+\begin{center}
+	\begin{longtable}{||p{7cm}| p{2.5cm}||} 
+		\hline
+		Obiettivo & Tipologia \\ [0.5ex] 
+		\hline\hline
+		analisi dell'attuale infrastruttura e delle problematiche che hanno portato alla scelta di modificare l’architettura & obbligatorio\\ 
+		\hline
+		analisi omnicomprensiva della nuova architettura; & obbligatorio \\
+		\hline
+		studio di fattibilità in termini "tecnologici" (ossia reperimento e/o sviluppo di componentistica necessaria alla realizzazione) e relativi banchmark di confronto & obbligatorio \\
+		\hline
+		sviluppo prototipo al fine di testare le soluzioni trovate e le performance effettive delle stesse (in termini di tempo di esecuzione, scalabilità e risorse impegnate). & desiderabile \\ [1ex]
+		\hline
+		\caption{Obiettivi obbligatori e desiderabili di progetto}
+		\label{tab:obiettivi}
+	\end{longtable}
+\end{center}
 
 
 
-\subsection{Strumenti e tecnologie di sviluppo del team}
 
-%Per lo sviluppo dell'applicazione è stato utilizzato il linguaggio Java. \\
-%Per l'interfacciamento con i PLC è stato utilizzato il protocollo ModBusTCP in un'implementazione proprietaria di \acrshort{smi}.\\
-Descritte le tecnologie di sviluppo del team JMES. \\
-Principalmente si paralerà del linguaggio Java e del framework sviluppato da \acrshort{smi} per lo sviluppo: \textit{Synergy}.
 
-Al centro degli strumenti per la gestione del flusso di lavoro del team JMES c'è uno strumento sviluppato da IBM, \acrfull{rtc}. Questo offre le seguenti funzionalità:
-\begin{itemize}
-	\item versionamento del codice;
-	\item gestione dei \textit{work item} provenienti dallo \textit{sprint backlog} (\textit{issue tracking system});
-	\item \textit{build tool}.
-\end{itemize}
-\acrshort{rtc} si integra all'interno dell'ambiente di sviluppo del team grazie a un \textit{plug-in} completo per l'\acrshort{ide} Eclipse;\\
 
 \clearpage
 
 
-\section{Outline del documento}
+\section{Organizzazione del Documento}
 
-L'obiettivo di questo documento è di raccogliere e tradurre a parole l'esperienza fatta durante lo stage curricolare presso Sanmarco Informatica svolto nel periodo 10 giugno 2019 - 8 agosto 2019.
+\subsection{Contenuti}
+L'obiettivo di questo documento è di raccogliere e tradurre a parole l'esperienza fatta durante lo stage curricolare presso Sanmarco Informatica svolto nel periodo 10 giugno 2019 - 8 agosto 2019. A partire dal prossimo capitolo si toccheranno tutti gli argomenti tecnici trattati:
 
-A partire dal prossimo capitolo si toccheranno tutti gli argomenti tecnici trattati. \\
-Iniziando con un chiarimento sulle tecnologie adottate per il progetto di stage, si passerà poi alla motivazione che ha spinto \acrshort{smi} a fare questa proposta di progetto. Infine nel capitolo \ref{ch:analisi_progettazione_sviluppo} verranno sintetizzate le attività di analisi, progettazione e sviluppo che sono iniziate a fine giugno 2019 e sono terminate agli inizi di agosto 2019.\\
+\begin{itemize}
+	\item Nel capitolo \nameref{ch:background} verranno analizzate più nel dettaglio le tecnologie già citate in questo capitolo, come il software JMES. Sono introdotti i linguaggi di programmazione utilizzati e gli strumenti per lo sviluppo e la gestione del codice; 
+	
+	\item Il capitolo \nameref{ch:problematiche} intende presentare i problemi che hanno portato alla proposta di stage. Verrà analizzato il sistema precedentemente sviluppato da \acrshort{smi} e si presenteranno i requisiti estratti da questo. 
+	
+	\item Il capitolo \ref{ch:analisi_progettazione_sviluppo} riassume l'attività di realizzazione del Proof of Concept (PoC) esplorativo utilizzato per effettuare \gls{benchmark} prestazionali sui requisiti chiave. Lo sviluppo prevede poi la progettazione e la codifica di un prototipo che servirà al termine dello stage come base per il team che continuerà lo sviluppo.
+	
+	\item Infine nel capitolo \ref{ch:retrospettiva} raccolgo le impressioni dell'esperienza di stage all'interno di \acrshort{smi}, di quale preparazione ho sentito la mancanza e per quali aspetti ho più apprezzato il corso di studi.
+	
+\end{itemize}
 
-Nonostante il tempo limitato, durante lo stage ho cercato di esplorare diversi aspetti dell'ingegneria del software che durante il percorso triennale ho potuto analizzare solo dal punto di vista teorico.\\
-L'esperienza mi ha infatti permesso di trascorrere del tempo in un team che utilizzava la disciplina \textit{Agile}, ho sperimentato la tecnica del \textit{pair programming} durante una fase dello sviluppo e ho potuto mettere in uso il modello del \textit{\acrfull{tdd}}, anche in questo caso in maniera limitata rispetto all'intero progetto.\\
+%Nonostante il tempo limitato, durante lo stage ho cercato di esplorare diversi aspetti dell'ingegneria del software che durante il percorso triennale ho potuto analizzare solo dal punto di vista teorico.\\
+%L'esperienza mi ha infatti permesso di trascorrere del tempo in un team che utilizzava la disciplina \textit{Agile}, ho sperimentato la tecnica del \textit{pair programming} durante una fase dello sviluppo e ho potuto mettere in uso il modello del \textit{\acrfull{tdd}}, anche in questo caso in maniera limitata rispetto all'intero progetto.\\
+
+%della prima versione e la raccolta dei requisiti. L'attività di progettazione ha ricoperto un ruolo particolarmente importante poichè doveva evitare gli errori commessi durante la progettazione del primo JDI. Verrà qui messa in luce la contrapposizione tra l'architettura distribuita della prima versione e quella concorrente della seconda.
 
 
-Nel capitolo \nameref{ch:background} vengono analizzate più nel dettaglio le tecnologie già citate in questo capitolo, come il software JMES. Sono introdotti i linguaggi di programmazione utilizzati e gli strumenti per lo sviluppo e la gestione del codice. \\
+%Nel capitolo \nameref{ch:background} vengono analizzate più nel dettaglio le tecnologie già citate in questo capitolo, come il software JMES. Sono introdotti i linguaggi di programmazione utilizzati e gli strumenti per lo sviluppo e la gestione del codice. \\
 
-Il capitolo \nameref{ch:problematiche} intende presentare i problemi che hanno portato alla proposta di stage. Il prodotto sviluppato durante lo stage mira a riprodurre le funzionalità principali di un software già presente in \acrshort{smi} (chiamato JDI), il cui sviluppo è terminato a metà 2018, che presentava diversi problemi sul piano architetturale. Questi hanno minato la stabilità e l'affidabilità del prodotto, che necessitava quindi di un rifacimento.\\
+% Questi hanno minato la stabilità e l'affidabilità del prodotto, che necessitava quindi di un rifacimento.\\
 
-Nonostante il fallimento della prima versione di JDI, la seconda versione da me sviluppata doveva riprodurre le funzionalità principali per poter essere una solida base di partenza per il resto del team JMES che una volta terminato lo stage avrebbe preso in carico il progetto. Il capitolo \ref{ch:analisi_progettazione_sviluppo} riassume l'analisi della prima versione e la raccolta dei requisiti. L'attività di progettazione ha ricoperto un ruolo particolarmente importante poichè doveva evitare gli errori commessi durante la progettazione del primo JDI. Verrà qui messa in luce la contrapposizione tra l'architettura distribuita della prima versione e quella concorrente della seconda.\\
+%Nonostante il fallimento della prima versione di JDI, la seconda versione da me sviluppata doveva riprodurre le funzionalità principali per poter essere una solida base di partenza per il resto del team JMES che una volta terminato lo stage avrebbe preso in carico il progetto. \\
 
-Infine nel capitolo \ref{ch:retrospettiva} raccolgo le impressioni dell'esperienza di stage all'interno di \acrshort{smi}, di quale preparazione ho sentito la mancanza e per quali aspetti ho più apprezzato il corso di studi.
+%Infine nel capitolo \ref{ch:retrospettiva} raccolgo le impressioni dell'esperienza di stage all'interno di \acrshort{smi}, di quale preparazione ho sentito la mancanza e per quali aspetti ho più apprezzato il corso di studi.
 
 
+\subsection{Convenzioni tipografiche}
 
+Riguardo la stesura del testo, relativamente al documento sono state adottate le
+seguenti convenzioni tipografiche:
+\begin{itemize}
+	\item Gli acronimi di uso non comune saranno indicati nella loro prima apparizione nel testo in forma estesa. In seguito verrà indicata solo la loro abbreviazione. L'elenco degli acronimi è situato alla fine del presente documento;
+	
+	\item I termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
+	
+	\item I termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere corsivo.
+\end{itemize}
