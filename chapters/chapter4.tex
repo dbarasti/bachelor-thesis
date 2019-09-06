@@ -20,7 +20,7 @@ Lo studio e l'analisi della versione precedente hanno impegnato le prime due set
 
 Il codice sorgente nelle sue componenti principali constava di:
 \begin{itemize}
-	\item otto progetti contenenti i \textit{\gls{driver}} per la comunicazione con i PLC. Ogni \gls{driver} è un'implementazione diversa di un protocollo;
+	\item otto progetti contenenti i \textit{\gls{driver}} per la comunicazione con i PLC. Ogni \textit{\gls{driver}} è un'implementazione diversa di un protocollo;
 	\item librerie di base per JDI, contenenti definizioni di interfacce e classi astratte, strutture dati, ecc;
 	\item progetti per i nodi \textit{Router} e \textit{Link}.
 \end{itemize} 
@@ -61,7 +61,7 @@ I requisiti descritti nel resto della sezione sono raccolti in tre categorie:
 
 \begin{itemize}
 	\item Requisiti funzionali: descrivono cosa il sistema dovrebbe fare. Quali funzionalità ci si aspetta;
-	\item Requisiti qualitativi: pongono dei vincoli su "come" il prodotto deve soddisfare i requisiti funzionali. Prestazioni, sicurezza e altri requisiti non funzionali in generale;
+	\item Requisiti di qualità: pongono dei vincoli su "come" il prodotto deve soddisfare i requisiti funzionali. Prestazioni, sicurezza e altri requisiti non funzionali in generale;
 	\item Requisiti di vincolo: definiscono limitazioni e vincoli nello sviluppo del prodotto. Linguaggi di sviluppo, librerie, versioni, compatibilità, ecc.
 \end{itemize}
 
@@ -71,7 +71,7 @@ Per tenere traccia dei requisiti, per ognuno verrà usata la seguente codifica:
 \begin{center}
 	\large{R[F | Q | V][Codice]}
 \end{center}
-dove la prima opzione specificata indica un requisito rispettivamente funzionale, qualitativo o di vincolo. La seconda opzione è un identificativo numerico intero crescente.
+dove la prima opzione specificata indica un requisito rispettivamente funzionale, di qualità o di vincolo. La seconda opzione è un identificativo numerico intero crescente.
 
 
 
@@ -84,7 +84,7 @@ dove la prima opzione specificata indica un requisito rispettivamente funzionale
 		RF1 & Configurazione del sistema & Il sistema deve ricavare le informazioni riguardanti la configurazione delle macchine ad esso collegate da un file JSON. Questo file conterrà le seguenti informazioni:
 		\begin{itemize}
 			\item indirizzo IP, porta e ID dei PLC con cui il sistema deve interagire;
-			\item tipo di \gls{driver} da utilizzare per la comunicazione con ogni PLC;
+			\item tipo di \textit{\gls{driver}} da utilizzare per la comunicazione con ogni PLC;
 			\item per ogni PLC, le locazioni di memoria con cui interagire;
 			\item come interpretare i dati presenti nelle locazioni di memoria (numero intero, numero reale, stringa ecc..);
 			\item le modalità di accesso per ogni locazione di memoria: lettura e/o scrittura.
@@ -106,27 +106,28 @@ dove la prima opzione specificata indica un requisito rispettivamente funzionale
 		\hline
 		RF9 & Ultima lettura & Il sistema deve poter fornire, per ogni macchina collegata, informazioni riguardanti l'ultima lettura avvenuta. Il formato di questa informazione deve essere l'orario dell'ultima lettura effettuata nel formato dd/mm/yyyy, mm:ss\\
 		\hline
-		RV10 & Linguaggi & Il linguaggio per lo sviluppo del sistema JDI deve essere Java. Non sono posti vincoli sulla versione\\
+		RF10 & Richieste multiple di scrittura & Se vengono richieste nel breve periodo multiple scritture, il sistema deve soddisfarle tutte (quando sono disponibili i giusti permessi) mantenendo l'ordine di arrivo delle richieste \\
 		\hline
-		RV11 & Concorrenza & Deve essere utilizzato un approccio concorrente per realizzare il prodotto\\
+		RF11 & Riconnessione &  Nel caso in cui avvenga la disconnessione di un PLC, il sistema deve effettuare tentativi di riconnessione utilizzando un algoritmo che allunghi gli intervalli tra un tentativo e il successivo fino al raggiungimento di un minuto di attesa\\
 		\hline
-		RQ12 & Reattività scrittura & Quando avviene una richiesta di scrittura, il sistema deve prendere in carico la gestione di questa nel più breve tempo possibile\\
+		RV12 & Linguaggi & Il linguaggio per lo sviluppo del sistema JDI deve essere Java. Non sono posti vincoli sulla versione\\
 		\hline
-		RF13 & Richieste multiple di scrittura & Se vengono richieste nel breve periodo multiple scritture, il sistema deve soddisfarle tutte (quando sono disponibili i giusti permessi) mantenendo l'ordine di arrivo delle richieste \\
+		RV13 & Concorrenza & Deve essere utilizzato un approccio concorrente per realizzare il prodotto\\
 		\hline
-		RF14 & Riconnessione &  Nel caso in cui avvenga la disconnessione di un PLC, il sistema deve effettuare tentativi di riconnessione utilizzando un algoritmo che allunghi gli intervalli tra un tentativo e il successivo fino al raggiungimento di un minuto di attesa\\
+		RV14 & Librerie & Le dipendenze del progetto devono limitarsi allo stretto necessario per portare a termine gli obiettivi fissati. L'introduzione di una libreria deve essere approvata da un responsabile\\
 		\hline
-		RQ14 & Scritture sicure & Se ci sono diverse richieste pendenti per un PLC e viene persa la connessione con questo, la coda di richieste deve essere eliminata. Nel periodo di disconnessione le richieste di scrittura per quel PLC devono essere rifiutate\\
+		
+		RV15 & Compatibilità PLC & Il sistema deve poter funzionare con dispositivi \textit{Schneider} che utilizzano il protocollo \textit{ModbusTCP} \\ 
 		\hline
-		RV15 & Librerie & Le dipendenze del progetto devono limitarsi allo stretto necessario per portare a termine gli obiettivi fissati. L'introduzione di una libreria deve essere approvata da un responsabile\\
+		RV16 & Svolgimento test \#1 & Il sistema deve essere testato con almeno un dispositivo PLC \textit{Schneider} M221 \\ 
 		\hline
-		RQ16 & Consumo memoria & Il sistema deve occupare non più di 2GB di memoria in una situazione reale: 5 PLC collegati con diverse operazioni di lettura e scrittura che occorrono a intervalli di pochi secondi\\
+		RV17 & Svolgimento test \#2 & Per i test di scalabilità del sistema devono essere simulati dei dispositivi PLC con protocollo \textit{ModbusTCP} con l'uso del software \textit{Modbus PLC Simulator} \\ 
 		\hline
-		RV17 & Compatibilità PLC & Il sistema deve poter funzionare con dispositivi \textit{Schneider} che utilizzano il protocollo \textit{ModbusTCP} \\ 
+		RQ18 & Reattività scrittura & Quando avviene una richiesta di scrittura, il sistema deve prendere in carico la gestione di questa nel più breve tempo possibile\\
 		\hline
-		RV18 & Svolgimento test \#1 & Il sistema deve essere testato con almeno un dispositivo PLC \textit{Schneider} M221 \\ 
+		RQ19 & Scritture sicure & Se ci sono diverse richieste pendenti per un PLC e viene persa la connessione con questo, la coda di richieste deve essere eliminata. Nel periodo di disconnessione le richieste di scrittura per quel PLC devono essere rifiutate\\
 		\hline
-		RV19 & Svolgimento test \#2 & Per i test di scalabilità del sistema devono essere simulati dei dispositivi PLC con protocollo \textit{ModbusTCP} con l'uso del software \textit{Modbus PLC Simulator} \\ [1ex] 
+		RQ20 & Consumo memoria & Il sistema deve occupare non più di 2GB di memoria in una situazione reale: 5 PLC collegati con diverse operazioni di lettura e scrittura che occorrono a intervalli di pochi secondi\\ [1ex] 
 		\hline
 		\caption{Tabella requisiti}
 		\label{tab:requisiti}
@@ -178,17 +179,17 @@ Questa metodo prende il nome di \textit{tracer bullet development}.
 \subsection{Integrazione iniziale}
 Grazie all'analisi svolta in primo luogo sulla vecchia struttura di JDI è stato possibile individuare i componenti riutilizzabili nella nuova versione da me sviluppata.\\
 
-Lo scoglio iniziale era certamente rappresentato dall'interazione tra JDI e PLC. Dovevo infatti dimostrare di poter utilizzare il protocollo ModbusTCP per effettuare le operazioni di scrittura e lettura verso il PLC. A questo proposito è utile presentare il primo componente riutilizzato dalla prima versione: il \gls{driver} ModbusTCP.\\
+Lo scoglio iniziale era certamente rappresentato dall'interazione tra JDI e PLC. Dovevo infatti dimostrare di poter utilizzare il protocollo ModbusTCP per effettuare le operazioni di scrittura e lettura verso il PLC. A questo proposito è utile presentare il primo componente riutilizzato dalla prima versione: il \textit{\gls{driver}} ModbusTCP.\\
 
-Il \gls{driver} per ModbusTCP presentava una comoda interfaccia effettuare le tipiche operazioni su PLC: connessione, disconnessione, lettura e scrittura.
+Il \textit{\gls{driver}} per ModbusTCP presentava una comoda interfaccia effettuare le tipiche operazioni su PLC: connessione, disconnessione, lettura e scrittura.
 
-A dimostrazione della fattibilità della prima integrazione ho realizzato un semplice test che utilizzasse il driver ModbusTCP per connettersi ad un dispositivo \textit{Schneider M221} ed effettuare una lettura e una scrittura.
+A dimostrazione della fattibilità della prima integrazione ho realizzato un semplice test che utilizzasse il \textit{\gls{driver}} ModbusTCP per connettersi ad un dispositivo \textit{Schneider M221} ed effettuare una lettura e una scrittura.
 
-Di seguito il codice che utilizza l'interfaccia del driver per effettuare il test di lettura:
+Di seguito il codice che utilizza l'interfaccia del \textit{driver} per effettuare il test di lettura:
 
 
 \clearpage
-\begin{lstlisting}[basicstyle=\footnotesize,language=java, caption={Codice che effettua la connessione ad un PLC ed effettua la lettura dell'area di memoria 17, interpretandola come un intero a 32 bit. I dettagli della connessione sono racchiusi nel metodo \textit{createAndGetDriver().}}]
+\begin{lstlisting}[language=java, caption={Codice che effettua la connessione ad un PLC ed effettua la lettura dell'area di memoria 17, interpretandola come un intero a 32 bit. I dettagli della connessione sono racchiusi nel metodo \textit{createAndGetDriver().}}]
 public static void main(String[] args) {
   Driver driver = createAndGetDriver();
   driver.connect().get();
@@ -212,24 +213,24 @@ public static void main(String[] args) {
 \end{lstlisting} 
 
 
-La realizzazione ex novo di un driver avrebbe richiesto lo studio a basso livello del protocollo Modbus e ModbusTCP. Il riuso in questo caso si è rivelata una scelta appropriata.
+La realizzazione ex novo di un \textit{\gls{driver}} avrebbe richiesto lo studio a basso livello del protocollo Modbus e ModbusTCP. Il riuso in questo caso si è rivelata una scelta appropriata.
 
 Inserire nel progetto questo componente ha avuto però dei lati negativi: 
 \begin{itemize}
-	\item buona parte del codice del driver serviva a svolgere compiti che, ai fini dello stage, non sono risultati utili; 
-	\item assieme al driver ho dovuto importare nel progetto le sue dipendenze. Prevalentemente librerie sviluppate da \acrshort{smi};
+	\item buona parte del codice del \textit{\gls{driver}} serviva a svolgere compiti che, ai fini dello stage, non sono risultati utili; 
+	\item assieme al \textit{\gls{driver}} ho dovuto importare nel progetto le sue dipendenze. Prevalentemente librerie sviluppate da \acrshort{smi};
 	\item mi ha vincolato all'uso di alcune classi per mantenere una compatibilità; principalmente quelle relative ai tipi dei dati letti e scritti. Come specificato nei requisiti infatti, alla lettura di una certa area di memoria consegue l'interpretazione del dato.
 \end{itemize}
 
-Queste conseguenze sono state comunque largamente colmate dalle decine di ore di lavoro risparmiate per la creazione di un driver ModbusTCP.\\
+Queste conseguenze sono state comunque largamente colmate dalle decine di ore di lavoro risparmiate per la creazione di un \textit{\gls{driver}} ModbusTCP.\\
 
 
-\subsection{Benchmark}
+\subsection{Benchmark} \label{sec:benchmark}
 
 Sapendo di poter effettuare le operazioni di base sul PLC di test ho proseguito con la creazione del primo prototipo per effettuare i \textit{benchmark} sulle prestazioni.
 \newline
 
-Avendo realizzato svariati prototipi per determinare la soluzione migliore a diversi problemi è risultato utile utilizzare il versionamento di git per fermare nel tempo le diverse versioni sviluppate. In figura \ref{fig:gitkraken_benchmark} è presente una vista del software GitKraken che mostra come ogni versione di \textit{benchmark} abbia una \textit{tag} associata.
+Avendo realizzato svariati prototipi per determinare la soluzione migliore a diversi problemi è risultato utile utilizzare il versionamento di git per fermare nel tempo le diverse versioni sviluppate. In figura \ref{fig:gitkraken_benchmark} è presente una vista del software GitKraken che mostra come ogni versione di \textit{benchmark} abbia una \textit{tag} associata.\\
 
 \label{fig:gitkraken_benchmark}
 \begin{figure}[h]
@@ -303,66 +304,250 @@ I risultati ottenuti dal \textit{benchmark} hanno superato le aspettative. I tem
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=1\textwidth]{figures/benchmark_1_grafico}
+	\includegraphics[width=0.9\textwidth]{figures/benchmark_1_grafico}
 	\caption{Grafico scalabilità concorrenza di \textit{ConcurrentHashMap}}
 	\label{fig:grafico_benchmark_1}
 \end{figure}
 
 
 \subsection{Progettazione e codifica}
+Per ottenere un'architettura solida e manutenibile è stato scelto di gestire separatamente le operazioni di lettura e di scrittura. Nella soluzione sviluppata \textbf{per ogni PLC} saranno istanziati quindi due \textit{thread}: 
+\begin{itemize}
+	\item il primo occupa di effettuare la lettura (grazie al proprio \textit{\gls{driver}}) di tutte le aree di memoria definite nel file di configurazione. Questa operazione avviene ad intervalli regolari definiti anch'essi nella configurazione. L'intervallo è chiamato tempo di \textit{\gls{polling}};
+	\item il secondo rimane in attesa che avvenga una richiesta di scrittura. Quando questa avviene utilizza il proprio \textit{\gls{driver}} per completare la richiesta.
+\end{itemize}
 
-L'attività di progettazione ha portato alla definizione di un'architettura composta principalmente dai componenti esposti di seguito. Dopo una breve descrizione verranno analizzati in dettaglio.
+Le specifiche di un'area di memoria da leggere o scrivere sono definite \textit{TagConfiguration}. L'insieme di una \textit{TagConfiguration} e del valore letto definisce una \textit{Tag}.
+
+L'attività di progettazione ha portato alla definizione di un'architettura composta principalmente dai componenti esposti di seguito. Dopo una breve descrizione verranno analizzati alcuni di essi in dettaglio.
  
 
 \begin{itemize}
 	\item \textit{Configurators}: gerarchia di classi che si occupano di elaborare il file JSON contenente la configurazione delle macchine. La loro interfaccia permette di creare separatamente i \textit{thread} di lettura e quelli di scrittura. Uno per ogni PLC specificato nella configurazione. In figura \ref{fig:json} un esempio del file che il sistema è in grado di elaborare;
 	
-	\item \textit{Engines}: contiene le classi che definiscono i \textit{task} che i \textit{thread} devono svolgere. Queste sono \textit{TagUpdater} e \textit{TagPoller}. La prima definisce il \textit{task} per la scrittura, la seconda il \textit{task} di lettura. \textit{Tag} è l'oggetto che rappresenta i dettagli dell'area di memoria e il valore associato;
+	\item \textit{Engines}: contiene le classi che definiscono i \textit{task} che i \textit{thread} devono svolgere. Queste sono \textit{TagUpdater} e \textit{TagPoller}. La prima definisce il \textit{task} per la scrittura, la seconda il \textit{task} di lettura;
 
 	\item \textit{Request\_handlers}: classi che astraggono i dettagli per portare a termine le richieste di lettura e scrittura. Vengono utilizzate da \textit{TagUpdater} e \textit{TagPoller};
 	
 	\item Store: Classi per la gestione dei valori letti e scritti. 
 \end{itemize}
 
-%Il requisito RQ22 che richiedeva una rapida reazione alle richieste di scrittura
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1\textwidth]{figures/json}
-	\caption{Esempio di file di configurazione}
-	\label{fig:json}
-\end{figure}
+\clearpage
+\begin{lstlisting}[language=json,firstnumber=1, caption={Esempio di una configurazione in formato JSON. È presente una sola macchina denominata "plc-fisico". Per questa sono definite due aree di memoria con diversi permessi.}]
+{"machines": {
+	"plc-fisico": {
+		"driver": "driver-modbustcp",
+		"settings": {
+			"PollingTime": "1000",
+			"Address": "10.200.200.80",
+			"Port": "502",
+			"unitId": "100"
+		},
+		"tags": {
+			"counter": {
+				"type": "it.smi.types.Int32",
+				"address": "40017",
+				"canRead": true,
+				"canWrite": false
+			},
+			"watchdog": {
+				"type": "it.smi.types.Int16",
+				"address": "40020",
+				"canRead": true,
+				"canWrite": true
+			}
+		}
+	}
+}}
+\end{lstlisting}
+\label{fig:json}
 
 \clearpage
-
 \paragraph{Configurators}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=1\textwidth]{figures/configurators}
+	\includegraphics[width=0.8\textwidth]{figures/configurators}
 	\caption{Diagramma delle classi del componente \textit{Configurators}}
 	\label{fig:configurators}
 \end{figure}
 
-Il componente \textit{Configurators} racchiude le classi che effettuano le operazioni di creazione dei \textit{thread} per la lettura e per la scrittura. Utilizzano la libreria \textit{Jackson} per processare il file JSON di configurazione.
+Il componente \textit{Configurators} racchiude le classi che effettuano le operazioni di creazione dei \textit{thread} per la lettura e per la scrittura. Utilizzano la libreria \textit{Jackson}\footnote{Ulteriori informazioni disponibili su \href{https://github.com/FasterXML/jackson}{https://github.com/FasterXML/jackson}} per processare il file JSON di configurazione.
 
-La classe base \textit{Configuration} effettua le operazioni di basso livello con il file JSON per ottenere, per ogni PLC specificato, il driver adatto. Ricava poi le configurazioni delle \textit{Tag}, cioè delle aree di memoria interessate da lettura e scrittura.
+La classe base \textit{Configuration} effettua le operazioni di basso livello con il file JSON per ottenere, per ogni PLC specificato, il \textit{\gls{driver}} adatto. Ricava poi le \textit{TagConfiguration} per ogni area di memoria interessata da lettura e scrittura.
 
-\textit{ReadingConfiguration} grazie al lavoro svolto dalla classe padre \textit{Configuration} estrae i \textit{thread} per la lettura fornendo loro la lista di configurazioni con i permessi di lettura.
+\textit{ReadingConfiguration} grazie al lavoro svolto dalla classe padre \textit{Configuration} estrae i \textit{thread} per la lettura fornendo loro la lista di \textit{TagConfiguration} con i permessi di lettura.
 
-\textit{WritingConfiguration} fornisce lo stesso servizio ma ricavando le configurazioni sulla base dei permessi di scrittura.
+\textit{WritingConfiguration} fornisce lo stesso servizio ma ricavando le configurazioni sulla base dei permessi di scrittura.\\
+
+
+\begin{lstlisting}[language=java, caption={Le configurazioni delle tag da leggere per un dato PLC vengono filtrate usando gli Stream Java}]
+//ReadingConfiguration
+private List<TagConfiguration> filterReadableConfigurations(
+		List<TagConfiguration> tagConfigurations) {
+	return tagConfigurations.stream()
+	.filter(TagConfiguration::canRead)
+	.collect(
+		Collectors.toCollection(ArrayList::new)
+	);
+}
+\end{lstlisting}
+
+\clearpage
 
 \paragraph{Engines}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{figures/engines}
+	\caption{Diagramma delle classi del componente \textit{Engines}}
+	\label{fig:configurators}
+\end{figure}
 
-In questo componente sono definite le classi che implementano l'interfaccia \textit{Runnable}. Rappresentano i \textit{task} che i \textit{thread} (di lettura o scrittura) devono svolgere. Utilizzano la classe \textit{ConnectionHandler} per delegare la gestione della connessione con il proprio driver.
+In questo componente sono definite le classi che implementano l'interfaccia \textit{Runnable}. Rappresentano i \textit{task} che i \textit{thread} devono svolgere. Il \textit{task} definito in \textit{TagPoller} verrà svolto dai \textit{thread} di lettura. Quello in \textit{TagUpdater} da quelli di scrittura. Utilizzano la classe \textit{ConnectionHandler} per delegare la gestione della connessione con il proprio \textit{\gls{driver}}.
 
-%\texttt{}
-%Si parlerà principalmente di: 
-%\begin{itemize}
-%	\item lavoro di integrazione iniziale delle tecnologie e degli strumenti utilizzati durante lo sviluppo. 
-%	\item la progettazione di prototipi e l'analisi di prestazione con benchmark per testare le prestazioni prima ancora di iniziare lo sviluppo intensivo;
-%	\item la scelta del prototipo
-%	\item lo sviluppo
-%	\item i test. 
-%\end{itemize}
+Osservando il metodo \textit{run} della classe \textit{TagPoller} nella figura \ref{fig:tagpoller} si può intuire il funzionamento di base che un \textit{thread} di lettura avrà. Vengono effettuate le letture verso il PLC di tutte le \textit{Tag} etichettate come "da leggere". Il \textit{thread} che sta svolgendo il \textit{task} viene mandato in \textit{sleep()} per il tempo di \textit{\gls{polling}} specificato all'interno della configurazione. Si tratta di un'esecuzione che termina solo quando il \textit{thread} corrente viene interrotto. \\
+
+Il metodo \textit{run()} della classe \textit{TagUpdater} in figura \ref{fig:tagupdater} risulta allo stesso modo di facile comprensione. I dettagli del suo funzionamento verranno approfonditi in seguito, quando si mostrerà l'integrazione tra i componenti \textit{Store} e \textit{Engines}.\\
+
+\clearpage
+\begin{lstlisting}[language=java,caption={Metodo run() della classe TagPoller}]
+//TagPoller
+@Override
+public void run() {
+	ConnectionHandler.instantiateConnectionFor(driver, LOG_NAME, MACHINE_NAME);
+	try {
+		while (!Thread.interrupted()) {
+			readTags();
+			Thread.sleep(POLLING_TIME);
+		}
+	} catch (InterruptedException e) {
+		Logger.log(LOG_NAME + " Thread interrupted");
+	} finally {
+		ConnectionHandler.interruptConnectionFor(driver, MACHINE_NAME);
+		MachineStatusesRepository.communicateStatusChange(MACHINE_NAME, MachineStatusesRepository.Status.DISCONNECTED);
+	}
+}
+\end{lstlisting}
+\label{fig:tagpoller}
+
+
+
+\begin{lstlisting}[language=java,caption={Metodo run() della classe TagUpdater}]
+//TagUpdater
+@Override
+public void run() {
+	ConnectionHandler.instantiateConnectionFor(driver, LOG_NAME);
+	while (!Thread.interrupted()) {
+		retrieveAndWriteTag();
+	}
+	Logger.log(LOG_NAME + " Thread interrupted");
+	ConnectionHandler.interruptConnectionFor(driver);
+}
+\end{lstlisting}
+\label{fig:tagupdater}
+
+\clearpage
+
+\paragraph{Store}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\textwidth]{figures/store}
+	\caption{Diagramma delle classi principali del componente \textit{Store}}
+	\label{fig:store}
+\end{figure}
+
+All'interno del componente \textit{Store} sono contenute le classi che si occupano di gestire i dati da leggere e da scrivere. Queste collaborano con le classi del componente \textit{Engines}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{figures/polling_scheme}
+	\caption{Schema del ciclo di \textit{polling}}
+\end{figure}
+\label{fig:polling_scheme}
+
+Per la gestione dei numerosi dati regolarmente aggiornati provenienti dai PLC è necessario appoggiarsi ad adeguati componenti che tengono traccia dei cambiamenti. Come detto nella sezione \ref{sec:benchmark}, la struttura dati di riferimento per i valori letti è una ConcurrentHashMap. 
+
+Lo schema in figura \ref{fig:polling_scheme} mostra l'operazione di \textit{\gls{polling}} che avviene per la lettura delle \textit{Tag} M1, M2 e M3. Seguendo i passi principali evidenziali nella figura si comprende come i componenti delle due classi collaborino:
+\begin{enumerate}
+	\item il \textit{thread} che esegue il \textit{task} definito in \textit{TagPoller} (Engines) effettua il ciclo di lettura. Le \textit{Tag} lette vengono raccolte in una lista;
+	\item la lista viene mandata a \textit{OnRamPollingTagRepository} (Store) che si occupa di aggiornare i valori contenuti nell'oggetto \textit{storedTags}.
+\end{enumerate} 
+Questi passi vengono eseguiti ad ogni ciclo di \textit{\gls{polling}}.\\
+
+Per terminare la visione dell'integrazione tra i componenti \textit{Engines} e \textit{Store} viene ora descritta la gestione delle richieste di scrittura: per ottenere una bassa latenza tra il momento in cui viene richiesta una scrittura e quando viene presa in carico dal \textit{thread} di scrittura ho preso spunto dal classico \textbf{problema del produttore/consumatore}.
+
+
+Il \textit{thread} di scrittura richiede al proprio oggetto \textit{OnRamTagUpdaterRepositoy} una \textit{Tag} che è in attesa di essere scritta. Il \textit{thread} svuota la coda di richieste. Se non ci sono richieste pendenti il \textit{thread} di scrittura viene messo in stato di \textit{wait}. Appena la \textit{repository} riceve una nuova richiesta di scrittura il \textit{thread} viene notificato. Questo riprenderà la sua esecuzione consumando la nuova richiesta.
+
+Questo meccanismo è stato semplificato dalla creazione della classe \textit{TagsToWriteQueue} che ingloba un \textit{ConcurrentLinkedDeque} utilizzato per gestire le richieste per ogni \textit{thread} di scrittura. Di seguito i metodi di \textit{TagsToWriteQueue} che utilizzano \textit{wait()} e \textit{notify()} per rispettivamente fermare e riattivare il consumo delle richieste.
+
+\begin{lstlisting}[language=java,caption={Metodi che implementano il problema produttore/consumatore per gestire le richieste di scrittura}]
+//TagsToWriteQueue
+synchronized void addTagPair(String tagNameToInsert, 
+				AbstractValue newValue) {
+	tagsQueue.add(new Pair<>(tagNameToInsert, newValue));
+	notify();
+}
+synchronized Pair<String, AbstractValue> popTagPair() {
+	if (tagsQueue.isEmpty()) {
+		try {
+			wait();
+		} catch (InterruptedException e) {
+			Logger.log(LOG_NAME + "Interrupted during wait");
+			Thread.currentThread().interrupt();
+		}
+	}
+	return tagsQueue.poll();
+}
+\end{lstlisting}
+
+
+\subsection{Verifica e validazione}
+
+I processi di verifica e validazione si occupano di controllare che il software sviluppato rispetti i requisiti definiti da chi ha richiesto il software. Questi controlli iniziano appena sono disponibili i primi requisiti e continuano per tutta la durata del processo di sviluppo.
+
+\textit{Barry Boehm} espresse in breve la differenza tra verifica e validazione nel seguente modo:
+\begin{quote}
+	\begin{itemize}
+		\item Validation: Are we building the right product?
+		\item Verification: Are we building the product right?
+	\end{itemize}
+\end{quote}
+
+L'obiettivo della verifica è controllare che il software soddisfi i requisiti funzionali e non funzionali definiti durante l'attività di analisi.
+
+La validazione riguarda invece un punto di vista più ampio: il suo scopo è di assicurarsi che il software soddisfi le aspettative del cliente. Risulta essenziale poiché non sempre i bisogni di chi ha richiesto il software sono perfettamente rispecchiati nell'analisi dei requisiti.\\
+
+
+
+Per quanto riguarda la verifica, JDI è stato sottoposto ad analisi statica e dinamica
+\begin{itemize}
+	\item Analisi statica: non richiede l'esecuzione del software che si sta mettendo alla prova. Può evidenziare numerosi problemi nel codice sorgente prima ancora di eseguire test di unità;
+	\item Analisi dinamica: prevede l'esecuzione del codice. Verifica la presenza di difetti nel prodotto. 
+\end{itemize}
+
+
+Gli strumenti utilizzati per effettuare l'analisi statica erano integrati nell'IDE Intellij. È stato configurato per rilevare probabili \textit{bug}, aree del codice non raggiunte e problemi di \textit{performance}. Sono inoltre state utilizzate le configurazioni di \acrshort{smi} per verificare le linee guida per l'indentazione e l'organizzazione del codice.\\
+
+
+Per effettuare analisi dinamica invece sono stati implementati test di unità con il \textit{framework} JUnit per rilevare la presenza di difetti nelle classi più delicate:
+\begin{itemize}
+	\item \textit{TagUpdaterRepository};
+	\item \textit{TagsToWriteQueue}.
+\end{itemize}
+Per questi due moduli è stato utilizzato il \acrfull{tdd}. Una pratica che prevede di scrivere codice solamente per far passare un test che fallisce. I passi seguiti per lo sviluppo dei moduli è sono stati i seguenti:
+\begin{enumerate}
+	\item pensare ad un test per verificare una funzionalità del modulo;
+	\item eseguire il test. Inizialmente questo fallirà;
+	\item scrivere il codice per soddisfare il test scritto;
+	\item verificare che il codice non abbia introdotto regressioni. I test scritti precedente devono passare;
+	\item riorganizzare il codice scritto;
+	\item ripetere i passi precedenti.
+\end{enumerate}
+
+Per rispettare i vicoli sul consumo della memoria sono stati eseguiti test di \textit{performance} che prevedevano l'esecuzione del sistema in condizioni simili di stress. I dati rilevato sono stati analizzati e approvati dal tutor \acrshort{smi}. I risultati si sono attestati al di sotto dei 2GB vincolati dall'analisi.\\
+
+La validazione del sistema ha accertato che il software prodotto rispettasse i requisiti elaborati da \acrshort{smi}. Per valutare oggettivamente il prodotto sviluppato si sono svolte numerose riunioni in presenza del tutor Alex Beggiato e dei membri del team di sviluppo JMES. L'esito è stato estremamente positivo, avendo raggiunto tutti gli obiettivi posti a inizio stage e i requisiti raccolti durante l'attività di analisi.
+
 

@@ -3,7 +3,7 @@
 \glsgroupheading{B}\relax \glsresetentrylist %
 \glossentry{bu}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{ix}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{2\delimN 3}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{2}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{6}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{21}}}\glsgroupskip
 \glsgroupheading{C}\relax \glsresetentrylist %
@@ -14,7 +14,7 @@
 		\setentrycounter[]{page}\glsnumberformat{7}}}\glsgroupskip
 \glsgroupheading{M}\relax \glsresetentrylist %
 \glossentry{mes}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{4}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{3\delimR 5}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{11\delimN 12}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{14\delimN 15}}}\glsgroupskip
 \glsgroupheading{R}\relax \glsresetentrylist %
@@ -30,7 +30,8 @@
 		\setentrycounter[]{page}\glsnumberformat{11}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{14\delimR 16}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{18}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{21}}}\glsgroupskip
+		\setentrycounter[]{page}\glsnumberformat{21}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{35}}}\glsgroupskip
 \glsgroupheading{T}\relax \glsresetentrylist %
 \glossentry{tdd}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{8}}}\glsgroupskip
