@@ -20,8 +20,8 @@
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Schema logico seconda iterazione \acrshort {poc} di JDI\relax }}{39}{figure.caption.24}% 
 \contentsline {figure}{\numberline {4.4}{\ignorespaces Interfaccia di GitKraken che mostra come ho tenuto traccia dei diversi \textit {benchmark} effettuati\relax }}{41}{figure.caption.25}% 
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Grafico scalabilità concorrenza di \textit {ConcurrentHashMap}\relax }}{43}{figure.caption.26}% 
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Diagramma delle classi del componente \textit {Configurators}\relax }}{46}{figure.caption.27}% 
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Diagramma delle classi del componente \textit {Engines}\relax }}{47}{figure.caption.28}% 
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagramma delle classi principali del componente \textit {Store}\relax }}{49}{figure.caption.29}% 
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Schema del ciclo di \textit {polling}\relax }}{49}{figure.caption.30}% 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Diagramma delle classi del componente \textit {Configurators}\relax }}{47}{figure.caption.27}% 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Diagramma delle classi del componente \textit {Engines}\relax }}{48}{figure.caption.28}% 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagramma delle classi principali del componente \textit {Store}\relax }}{50}{figure.caption.29}% 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Schema del ciclo di \textit {polling}\relax }}{50}{figure.caption.30}% 
 \addvspace {10\p@ }

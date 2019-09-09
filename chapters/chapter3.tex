@@ -110,9 +110,9 @@ A differenza della versione precedente, che avviava un servizio Windows per ogni
 
 Inoltre visto lo scarso successo della versione distribuita di JDI, la nuova versione doveva sfruttare la concorrenza su singola JVM per adempiere ai compiti di gestione dei diversi flussi da e verso i PLC.
 
-Un importante punto per JDI è che potesse essere facilmente manutenibile e che facesse uso il meno possibile di librerie esterne che hanno reso la manutenzione complicata 56nella prima versione.\\
+Un importante punto per JDI è che potesse essere facilmente manutenibile e che facesse uso il meno possibile di librerie esterne che hanno reso la manutenzione complicata nella prima versione.\\
 
-Lo scopo in pratica era di raggruppare le funzionalità di base che vecchia versione offriva sotto forma di servizi Windows, in un ambiente \textit{multi-threadded} e:
+Lo scopo in pratica era di raggruppare le funzionalità di base che la precedente versione offriva sotto forma di servizi Windows, in un ambiente \textit{multi-threaded} e:
 \begin{itemize}
 	\item Garantirne la scalabilità;
 	\item Valutare quantitativamente le sue caratteristiche, attraverso \textit{benchmark} di prototipi;
@@ -120,6 +120,7 @@ Lo scopo in pratica era di raggruppare le funzionalità di base che vecchia vers
 	\item Storicizzare i dati raccolti.
 \end{itemize}
 Gli ultimi due punti sono obiettivi più a lungo termine per JDI, che non rientrano nel dominio dello stage svolto.
+
 
 \subsection{I requisiti del progetto}\label{subsec:requisiti}
 In questa sezione vengono raccolti i requisiti estrapolati dall'analisi della vecchia versione e dagli incontri svolti con i responsabili del team JMES. Particolare attenzione sarà posta sui requisiti non  funzionali. Come detto sono stati il punto debole della versione precedente.\\
@@ -211,6 +212,30 @@ dove la prima opzione specificata indica un requisito rispettivamente funzionale
 \end{center}
 
 \clearpage
+
+
+\subsection{Anticipo soluzione}
+
+In seguito alla raccolta di requisiti ho svolto due riunioni con il responsabile tecnico Alex Beggiato e parte dei membri del team JMES. Lo scopo degli incontri era delineare una possibile soluzione ai problemi evidenziati durante l'analisi della precedente versione.\\
+
+I principali svantaggi introdotti dalla versione distribuita di JDI riguardavano scalabilità e stabilità del sistema. Per sopperire a queste mancanze la nuova versione è stata sottoposta a vincoli più stringenti.
+
+La soluzione di seguito esposta intende dare un'idea generale di quanto è stato sviluppato nel capitolo \ref{ch:analisi_progettazione_sviluppo}.\\
+
+La definizione contenente i dettagli dei PLC collegati al sistema doveva essere reperibile in un file in formato JSON. Era quindi necessario un componente all'interno dell'architettura che si occupasse di analizzare il file ed estrarre le informazioni necessarie ad avviare il sistema. Questo doveva costruire e rendere disponibile una configurazione contenente:
+\begin{itemize}
+	\item I dettagli delle aree di memoria da leggere e da scrivere;
+	\item Il tempo di aggiornamento delle letture dei PLC, chiamato tempo di \gls{polling};
+	\item Il \gls{driver} che implementa il protocollo Modbus TCP/IP per effettuare le operazioni di connessione, disconnessione, lettura, scrittura.
+\end{itemize}
+
+Grazie a questi elementi sarebbe stato possibile stabilire una connessione con i PLC per effettuare il reperimento e l'elaborazione dei dati provenienti dai PLC.\\
+
+Il punto di partenza è stato fornire ogni PLC di un \gls{thread}. Questo doveva occuparsi dell'interazione con la macchina effettuando le operazioni di base: lettura ad intervalli regolari delle aree di memoria specificate nel file di configurazione e scrittura di valori su richiesta. Da un approfondimento successivo è emersa la possibilità di limitare ancor di più la responsabilità dei singoli \gls{thread}, suddividendo lettura e scrittura ottenendo infine due \gls{thread} per ogni PLC.
+
+
+
+
 
 \subsection{Organizzazione temporale}
 \begin{center}

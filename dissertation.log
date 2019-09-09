@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.8.12)  9 SEP 2019 09:03
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.8.12)  10 SEP 2019 00:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1950,18 +1950,18 @@ Underfull \hbox (badness 2486) in paragraph at lines 154--154
 Underfull \vbox (badness 10000) detected at line 158
  []
 
-[7] [8]) [9
+[7] [8] [9
 
-]
+]) [10]
 \openout2 = `chapters/chapter2.aux'.
 
- (./chapters/chapter2.tex [10
+ (./chapters/chapter2.tex
+Capitolo 2.
+[11
 
 
 
 ]
-Capitolo 2.
-[11]
 File: figures/layer_jmes.png Graphic file (type bmp)
 <figures/layer_jmes.png>
 LaTeX Font Info:    Font shape `TU/LatoRegular(0)/m/it' will be
@@ -2143,102 +2143,117 @@ Underfull \hbox (badness 10000) in paragraph at lines 113--114
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
+Underfull \hbox (badness 10000) in paragraph at lines 126--127
 
  []
 
 [26]
-Underfull \hbox (badness 10000) in paragraph at lines 134--135
+Underfull \hbox (badness 10000) in paragraph at lines 135--136
 
  []
 
 [27]
 LaTeX Font Info:    Font shape `TU/EBGaramond(0)/m/n' will be
-(Font)              scaled to size 15.84007pt on input line 148.
+(Font)              scaled to size 15.84007pt on input line 149.
 
-Underfull \hbox (badness 10000) in paragraph at lines 158--158
+Underfull \hbox (badness 10000) in paragraph at lines 159--159
 []|\TU/EBGaramond(0)/bx/n/12 Codice
  []
 
 
-Underfull \hbox (badness 1281) in paragraph at lines 160--161
+Underfull \hbox (badness 1281) in paragraph at lines 161--162
 []|\TU/EBGaramond(0)/bx/n/12 Il sistema deve ricavare le informazio-
  []
 
 
-Underfull \hbox (badness 2707) in paragraph at lines 160--161
+Underfull \hbox (badness 2707) in paragraph at lines 161--162
 \TU/EBGaramond(0)/bx/n/12 ni riguardanti la configurazione delle
  []
 
 
-Underfull \hbox (badness 1454) in paragraph at lines 160--161
+Underfull \hbox (badness 1454) in paragraph at lines 161--162
 \TU/EBGaramond(0)/bx/n/12 macchine ad esso collegate da un file
  []
 
 
-Underfull \hbox (badness 1264) in paragraph at lines 165--166
+Underfull \hbox (badness 1264) in paragraph at lines 166--167
 \TU/EBGaramond(0)/bx/n/12 ro intero, numero reale, stringa
  []
 
 
-Underfull \hbox (badness 1314) in paragraph at lines 177--178
+Underfull \hbox (badness 1314) in paragraph at lines 178--179
 \TU/EBGaramond(0)/bx/n/12 no poter essere individuati come una
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 179--179
+Underfull \hbox (badness 10000) in paragraph at lines 180--180
 []|\TU/EBGaramond(0)/bx/n/12 Rilevazione malfun-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 179--179
+Underfull \hbox (badness 10000) in paragraph at lines 180--180
 \TU/EBGaramond(0)/bx/n/12 zionamento PLC
  []
 
 
-Underfull \hbox (badness 2384) in paragraph at lines 196--197
+Underfull \hbox (badness 2384) in paragraph at lines 197--198
 []|\TU/EBGaramond(0)/bx/n/12 Il sistema deve poter funzionare con
  []
 
 
-Underfull \hbox (badness 2277) in paragraph at lines 196--197
+Underfull \hbox (badness 2277) in paragraph at lines 197--198
 \TU/EBGaramond(0)/bx/n/12 dispositivi \TU/EBGaramond(0)/m/it/12 Schneider \TU/E
 BGaramond(0)/bx/n/12 che utilizzano il
  []
 
 
-Overfull \hbox (27.51935pt too wide) in alignment at lines 156--205
+Overfull \hbox (27.51935pt too wide) in alignment at lines 157--206
  [] [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 205
+Underfull \vbox (badness 10000) detected at line 206
  []
 
 
-Underfull \hbox (badness 2781) in paragraph at lines 206--206
+Underfull \hbox (badness 2781) in paragraph at lines 207--207
 []|\TU/EBGaramond(0)/bx/n/12 Il sistema deve occupare non più di
  []
 
 
-Overfull \hbox (27.51935pt too wide) in alignment at lines 205--210
+Overfull \hbox (27.51935pt too wide) in alignment at lines 206--211
  [] [] [] 
  []
 
 [28
 
-] [29] [30] [31] [32]) [33
+] [29] [30] [31] [32]
+Underfull \hbox (badness 10000) in paragraph at lines 219--220
 
-]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--224
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 232--233
+
+ []
+
+[33
+
+]) [34]
 \openout2 = `chapters/chapter4.aux'.
 
- (./chapters/chapter4.tex [34
+ (./chapters/chapter4.tex
+Capitolo 4.
+[35
 
 
 
 ]
-Capitolo 4.
-[35]
 Underfull \hbox (badness 10000) in paragraph at lines 43--44
 
  []
@@ -2314,22 +2329,32 @@ File: figures/benchmark_1_grafico.png Graphic file (type bmp)
 <figures/benchmark_1_grafico.png>
  [43
 
-] [44
+]
+Underfull \hbox (badness 10000) in paragraph at lines 228--229
+
+ []
+
+[44
 
 ]
+Underfull \hbox (badness 10000) in paragraph at lines 230--231
+
+ []
+
+[45]
 LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/m/n' will be
-(Font)              scaled to size 11.27509pt on input line 223.
+(Font)              scaled to size 11.27509pt on input line 246.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `SourceCodePro' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [45
+ [46
 
 ]
 File: figures/configurators.png Graphic file (type bmp)
 <figures/configurators.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 268--269
+Underfull \hbox (badness 10000) in paragraph at lines 291--292
 
  []
 
@@ -2337,57 +2362,61 @@ Underfull \hbox (badness 10000) in paragraph at lines 268--269
 File: lstlang1.sty 2018/09/02 1.7 listings language file
 )
 LaTeX Font Info:    Font shape `TU/SourceCodePro(0)/m/n' will be
-(Font)              scaled to size 9.3959pt on input line 271.
- [46
+(Font)              scaled to size 9.3959pt on input line 294.
+ [47
 
 ]
 File: figures/engines.png Graphic file (type bmp)
 <figures/engines.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--296
+Underfull \hbox (badness 10000) in paragraph at lines 318--319
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 297--298
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
 
  []
 
-[47
+[48
 
-] [48
+] [49
 
 ]
 File: figures/store.png Graphic file (type bmp)
 <figures/store.png>
 File: figures/polling_scheme.png Graphic file (type bmp)
 <figures/polling_scheme.png>
- [49
+ [50
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 364--365
-
- []
-
-[50]
-Underfull \hbox (badness 10000) in paragraph at lines 408--409
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 419--420
+Underfull \hbox (badness 10000) in paragraph at lines 387--388
 
  []
 
 [51]
-Underfull \hbox (badness 10000) in paragraph at lines 437--438
+Underfull \hbox (badness 10000) in paragraph at lines 431--432
 
  []
 
-) [52]
+
+Underfull \hbox (badness 10000) in paragraph at lines 442--443
+
+ []
+
+[52]
+Underfull \hbox (badness 10000) in paragraph at lines 460--461
+
+ []
+
+) [53]
 \openout2 = `chapters/conclusion.aux'.
 
- (./chapters/conclusion.tex
+ (./chapters/conclusion.tex [54
+
+
+
+]
 Capitolo 5.
 
 Underfull \hbox (badness 10000) in paragraph at lines 6--7
@@ -2443,11 +2472,7 @@ Underfull \hbox (badness 2486) in paragraph at lines 23--23
 Underfull \vbox (badness 10000) detected at line 27
  []
 
-[53
-
-
-
-] [54]
+[55] [56]
 Underfull \hbox (badness 10000) in paragraph at lines 48--49
 
  []
@@ -2462,15 +2487,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 56--58
 
  []
 
-[55]) [56] (./dissertation.bbl) (./dissertation.gls) (./dissertation.acr
-[57
+[57]) [58] (./dissertation.bbl) (./dissertation.gls
+LaTeX Font Info:    Font shape `TU/EBGaramond(0)/bx/it' will be
+(Font)              scaled to size 13.20007pt on input line 11.
+) (./dissertation.acr
+[59
 
 
 
 
-] [58
+] [60
 
-]) [59
+]) [61
 
 ] (./dissertation.bbl)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 53.
@@ -2481,7 +2509,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 53.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 53.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 53.
 Package rerunfilecheck Info: File `dissertation.out' has not changed.
-(rerunfilecheck)             Checksum: 5EFE79B515A3128EB3897D2A62FFA85D.
+(rerunfilecheck)             Checksum: 32EAD1025BFF71ED6EDE17C3594A62D0.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2495,12 +2523,12 @@ LaTeX Warning: There were multiply-defined labels.
 ### simple group (level 1) entered at line 32 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 53111 strings out of 494857
- 1144681 string characters out of 6175136
- 1639080 words of memory out of 5000000
- 56114 multiletter control sequences out of 15000+600000
+ 53294 strings out of 494857
+ 1149133 string characters out of 6175136
+ 1641204 words of memory out of 5000000
+ 56297 multiletter control sequences out of 15000+600000
  541106 words of font info for 101 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 85i,12n,138p,2002b,1555s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 85i,12n,138p,2002b,1569s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on dissertation.pdf (71 pages).
+Output written on dissertation.pdf (73 pages).
