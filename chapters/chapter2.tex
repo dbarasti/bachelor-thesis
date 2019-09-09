@@ -25,12 +25,13 @@ Vediamo quali sono i benefici che JMES, l'implementazione MES di \acrshort{smi} 
 	\item Progetto carta zero. Grazie alla gestione software della produzione, si riduce la carta circolante che molto spesso veniva utilizzata per tracciare le fasi degli impianti, per registrare le interazioni operatore-macchina e per le stampe di documenti tecnici di assemblaggio.
 \end{enumerate}
 
-\label{fig:layer_jmes}
+
 \begin{wrapfigure}[11]{r}[1pt]{0.22\textwidth}
 	\vspace{-25pt}
 	\includegraphics[width=0.16\textwidth]{figures/layer_jmes}
 	\centering
 	\caption{Rappresentazione dei \textit{layer} di JMES}
+	\label{fig:layer_jmes}
 \end{wrapfigure}
 L'applicazione JMES presenta un'architettura a \textit{layer} schematizzata in figura \ref{fig:layer_jmes}. Si tratta di un'applicazione che utilizza \textit{AngularJS} per l'interfaccia grafica e si affida a servizi web esposti da un'applicazione Java su web server \textit{Apache Tomcat} per gestire i flussi di dati \textit{front-end} - \textit{back-end}.\\
 Poiché l'applicazione oggetto di questa tesi non è logicamente legata al software JMES, non risulta utile ai fini della comprensione analizzare dettagliatamente la sua composizione.\\
@@ -49,7 +50,7 @@ Per superare questo problema una prima versione del PLC fu inventata da \textit{
 	\label{fig:schema_plc}
 	\includegraphics[width=0.6\textwidth]{figures/plc_overview}
 	\centering
-	\caption{Schema di un classico PLC e dei suoi moduli. (Dall'articolo \textit{Engineering Essentials}. Disponibile su  https://www.machinedesign.com/engineering-essentials/engineering-essentials-what-programmable-logic-controller)}
+	\caption[Schema di un classico PLC e dei suoi moduli]{Schema di un classico PLC e dei suoi moduli. (Dall'articolo \textit{Engineering Essentials}. Disponibile su  https://www.machinedesign.com/engineering-essentials/engineering-essentials-what-programmable-logic-controller)}
 \end{wrapfigure}
 
 I PLC sono modulari, quindi componibili in diverse configurazioni. I moduli fondamentali sono quelli di \textit{input} e di \textit{output}. Entrambi sono in grado di gestire segnali analogici e digitali. Sono progettati per essere robusti e per resistere a forti condizioni atmosferiche.
@@ -111,7 +112,17 @@ Esistono decine di produttori  di PLC e spesso ognuno implementa i propri protoc
 	\item MTConnect;
 	\item MQTT.
 \end{itemize}
-Ogni protocollo definisce specifiche proprie di comunicazione con una certa complessità. Dato il tempo limitato a disposizione durante lo stage ho circoscritto il dominio dell'applicazione per gestire una sola tipologia di protocollo: Modbus TCP/IP. È stata posta particolare attenzione durante lo studio dell'architettura in modo che sia possibile estendere le capacità dell'applicazione per gestire ulteriori protocolli.
+Ogni protocollo definisce specifiche proprie di comunicazione, portando con se una certa complessità. Dato il tempo limitato a disposizione durante lo stage ho circoscritto il dominio dell'applicazione per gestire una sola tipologia di protocollo: Modbus TCP/IP. \\
+Le motivazioni sono state principalmente:
+\begin{itemize}
+	\item Modbus TCP/IP è un protocollo comune tra i clienti \acrshort{smi};
+	
+	\item È stato facile reperire PLC che facessero uso del protocollo per effettuare i test sul prodotto;
+	
+	\item Era già disponibile un \textit{driver} che implementasse il protocollo Modbus TCP/IP. Questo faceva parte dell'applicativo precedente e poteva essere riutilizzato.
+\end{itemize}
+
+È stata posta particolare attenzione durante la realizzazione dell'architettura in modo che sia possibile estendere in futuro le capacità dell'applicativo per gestire ulteriori protocolli.
 
 \subsection{Modbus}
 
@@ -125,18 +136,19 @@ In caso di errore, il protocollo definisce un meccanismo per inviare il corretto
 	%	\vspace{-20pt}
 	\includegraphics[width=0.6\textwidth]{figures/modbus_communication_stack}
 	\centering
-	\caption{\textit{Stack} di comunicazione di Modbus. (Da MODBUS, Application Protocol Specification, vol. 1.1b, 28 dicembre 2006. Disponibile su www.modbus.org/docs/Modbus\_Application\_Protocol\_V1\_1b.pdf.)}
+	\caption[\textit{Stack} di comunicazione di Modbus]{\textit{Stack} di comunicazione di Modbus. (Da MODBUS, Application Protocol Specification, vol. 1.1b, 28 dicembre 2006. Disponibile su www.modbus.org/docs/Modbus\_Application\_Protocol\_V1\_1b.pdf.)}
 \end{wrapfigure}
 
 La comunicazione può avvenire su diversi tipi di rete (ad esempio \textit{Ethernet}) incorporando il protocollo Modbus in pacchetti dati nel protocollo che si intende utilizzare. Ci sono quindi diversi modi di implementare Modbus. Uno di questi è con \textit{TCP/IP over Ethernet}.
-\newline
+%\newline
 \newline
 
 \subsection{Modbus TCP/IP}\label{sec:modbus_tcp}
 \setlength\intextsep{0pt}
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{wrapfigure}[9]{r}{0.5\textwidth}
+	\vspace{-50pt}
 	\includegraphics[width=0.65\textwidth]{figures/modbus_layers_frame}
-	\caption{(a) \textit{layer} di Modbus TCP/IP; (b) \textit{frame} Modbus TCP/IP. (Da \textit{Fieldbus and Networking in Process Automation}, S.K. Sen. CRC Press, 2017)}
+	\caption[(a) \textit{layer} di Modbus TCP/IP; (b) \textit{frame} Modbus TCP/IP]{(a) \textit{layer} di Modbus TCP/IP; (b) \textit{frame} Modbus TCP/IP. (Da \textit{Fieldbus and Networking in Process Automation}, S.K. Sen. CRC Press, 2017)}
 	\centering
 	\label{fig:modbustcp_layers_frame}
 \end{wrapfigure}
@@ -145,14 +157,10 @@ La specifica Modbus TCP/IP è stata introdotta nel 1999. Ci sono dei vantaggi ne
 Modbus TCP/IP è un protocollo internet. Consiste nel protocollo Modbus inserito in un contenitore TCP. In pratica quindi i dispositivi Modbus possono comunicare su Modbus TCP/IP. L'unico vincolo è quello di un \textit{gateway} che effettui le conversioni adatte per passare i dati dallo strato fisico a quello \textit{Ethernet} e da Modbus a Modbus TCP/IP.\\
 La figura \ref{fig:modbustcp_layers_frame} mostra gli strati del protocollo Modbus TCP/IP affianco allo standard OSI e il \textit{frame} Modbus contenuto nel \textit{frame} Modbus TCP/IP.
 
-\clearpage
-
 
 
 \section{Tecnologie e strumenti impiegati}
-Saranno qui elencate e descritte le tecnologie e gli strumenti scelti per lo sviluppo del progetto e altri a supporto delle diverse attività.
-
-Saranno giustificate alcune scelte, come la riduzione quasi a zero di librerie esterne, e l'approccio "chiuso" di \acrshort{smi} verso il fare affidamento a prodotti esterni.\\
+Saranno qui elencate e descritte le tecnologie e gli strumenti scelti per lo sviluppo del progetto e altri a supporto delle diverse attività. Saranno giustificate alcune scelte, come la limitazione nell'uso di librerie esterne.\\
 %Ho notato infatti che un ragionamento spesso fatto dai responsabili tecnici è "preferiamo reinventare la ruota sviluppando internamente librerie anche già esistenti, per avere pieno controllo sullo sviluppo e sulla manutenzione". Cercherò di analizzare criticamente questo ragionamento.\\
 
 Come accennato in \ref{jdi}, il lavoro da me svolto non è integrato in JMES ma è un modulo esterno che permette di ampliare le sue funzionalità. Questo mi ha permesso di avere un certo grado di libertà nella scelta degli strumenti di lavoro, prediligendo tecnologie che ero curioso di conoscere più nel dettaglio.
@@ -162,7 +170,7 @@ I principali strumenti per lo sviluppo da me utilizzati sono stati i seguenti:
 \begin{itemize}
 	\item Intellij IDEA. Un ambiente di sviluppo per Java prodotto da \textit{JetBrains} che mi ha permesso, grazie anche a numerosi \textit{plug-in}, di integrare in un solo ambiente lo sviluppo \textit{software}, i test automatici, la \textit{build} e il versionamento del codice;
 	
-	\item Gradle. Un sistema per l'automazione di \textit{build} che prende spunto da i classici Apache Maven e Apache Ant che permette di specificare la configurazione del progetto con un linguaggio specifico basato su Groovy;
+	\item Gradle. Un sistema per l'automazione di \textit{build} che prende spunto dai classici \textit{Apache Maven} e \textit{Apache Ant} che permette di specificare la configurazione del progetto con un linguaggio specifico basato su \textit{Groovy};
 	
 	\item Git. Sistema di versionamento distribuito utilizzato in questo progetto assieme a GitHub che ha fornito il servizio di \textit{repository} remoto.\\ Il suo uso è stato fondamentale in quanto sono state create, sopratutto nel primo periodo di sviluppo, diverse possibili soluzioni al problema. Git ha permesso di mantenere in parallelo ogni soluzione sviluppata, grazie all'uso di \textit{branch};
 	
@@ -184,7 +192,7 @@ Per quanto riguarda invece gli strumenti e le tecnologie non prettamente legate 
 Per la comunicazione interna al team JMES è stato utilizzato lo strumento di messaggistica Slack, mentre per la comunicazione più formale interna ed esterna all'azienda mi è stato fornito un account di posta elettronica.\\
 
 \begin{figure}[h]
-	\includegraphics[width=1\textwidth]{figures/machineExpert}
-	\caption{Vista del software per la programmazione di PLC Schneider.}
+	\includegraphics[width=0.9\textwidth]{figures/modbus_plc_simulator}
+	\caption{Vista del software \textit{Modbus PLC Simulator}}
 	\centering
 \end{figure}

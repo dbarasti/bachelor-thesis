@@ -13,7 +13,7 @@ In questo capitolo si analizzerà brevemente la situazione che ha portato al pri
 
 Dai bisogni sottolineati in \ref{jdi} \acrshort{smi} ha deciso di iniziare lo sviluppo di un software (JDI) che fosse in grado di interfacciarsi con i PLC utilizzando i giusti protocolli di comunicazione. Lo sviluppo iniziò a maggio 2018 e venne assegnato alla \acrshort{bu} JMES. Terminò circa sei mesi dopo.
 
-Per sottolineare ulteriormente la separazione logica tra JMES e JDI è utile ricordare che JMES serve all'operatore per determinare come organizzare il proprio turno lavorativo. JDI invece mira ad aiutare l'operatore nelle operazioni manuali che possono facilmente portare a errori. Ad esempio la dichiarazione dei pezzi prodotti da un macchinario o la segnalazione dell'interruzione di funzionamento di una macchina e di tutte le operazioni \textit{error-prone}.
+Per sottolineare ulteriormente la separazione logica tra JMES e JDI è utile ricordare che JMES serve all'operatore per determinare come organizzare il proprio turno lavorativo. JDI invece mira ad aiutare l'operatore nelle operazioni manuali che possono facilmente portare a errori. Ad esempio la dichiarazione dei pezzi prodotti da un macchinario o la segnalazione dell'interruzione di funzionamento di una macchina e di tutte le operazioni \textit{error-prone}. L'applicativo JDI non è previsto di un'interfaccia grafica.
 \newline
 
 Lo sviluppo è stato eseguito da un solo programmatore a cui non erano stati posti vincoli precisi per la progettazione dell'applicazione, se non l'utilizzo del linguaggio Java. Questo ha dato piena libertà sulla scelta delle tecnologie di sviluppo.
@@ -31,16 +31,19 @@ Le richieste erano principalmente
 La soluzione sviluppata aveva un primo visibile vantaggio: la struttura a nodi poteva essere distribuita in punti fisici diversi. L'importante era che la comunicazione tra nodi \textit{Link} e \textit{Router} potesse avvenire. Questo era garantito dalla connessione \textit{WebSocket} stabilita, che era indipendente dalla posizione dei nodi.
 \newline
 
-\label{fig:nodi_jdi}
+\clearpage
+
+
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\textwidth]{figures/nodi_jdi}
+	\includegraphics[width=0.75\textwidth]{figures/nodi_jdi_2}
 	\caption{Architettura a nodi \textit{Router}/\textit{Link} della prima versione di JDI}
+	\label{fig:nodi_jdi}
 \end{figure}
 
 
 
-\section{I problemi con JDI}
+\subsection{I problemi emersi}
 La soluzione sviluppata presupponeva un utilizzo di JDI che facesse uso della possibilità di distribuire i suoi nodi su più punti. Nella realtà però gli \textit{stakeholder} di JMES hanno constatato che le esigenze dei clienti non prevedevano lo sfruttamento di questa caratteristica. Gli svantaggi che come vedremo ha portato la soluzione sviluppata erano molto maggiori dei possibili vantaggi commerciali del prodotto.
 \newline
 
@@ -55,17 +58,49 @@ A seguito di questi eventi avvenuti presso la sede di un cliente sono intervenut
 
 Le problematiche emerse hanno sottolineato carenze che si riassumono in:
 \begin{itemize}
-	\item basse prestazioni (velocità di trasmissione);
-	\item scarsa affidabilità (stabilità del sistema a lungo termine);
-	\item alto consumo di risorse;
-	\item bassa manutenibilità.
+	\item Basse prestazioni (velocità di trasmissione);
+	\item Scarsa affidabilità (stabilità del sistema a lungo termine);
+	\item Alto consumo di risorse;
+	\item Bassa manutenibilità.
 \end{itemize}
 
-%Si discute della mancanza di test di affidabilità e di scalabilità del prodotto sviluppato, dell'inutilità della possibilità di distribuire fisicamente JDI e dei drawback a cui l'architettura scelta portava e della scarsa manutenibilità del codice.\\
-%Di questi problemi ci si è accorti solo arrivati in produzione, cioè quando JDI è stato installato nelle fabbriche di alcuni clienti.
+\subsection{Studio della prima versione}
+Nonostante il primo sviluppo di JDI non avesse avuto un risultato positivo una volta messo in produzione, le funzionalità di base di questo dovevano essere presenti anche nella nuova versione.\\
+Per raccogliere i requisiti del progetto è stato utile avere un contatto diretto con lo sviluppatore che realizzò la prima versione di JDI.
+Mi è stato dato accesso al codice sorgente del progetto, che ho utilizzato principalmente per comprenderne il funzionamento interno. Questo mi ha permesso di:
+\begin{itemize}
+	\item Ricavare informazioni sull'uso delle tecnologie utilizzate;
+	\item Individuare componenti riutilizzabili.
+\end{itemize}
+
+Oltre a ciò sono avvenuti numerosi colloqui con le persone chiave per raccogliere i vecchi e i nuovi requisiti del progetto di stage. Come visto nel capitolo precedente, i problemi stavano nella scarsa soddisfazione di requisiti non funzionali, e non nel soddisfacimento di quelli funzionali.
+
+Lo studio e l'analisi della versione precedente hanno impegnato le prime due settimane di lavoro. 
+
+Il codice sorgente nelle sue componenti principali constava di:
+\begin{itemize}
+	\item otto progetti contenenti i \textit{\gls{driver}} per la comunicazione con i PLC. Ogni \textit{\gls{driver}} è un'implementazione diversa di un protocollo;
+	\item librerie di base per JDI, contenenti definizioni di interfacce e classi astratte, strutture dati, ecc;
+	\item progetti per i nodi \textit{Router} e \textit{Link}.
+\end{itemize} 
+
+Dall'analisi del codice sono emersi due principali attori che hanno caratterizzato lo stile del codice: ReactiveX e Jawampa.
+
+\subsubsection{ReactiveX}
+ReactiveX è una libreria per la programmazione asincrona e \textit{event-based} in Java\footnote{Più informazioni su \href{http://reactivex.io/intro.html}{http://reactivex.io/intro.html}} che estende il \textit{pattern Observer}. Largamente utilizzata per lo sviluppo di applicazioni Android e in generale dove esiste una gestione delle \textit{UI}. Aggiunge astrazione alla gestione a basso livello di \textit{thread}, sincronizzazione e strutture dati concorrenti.\\
+Problemi con la libreria ReactiveX: i vantaggi di questa libreria sono sentiti se si gestiscono eventi provenienti da interfacce grafiche (e.g. la pressione di un pulsante) o se si fa uso di \textit{Callback}. L'utilizzo rilevato nella prima versione di JDI non aveva a che fare con questi casi. Non è infatti prevista alcuna interfaccia grafica per JDI. Inoltre molte porzioni di codice sono risultate complicate dall'uso forzato della libreria. Un altro aspetto che non è stato considerato quando si è fatta la scelta di utilizzare tale libreria è che quasi mai chi scrive un \textit{software} è poi colui che lo mantiene. Quando si sono verificati i primi problemi con JDI il codice non era facilmente interpretabile da chi non aveva mai scritto del codice ReactiveX.\\
 
 
+\subsubsection{Jawampa}
+Come detto la comunicazione tra i nodi \textit{Link} e \textit{Router} avveniva tramite \textit{\gls{websocket}}. La libreria jawampa è l'implementazione di \acrfull{wamp}, un protocollo secondario di \gls{websocket}. \acrshort{wamp} unifica in un protocollo due \textit{pattern} per lo scambio di messaggi: \acrfull{rpc} e \textit{Publish \& Subscribe}. Per l'implementazione di questo sub-protocollo è stata utilizzata la libreria open-source jawampa\footnote{Disponibile su \href{https://github.com/Matthias247/jawampa}{https://github.com/Matthias247/jawampa}}.\\
+Problemi con la libreria jawampa: durante le riunioni effettuate con i responsabili e gli sviluppatori del team JMES è emerso che i problemi dovuti alle basse prestazioni nella comunicazione tra i nodi erano causati da questa implementazione di \gls{websocket}. Jawampa è inoltre una libreria non più mantenuta. Una conferma di ciò si può trovare nella \href{https://github.com/Matthias247/jawampa}{\textit{repository} pubblica} su GitHub.
 
+
+%Parlerò poi dell'uso di librerie esterne fatto in questa versione (e.g. Google Guice, ReactiveX, jawampa...)
+
+%In questa sezione si sottolineerà l'approccio di distribuzione della vecchia versione. Nelle seguenti sezioni invece apparirà chiaro come la distribuzione sia stata messa da parte sostituendola con un puro approccio concorrente.
+
+%Sarà quindi descritta la fase di analisi durata circa due settimane. 
 
 \section{Il nuovo sviluppo}
 
@@ -79,11 +114,142 @@ Un importante punto per JDI è che potesse essere facilmente manutenibile e che 
 
 Lo scopo in pratica era di raggruppare le funzionalità di base che vecchia versione offriva sotto forma di servizi Windows, in un ambiente \textit{multi-threadded} e:
 \begin{itemize}
-	\item garantirne la scalabilità;
-	\item valutare quantitativamente le sue caratteristiche, attraverso \textit{benchmark} di prototipi;
-	\item rendere disponibile i dati ricavati con servizi web. Principalmente a JMES ma in generale a chi ne possa trarre vantaggio;
-	\item storicizzare i dati raccolti.
+	\item Garantirne la scalabilità;
+	\item Valutare quantitativamente le sue caratteristiche, attraverso \textit{benchmark} di prototipi;
+	\item Rendere disponibile i dati ricavati con servizi web. Principalmente a JMES ma in generale a chi ne possa trarre vantaggio;
+	\item Storicizzare i dati raccolti.
 \end{itemize}
 Gli ultimi due punti sono obiettivi più a lungo termine per JDI, che non rientrano nel dominio dello stage svolto.
 
+\subsection{I requisiti del progetto}\label{subsec:requisiti}
+In questa sezione vengono raccolti i requisiti estrapolati dall'analisi della vecchia versione e dagli incontri svolti con i responsabili del team JMES. Particolare attenzione sarà posta sui requisiti non  funzionali. Come detto sono stati il punto debole della versione precedente.\\
 
+I requisiti possono essere espressi con diversi livelli di dettaglio, a seconda della loro destinazione. Ian Sommerville nel testo \textit{Software Engineering} suggerisce due definizioni per effettuare una distinzione nel livello di dettaglio:
+\begin{itemize}
+	\item \textit{User requirements} (requisiti utente): definizioni con linguaggio naturale e con eventuali diagrammi più formali di cosa il sistema debba essere in grado di fare, dal punto di vista dell'utente. Questo sottintende una definizione ad alto livello della funzionalità. Queste definizioni sono adatte ad un lettore delle specifiche non interessato ai dettagli tecnici del requisito;
+	
+	\item \textit{System requirements} (requisiti di sistema): sono descrizioni più dettagliate delle funzionalità, dei vincoli e dei servizi del sistema. Definiscono nel dettaglio cosa deve essere sviluppato (non definiscono comunque il "come"). 
+\end{itemize}
+
+L'astrazione dai dettagli fornita dai requisiti utente è utile quando la documentazione delle specifiche è indirizzata a lettori non esperti. Nell'ambito di questo stage invece ho collaborato esclusivamente con sviluppatori e responsabili tecnici che non necessitavano di filtri nella descrizione delle specifiche. I requisiti raccolti di seguito saranno quindi da considerarsi \textit{system requirements}.\\
+
+I requisiti descritti nel resto della sezione sono raccolti in tre categorie:
+
+\begin{itemize}
+	\item Requisiti funzionali: descrivono cosa il sistema dovrebbe fare. Quali funzionalità ci si aspetta;
+	\item Requisiti di qualità: pongono dei vincoli su "come" il prodotto deve soddisfare i requisiti funzionali. Prestazioni, sicurezza e altri requisiti non funzionali in generale;
+	\item Requisiti di vincolo: definiscono limitazioni e vincoli nello sviluppo del prodotto. Linguaggi di sviluppo, librerie, versioni, compatibilità, ecc.
+\end{itemize}
+
+\clearpage
+
+Per tenere traccia dei requisiti, per ognuno verrà usata la seguente codifica:
+\begin{center}
+	\large{R[F | Q | V][Codice]}
+\end{center}
+dove la prima opzione specificata indica un requisito rispettivamente funzionale, di qualità o di vincolo. La seconda opzione è un identificativo numerico intero crescente.
+
+
+
+
+\begin{center}
+	\begin{longtable}{||p{2cm}| p{5cm}| p{7cm} ||} 
+		\hline
+		Codice requisito & Nome & Descrizione\\ [0.5ex] 
+		\hline\hline
+		RF1 & Configurazione del sistema & Il sistema deve ricavare le informazioni riguardanti la configurazione delle macchine ad esso collegate da un file JSON. Questo file conterrà le seguenti informazioni:
+		\begin{itemize}
+			\item indirizzo IP, porta e ID dei PLC con cui il sistema deve interagire;
+			\item tipo di \textit{\gls{driver}} da utilizzare per la comunicazione con ogni PLC;
+			\item per ogni PLC, le locazioni di memoria con cui interagire;
+			\item come interpretare i dati presenti nelle locazioni di memoria (numero intero, numero reale, stringa ecc..);
+			\item le modalità di accesso per ogni locazione di memoria: lettura e/o scrittura.
+		\end{itemize}\\ 
+		\hline
+		RF2 & Riconfigurazione & Le API del sistema devono presentare un comando per effettuare una riconfigurazione. Questa avverrà quando le impostazioni all'interno del file di configurazione cambieranno e si vorranno questi cambiamenti ripercossi nel sistema.  Una riconfigurazione deve poter essere effettuata senza riavviare l'applicazione.\\
+		\hline
+		RF3 & Operazioni di lettura & Il sistema deve essere in grado di eseguire operazioni di lettura verso i PLC collegati. La lettura può avvenire solo se l'area di memoria interessata ha i permessi appropriati, specificati nel file di configurazione. l'operazione deve avvenire a intervalli regolari. I tempi di lettura possono variare per ogni PLC collegato, questa informazione deve essere presente nel file di configurazione\\
+		\hline
+		RF4 & Operazioni di scrittura & Il sistema deve essere in grado di eseguire operazioni di scrittura verso i PLC collegati. La scrittura può avvenire solo se l'area di memoria interessata ha i permessi appropriati, specificati nel file di configurazione. Non può quindi avvenire la scrittura di una locazione di memoria per cui non si dispongano i permessi nel file di configurazione.\\
+		\hline
+		RF5 & Richiesta scrittura & le API del prodotto devono permettere di richiedere la scrittura di un valore su una specifica area di memoria di uno specifico PLC. La richiesta deve rispettare i permessi definiti nel file di configurazione. Non può quindi avvenire la scrittura in una locazione di memoria per cui non si dispongano i permessi nel file di configurazione.\\
+		\hline
+		RF6 & Salvataggio dati & Il sistema deve mantenere in memoria i valori aggiornati dei dati letti ad ogni ciclo di lettura. Ogni dato deve avere un identificativo univoco. I dati dovranno poter essere individuati come una coppia ID-ValoreLetto\\
+		\hline
+		RF7 & Rilevazione malfunzionamento PLC (watchdog)& Per rilevare il malfunzionamento di un PLC il sistema deve gestire un particolare bit all'interno di ogni PLC con cui è collegato: prima di effettuare un'operazione di lettura, il sistema verifica (con una lettura) che il bit si trovi al valore 1. In tal caso il sistema provvede a resettare tale bit a 0. In caso contrario invece il sistema segnala la situazione anomala. Questa funzionalità presuppone che il programma all'interno del PLC sia istruito per gestire questo bit.\\
+		\hline
+		RF8 & Stato PLC & Il sistema deve fornire a comando lo stato attuale dei PLC collegati. Deve quindi essere in grado di rilevare se accade una disconnessione, se il PLC è connesso o se è in corso una riconnessione. \\
+		\hline
+		RF9 & Ultima lettura & Il sistema deve poter fornire, per ogni macchina collegata, informazioni riguardanti l'ultima lettura avvenuta. Il formato di questa informazione deve essere l'orario dell'ultima lettura effettuata nel formato dd/mm/yyyy, mm:ss\\
+		\hline
+		RF10 & Richieste multiple di scrittura & Se vengono richieste nel breve periodo multiple scritture, il sistema deve soddisfarle tutte (quando sono disponibili i giusti permessi) mantenendo l'ordine di arrivo delle richieste \\
+		\hline
+		RF11 & Riconnessione &  Nel caso in cui avvenga la disconnessione di un PLC, il sistema deve effettuare tentativi di riconnessione utilizzando un algoritmo che allunghi gli intervalli tra un tentativo e il successivo fino al raggiungimento di un minuto di attesa\\
+		\hline
+		RV12 & Linguaggi & Il linguaggio per lo sviluppo del sistema JDI deve essere Java. Non sono posti vincoli sulla versione\\
+		\hline
+		RV13 & Concorrenza & Deve essere utilizzato un approccio concorrente per realizzare il prodotto\\
+		\hline
+		RV14 & Librerie & Le dipendenze del progetto devono limitarsi allo stretto necessario per portare a termine gli obiettivi fissati. L'introduzione di una libreria deve essere approvata da un responsabile\\
+		\hline
+		
+		RV15 & Compatibilità PLC & Il sistema deve poter funzionare con dispositivi \textit{Schneider} che utilizzano il protocollo Modbus TCP/IP \\ 
+		\hline
+		RV16 & Svolgimento test \#1 & Il sistema deve essere testato con almeno un dispositivo PLC \textit{Schneider} M221 \\ 
+		\hline
+		RV17 & Svolgimento test \#2 & Per i test di scalabilità del sistema devono essere simulati dei dispositivi PLC con protocollo Modbus TCP/IP con l'uso del software \textit{Modbus PLC Simulator} \\ 
+		\hline
+		RQ18 & Reattività scrittura & Quando avviene una richiesta di scrittura, il sistema deve prendere in carico la gestione di questa nel più breve tempo possibile\\
+		\hline
+		RQ19 & Scritture sicure & Se ci sono diverse richieste pendenti per un PLC e viene persa la connessione con questo, la coda di richieste deve essere eliminata. Nel periodo di disconnessione le richieste di scrittura per quel PLC devono essere rifiutate\\
+		\hline
+		RQ20 & Consumo memoria & Il sistema deve occupare non più di 2GB di memoria in una situazione reale: 5 PLC collegati con diverse operazioni di lettura e scrittura che occorrono a intervalli di pochi secondi\\ [1ex] 
+		\hline
+		\caption{Tabella requisiti}
+		\label{tab:requisiti}
+	\end{longtable}
+\end{center}
+
+\clearpage
+
+\subsection{Organizzazione temporale}
+\begin{center}
+	\large{10 giugno - 24 giugno}
+\end{center}
+\begin{center}
+Per lo sviluppo della nuova versione ho dedicato circa due settimane all'attività di analisi della precedente versione di JDI. Ho incontrato le persone coinvolte nel progetto per discutere requisiti e richieste relative al sistema da sviluppare. Ho configurato un ambiente su PC per poter prendere visione e familiarizzare con l'infrastruttura esistente. È seguita l'attività di analisi che mi ha portato ad individuare le componenti potenzialmente riutilizzabili del sistema, i pregi e i difetti dell'architettura distribuita precedentemente realizzata.	
+\end{center}
+%\newline
+
+\begin{center}
+	\large{25 giugno-28 giugno}
+\end{center}
+
+\begin{center}
+	Nella proseguo della settimana si sono susseguite riunioni per definire i requisiti, raccolti nella tabella \ref{tab:requisiti}.
+\end{center}
+%\newline
+
+\begin{center}
+	\large{1 luglio - 9 luglio}
+\end{center}
+\begin{center}
+	Prima di procedere con la progettazione del nuovo sistema è stato necessario realizzare un \textit{proof of concept} su cui eseguire dei \textit{benchmark} per valutare le prestazioni di alcune possibili soluzioni frutto di attività di \textit{brainstorming} con alcuni sviluppatori del team JMES e il responsabile tecnico del prodotto.
+\end{center}
+%\newline
+
+\begin{center}
+	\large{10 luglio - 12 luglio}
+\end{center}
+\begin{center}
+	Terminate le attività di \textit{benchmarking} su PoC ho proseguito con l'attività di progettazione che ha portato alla produzione di un'organizzazione di base dell'architettura del prototipo.
+\end{center}
+%\newline
+
+\begin{center}
+	\large{15 luglio - 7 agosto}
+\end{center}
+\begin{center}
+	In seguito alla progettazione ho iniziato l'attività di sviluppo lavorando incrementalmente sui requisiti del progetto. Ogni requisito è stato approvato dal responsabile in seguito ad attività di dimostrazione e \textit{testing}.
+
+\end{center}

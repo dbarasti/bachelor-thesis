@@ -20,28 +20,31 @@
 \contentsline {section}{\numberline {2.2}Controllori a Logica Programmabile}{13}{section.2.2}% 
 \contentsline {section}{\numberline {2.3}L'interazione macchina-MES: JDI}{14}{section.2.3}% 
 \contentsline {section}{\numberline {2.4}Digital Industry e protocolli}{16}{section.2.4}% 
-\contentsline {subsection}{\numberline {2.4.1}Modbus}{16}{subsection.2.4.1}% 
+\contentsline {subsection}{\numberline {2.4.1}Modbus}{17}{subsection.2.4.1}% 
 \contentsline {subsection}{\numberline {2.4.2}Modbus TCP/IP}{17}{subsection.2.4.2}% 
 \contentsline {section}{\numberline {2.5}Tecnologie e strumenti impiegati}{18}{section.2.5}% 
 \contentsline {chapter}{\numberline {3}Le Problematiche}{21}{chapter.3}% 
 \contentsline {section}{\numberline {3.1}Il primo sviluppo di JDI}{21}{section.3.1}% 
-\contentsline {section}{\numberline {3.2}I problemi con JDI}{22}{section.3.2}% 
-\contentsline {section}{\numberline {3.3}Il nuovo sviluppo}{24}{section.3.3}% 
-\contentsline {chapter}{\numberline {4}Analisi, Progettazione e Codifica}{25}{chapter.4}% 
-\contentsline {section}{\numberline {4.1}Studio della versione precedente}{25}{section.4.1}% 
-\contentsline {section}{\numberline {4.2}I requisiti del progetto}{27}{section.4.2}% 
-\contentsline {section}{\numberline {4.3}Organizzazione temporale}{33}{section.4.3}% 
-\contentsline {section}{\numberline {4.4}Tracer bullet development}{34}{section.4.4}% 
-\contentsline {subsection}{\numberline {4.4.1}Integrazione iniziale}{34}{subsection.4.4.1}% 
-\contentsline {subsection}{\numberline {4.4.2}Benchmark}{36}{subsection.4.4.2}% 
-\contentsline {subsection}{\numberline {4.4.3}Progettazione e codifica}{38}{subsection.4.4.3}% 
-\contentsline {paragraph}{Configurators}{41}{lstnumber.4.2.25}% 
-\contentsline {paragraph}{Engines}{42}{lstnumber.4.3.9}% 
-\contentsline {paragraph}{Store}{44}{lstnumber.4.5.10}% 
-\contentsline {subsection}{\numberline {4.4.4}Verifica e validazione}{46}{subsection.4.4.4}% 
-\contentsline {chapter}{\numberline {5}Retrospettiva}{49}{chapter.5}% 
-\contentsline {section}{\numberline {5.1}Soddisfazione degli obiettivi}{49}{section.5.1}% 
-\contentsline {section}{\numberline {5.2}Considerazioni finali}{51}{section.5.2}% 
-\contentsline {chapter}{Riferimenti}{53}{section.5.2}% 
-\contentsline {chapter}{Glossario}{53}{section*.28}% 
-\contentsline {chapter}{Acronimi}{55}{section*.30}% 
+\contentsline {subsection}{\numberline {3.1.1}I problemi emersi}{23}{subsection.3.1.1}% 
+\contentsline {subsection}{\numberline {3.1.2}Studio della prima versione}{24}{subsection.3.1.2}% 
+\contentsline {subsubsection}{ReactiveX}{25}{subsection.3.1.2}% 
+\contentsline {subsubsection}{Jawampa}{25}{subsection.3.1.2}% 
+\contentsline {section}{\numberline {3.2}Il nuovo sviluppo}{26}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}I requisiti del progetto}{27}{subsection.3.2.1}% 
+\contentsline {subsection}{\numberline {3.2.2}Organizzazione temporale}{33}{subsection.3.2.2}% 
+\contentsline {chapter}{\numberline {4}Progettazione, Codifica e Test}{35}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}Realizzazione proof of concept}{35}{section.4.1}% 
+\contentsline {subsection}{\numberline {4.1.1}Prima iterazione}{36}{subsection.4.1.1}% 
+\contentsline {subsection}{\numberline {4.1.2}Seconda iterazione}{39}{subsection.4.1.2}% 
+\contentsline {section}{\numberline {4.2}Benchmark}{41}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}Progettazione prototipo}{44}{section.4.3}% 
+\contentsline {paragraph}{Configurators}{46}{lstnumber.4.1.25}% 
+\contentsline {paragraph}{Engines}{47}{lstnumber.4.2.9}% 
+\contentsline {paragraph}{Store}{49}{lstnumber.4.4.10}% 
+\contentsline {section}{\numberline {4.4}Verifica e validazione}{51}{section.4.4}% 
+\contentsline {chapter}{\numberline {5}Retrospettiva}{53}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}Soddisfazione degli obiettivi}{53}{section.5.1}% 
+\contentsline {section}{\numberline {5.2}Considerazioni finali}{55}{section.5.2}% 
+\contentsline {chapter}{Riferimenti}{57}{section.5.2}% 
+\contentsline {chapter}{Glossario}{57}{section*.31}% 
+\contentsline {chapter}{Acronimi}{59}{section*.33}% 

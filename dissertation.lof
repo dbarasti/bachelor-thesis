@@ -6,19 +6,22 @@
 \contentsline {figure}{\numberline {1.3}{\ignorespaces Una visione temporale delle rivoluzioni industriali fino ad oggi\relax }}{5}{figure.caption.13}% 
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Rappresentazione dei \textit {layer} di JMES\relax }}{12}{figure.caption.14}% 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Schema di un classico PLC e dei suoi moduli. (Dall'articolo \textit {Engineering Essentials}. Disponibile su https://www.machinedesign.com/engineering-essentials/engineering-essentials-what-programmable-logic-controller)\relax }}{13}{figure.caption.15}% 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Schema di un classico PLC e dei suoi moduli}}{13}{figure.caption.15}% 
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Interazioni tra operatore e JMES\relax }}{14}{figure.caption.16}% 
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Rappresentazione di come JDI si integra nei sistemi di produzione e con JMES\relax }}{15}{figure.caption.17}% 
-\contentsline {figure}{\numberline {2.5}{\ignorespaces \textit {Stack} di comunicazione di Modbus. (Da MODBUS, Application Protocol Specification, vol. 1.1b, 28 dicembre 2006. Disponibile su www.modbus.org/docs/Modbus\_Application\_Protocol\_V1\_1b.pdf.)\relax }}{17}{figure.caption.18}% 
-\contentsline {figure}{\numberline {2.6}{\ignorespaces (a) \textit {layer} di Modbus TCP/IP; (b) \textit {frame} Modbus TCP/IP. (Da \textit {Fieldbus and Networking in Process Automation}, S.K. Sen. CRC Press, 2017)\relax }}{17}{figure.caption.19}% 
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Vista del software per la programmazione di PLC Schneider.\relax }}{19}{figure.caption.20}% 
+\contentsline {figure}{\numberline {2.5}{\ignorespaces \textit {Stack} di comunicazione di Modbus}}{17}{figure.caption.18}% 
+\contentsline {figure}{\numberline {2.6}{\ignorespaces (a) \textit {layer} di Modbus TCP/IP; (b) \textit {frame} Modbus TCP/IP}}{17}{figure.caption.19}% 
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Vista del software \textit {Modbus PLC Simulator}\relax }}{19}{figure.caption.20}% 
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Architettura a nodi \textit {Router}/\textit {Link} della prima versione di JDI\relax }}{23}{figure.caption.21}% 
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Interfaccia di GitKraken che mostra come ho tenuto traccia dei diversi \textit {benchmark} effettuati\relax }}{36}{figure.caption.22}% 
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Grafico scalabilità concorrenza di \textit {ConcurrentHashMap}\relax }}{38}{figure.caption.23}% 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagramma delle classi del componente \textit {Configurators}\relax }}{41}{figure.caption.24}% 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Diagramma delle classi del componente \textit {Engines}\relax }}{42}{figure.caption.25}% 
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Diagramma delle classi principali del componente \textit {Store}\relax }}{44}{figure.caption.26}% 
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Schema del ciclo di \textit {polling}\relax }}{44}{figure.caption.27}% 
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Schema logico prima iterazione \acrshort {poc} di JDI\relax }}{37}{figure.caption.22}% 
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Test di performance per \textit {ConcurrentHashMap}. Nelle ordinate il tempo impiegato per l'operazione, nelle ascisse il numero di elementi scritti nelle mappe.}}{38}{figure.caption.23}% 
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Schema logico seconda iterazione \acrshort {poc} di JDI\relax }}{39}{figure.caption.24}% 
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Interfaccia di GitKraken che mostra come ho tenuto traccia dei diversi \textit {benchmark} effettuati\relax }}{41}{figure.caption.25}% 
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Grafico scalabilità concorrenza di \textit {ConcurrentHashMap}\relax }}{43}{figure.caption.26}% 
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Diagramma delle classi del componente \textit {Configurators}\relax }}{46}{figure.caption.27}% 
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Diagramma delle classi del componente \textit {Engines}\relax }}{47}{figure.caption.28}% 
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagramma delle classi principali del componente \textit {Store}\relax }}{49}{figure.caption.29}% 
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Schema del ciclo di \textit {polling}\relax }}{49}{figure.caption.30}% 
 \addvspace {10\p@ }
