@@ -210,6 +210,8 @@ Per comodità riporto i termini già definiti in \ref{subsec:prima_iterazione} a
 
 	\item \Gls{tag}: insieme di \gls{tagconfiguration} e il valore che essa assume (se si tratta di un valore letto) o che deve assumere (se di tratta di un valore da scrivere);
 	
+	\item \gls{configurator}: componente che estrae dal file di configurazione in formato JSON le informazioni necessarie a creare ed avviare i componenti necessari al corretto funzionamento del sistema;
+	
 	\item \Gls{pollingtagrepository}: componente che raccoglie e mantiene aggiornati i valori delle \gls{tag} lette. Viene utilizzato dai \gls{tagpoller} per delegare la gestione dei dati letti;
 	
 	\item \gls{tagupdaterrepository}: componente che gestisce le richieste di scrittura di una specifica \gls{tag}. Fornisce ad ogni \gls{tagupdater} i dati necessari per effettuare le scritture;
@@ -218,8 +220,10 @@ Per comodità riporto i termini già definiti in \ref{subsec:prima_iterazione} a
 \end{itemize}
 
 %Per una lettura più chiara della seguente sezione si faccia riferimento ai termini definiti in \ref{subsec:prima_iterazione}.\\
+\clearpage
 
-Per ottenere un'architettura solida e manutenibile è stato scelto di gestire separatamente le operazioni di lettura e scrittura. Nella soluzione sviluppata, per ogni PLC saranno utilizzati due componenti: \gls{tagpoller} e \gls{tagupdater}.
+L'architettura ottenuta dal prototipo doveva rappresentare una solida base per permettere al team JMES di realizzare, in seguito al mio stage, un sostituto completo per la versione precedente di JDI.\\
+Per ottenere un'architettura solida e manutenibile ho scelto di gestire separatamente le operazioni di lettura e scrittura. Nella soluzione sviluppata, per ogni PLC saranno utilizzati due componenti: \gls{tagpoller} e \gls{tagupdater}.
 \begin{itemize}
 	\item Il primo si occupa di effettuare la lettura (grazie al proprio \textit{\gls{driver}}) di tutte le aree di memoria definite nel file di configurazione (queste sono le \gls{tag}). Questa operazione avviene ad intervalli regolari definiti anch'essi nella configurazione. L'intervallo è il tempo di \gls{polling};
 	\item Il secondo si affida al \gls{tagupdaterrepository} per consumare la coda di richieste di scrittura che sono a lui indirizzate.
@@ -227,72 +231,95 @@ Per ottenere un'architettura solida e manutenibile è stato scelto di gestire se
 
 I componenti già in parte descritti nel glossario a inizio sezione e le loro interazioni sono rappresentati nell'architettura in seguito riportata.\\
 
-Schema architettura...\\
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.1\textwidth]{figures/architettura}
+	\caption{Schema architettura JDI}
+	\label{fig:architettura_jdi}
+\end{figure}
 
-L'attività di progettazione ha portato alla definizione di un'architettura composta principalmente dai componenti esposti di seguito. Dopo una breve descrizione verranno analizzati alcuni di essi in dettaglio.
+Nel seguito, seguendo un approccio \textit{top-down}, verranno analizzate le componenti principali dell'architettura presentata.
+%L'attività di progettazione ha portato alla definizione di un'architettura composta principalmente dai componenti esposti di seguito. Dopo una breve descrizione verranno analizzati alcuni di essi in dettaglio.
  
 
-\begin{itemize}
-	\item \textit{Configurators}: gerarchia di classi che si occupano di elaborare il file JSON contenente la configurazione delle macchine. La loro interfaccia permette di creare separatamente i \textit{thread} di lettura e quelli di scrittura. Uno per ogni PLC specificato nella configurazione. In figura \ref{fig:json} un esempio del file che il sistema è in grado di elaborare;
-	
-	\item \textit{Engines}: contiene le classi che definiscono i \textit{task} che i \textit{thread} devono svolgere. Queste sono \textit{TagUpdater} e \textit{TagPoller}. La prima definisce il \textit{task} per la scrittura, la seconda il \textit{task} di lettura;
+%\begin{itemize}
+%	\item \textit{Configurators}: gerarchia di classi che si occupano di elaborare il file JSON contenente la configurazione delle macchine. La loro interfaccia permette di creare separatamente i \textit{thread} di lettura e quelli di scrittura. Uno per ogni PLC specificato nella configurazione. In figura \ref{fig:json} un esempio del file che il sistema è in grado di elaborare;
+%	
+%	\item \textit{Engines}: contiene le classi che definiscono i \textit{task} che i \textit{thread} devono svolgere. Queste sono \textit{TagUpdater} e \textit{TagPoller}. La prima definisce il \textit{task} per la scrittura, la seconda il \textit{task} di lettura;
+%
+%	\item \textit{Request\_handlers}: classi che astraggono i dettagli per portare a termine le richieste di lettura e scrittura. Vengono utilizzate da \textit{TagUpdater} e \textit{TagPoller};
+%	
+%	\item Store: Classi per la gestione dei valori letti e scritti. 
+%\end{itemize}
+%
+%\clearpage
 
-	\item \textit{Request\_handlers}: classi che astraggono i dettagli per portare a termine le richieste di lettura e scrittura. Vengono utilizzate da \textit{TagUpdater} e \textit{TagPoller};
-	
-	\item Store: Classi per la gestione dei valori letti e scritti. 
+
+\clearpage
+
+\subsection{File di configurazione}
+Verrà di seguito descritto il formato del file di configurazione utilizzato per definire con quali PLC JDI deve effettuare il collegamento e per ognuno le aree di memoria interessate dalle operazioni di lettura e scrittura.\\
+
+Il livello più alto è il PLC. Per questo vengono definiti:
+\begin{itemize}
+	\item Impostazioni generali della macchina: Indirizzo IP, porta, identificativo univoco macchina e tempo di \gls{polling};
+	\item Elenco delle \gls{tag}. Per ognuna viene fornito: tipo del dato, indirizzo in memoria, permesso di lettura/scrittura. Per ogni PLC possono essere definite molteplici \gls{tag}. Queste vengono identificate dalla stringa nome-macchina.nome-tag. 
 \end{itemize}
 
-\clearpage
-\begin{lstlisting}[language=json,firstnumber=1, caption={Esempio di una configurazione in formato JSON. È presente una sola macchina denominata "plc-fisico". Per questa sono definite due aree di memoria con diversi permessi.}]
-{"machines": {
-	"plc-fisico": {
-		"driver": "driver-modbustcp",
-		"settings": {
-			"PollingTime": "1000",
-			"Address": "10.200.200.80",
-			"Port": "502",
-			"unitId": "100"
-		},
-		"tags": {
-			"counter": {
-				"type": "it.smi.types.Int32",
-				"address": "40017",
-				"canRead": true,
-				"canWrite": false
-			},
-			"watchdog": {
-				"type": "it.smi.types.Int16",
-				"address": "40020",
-				"canRead": true,
-				"canWrite": true
-			}
-		}
-	}
-}}
-\end{lstlisting}
-\label{fig:json}
+In un file di configurazione possono essere presenti diverse definizioni di PLC, identificate univocamente dal nome.\\
+Nel listato in figura \ref{lst:json} un esempio di file di configurazione con un solo PLC definito. Le due aree di memoria definite sono identificabili dalle stringhe \textit{plc-taglio-laser.counter} e \textit{plc-taglio-laser.watchdog}.
 
 \clearpage
-\paragraph{Configurators}
+
+\begin{lstlisting}[language=json,firstnumber=1, caption={Esempio di una configurazione in formato JSON. È presente una sola macchina denominata "plc-fisico". Per questa sono definite due aree di memoria con diversi permessi.},label={lst:json}]
+{"machines": {
+  "plc-taglio-laser": {
+    "settings": {
+      "PollingTime": "1000",
+      "Address": "10.200.200.80",
+      "Port": "502",
+      "unitId": "100"
+    },
+    "tags": {
+      "counter": {
+        "type": "it.smi.types.Int32",
+        "address": "40017",
+        "canRead": true,
+        "canWrite": false
+      },
+      "watchdog": {
+        "type": "it.smi.types.Int16",
+        "address": "40020",
+        "canRead": true,
+        "canWrite": true
+      }
+    }
+  }
+}}
+\end{lstlisting}
+
+\clearpage
+
+\subsection{Analisi del file di configurazione}
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{figures/configurators}
-	\caption{Diagramma delle classi del componente \textit{Configurators}}
+	\caption{Diagramma delle classi del componente \gls{configurator}}
 	\label{fig:configurators}
 \end{figure}
 
-Il componente \textit{Configurators} racchiude le classi che effettuano le operazioni di creazione dei \textit{thread} per la lettura e per la scrittura. Utilizzano la libreria \textit{Jackson}\footnote{Ulteriori informazioni disponibili su \href{https://github.com/FasterXML/jackson}{https://github.com/FasterXML/jackson}} per processare il file JSON di configurazione.
+Il componente \gls{configurator} racchiude le classi che effettuano le operazioni di creazione dei \textit{thread} per la lettura e per la scrittura, rappresentati rispettivamente in \gls{tagpoller} e \gls{tagupdater}. Utilizzano la libreria \textit{Jackson}\footnote{Ulteriori informazioni disponibili su \href{https://github.com/FasterXML/jackson}{https://github.com/FasterXML/jackson}} per processare il file JSON di configurazione. Nella pagina seguente viene raffigurato il formato del file di configurazione.
 
-La classe base \textit{Configuration} effettua le operazioni di basso livello con il file JSON per ottenere, per ogni PLC specificato, il \textit{\gls{driver}} adatto. Ricava poi le \textit{TagConfiguration} per ogni area di memoria interessata da lettura e scrittura.
+La classe base \textit{Configuration} effettua le operazioni di basso livello con la configurazione  caricata da \textit{file system} per ottenere, per ogni PLC specificato, il \textit{\gls{driver}} adatto. Ricava poi le \textit{TagConfiguration} per ogni area di memoria interessata da lettura e scrittura.
 
 \textit{ReadingConfiguration} grazie al lavoro svolto dalla classe padre \textit{Configuration} estrae i \textit{thread} per la lettura fornendo loro la lista di \textit{TagConfiguration} con i permessi di lettura.
 
-\textit{WritingConfiguration} fornisce lo stesso servizio ma ricavando le configurazioni sulla base dei permessi di scrittura.\\
+\textit{WritingConfiguration} fornisce lo stesso servizio ma ricavando le configurazioni sulla base dei permessi di scrittura.
 
 
 \begin{lstlisting}[language=java, caption={Le configurazioni delle tag da leggere per un dato PLC vengono filtrate usando gli Stream Java}]
-//ReadingConfiguration
+//ReadingConfiguration.java
 private List<TagConfiguration> filterReadableConfigurations(
 		List<TagConfiguration> tagConfigurations) {
 	return tagConfigurations.stream()
@@ -303,24 +330,58 @@ private List<TagConfiguration> filterReadableConfigurations(
 }
 \end{lstlisting}
 
+
+
+
+
 \clearpage
 
-\paragraph{Engines}
+\subsection{Lettura}
+
+\gls{tagpoller} è una classe che estende l'interfaccia \textit{Runnable}. Effettua la lettura di tutte le \gls{tag} di uno specifico PLC definite nella configurazione. Questa operazione avviene ad intervalli regolari detti cicli di \gls{polling}.\\
+Rappresenta il \textit{task} che il \textit{thread} di lettura svolge.\\ 
+Come detto, ad ogni PLC definito nella configurazione corrispondono un \textit{thread} di lettura e uno di scrittura. Saranno istanziati quindi $n$ \gls{tagpoller}, con $n$ il numero di PLC nella configurazione.\\
+
+Il funzionamento di \gls{tagpoller} è semplice: ad ogni ciclo utilizza la propria istanza di \gls{driver} per richiedere al PLC i valori di tutte le \gls{tag} specificate nella configurazione di \gls{tagpoller}. Questa configurazione viene fornita da \textit{ReadingConfiguration} alla creazione del \gls{thread}. I nuovi valori delle \gls{tag} vengono inviati alla \textit{repository} condivisa tra i \gls{thread} di lettura che si occupa di aggiornare i valori precedentemente letti.
+
+Nel metodo \textit{run} della classe \gls{tagpoller} nel listato in \ref{fig:tagpoller} viene descritto ad alto livello il comportamento del \gls{thread} di lettura. Vengono effettuate le letture verso il PLC di tutte le \textit{Tag} etichettate come "da leggere". Il \textit{thread} che sta svolgendo il \textit{task} viene mandato in \textit{sleep()} per il tempo di \textit{\gls{polling}} specificato all'interno della configurazione. Si tratta di un'esecuzione che termina solo quando il \textit{thread} corrente viene interrotto in caso di errore. \\
+\newline
 \begin{figure}[h]
+	\setlength{\belowcaptionskip}{15pt}
 	\centering
 	\includegraphics[width=0.8\textwidth]{figures/engines}
-	\caption{Diagramma delle classi del componente \textit{Engines}}
+	\caption{Diagramma delle classi del componente che contiene \textit{TagPoller} e \textit{TagUpdater}}
 	\label{fig:configurators}
 \end{figure}
 
-In questo componente sono definite le classi che implementano l'interfaccia \textit{Runnable}. Rappresentano i \textit{task} che i \textit{thread} devono svolgere. Il \textit{task} definito in \textit{TagPoller} verrà svolto dai \textit{thread} di lettura. Quello in \textit{TagUpdater} da quelli di scrittura. Utilizzano la classe \textit{ConnectionHandler} per delegare la gestione della connessione con il proprio \textit{\gls{driver}}.
-
-Osservando il metodo \textit{run} della classe \textit{TagPoller} nella figura \ref{fig:tagpoller} si può intuire il funzionamento di base che un \textit{thread} di lettura avrà. Vengono effettuate le letture verso il PLC di tutte le \textit{Tag} etichettate come "da leggere". Il \textit{thread} che sta svolgendo il \textit{task} viene mandato in \textit{sleep()} per il tempo di \textit{\gls{polling}} specificato all'interno della configurazione. Si tratta di un'esecuzione che termina solo quando il \textit{thread} corrente viene interrotto. \\
-
-Il metodo \textit{run()} della classe \textit{TagUpdater} in figura \ref{fig:tagupdater} risulta allo stesso modo di facile comprensione. I dettagli del suo funzionamento verranno approfonditi in seguito, quando si mostrerà l'integrazione tra i componenti \textit{Store} e \textit{Engines}.\\
 
 \clearpage
-\begin{lstlisting}[language=java,caption={Metodo run() della classe TagPoller}]
+
+\subsection{Scrittura}
+\gls{tagupdater} è una classe che estende l'interfaccia \textit{Runnable}. Si occupa di portare a termine le richieste di scrittura accumulare in \gls{tagupdaterrepository}. Rappresenta il \textit{task} che il \gls{thread} di scrittura svolge.\\ 
+Anche in questo caso per ogni PLC presente nella configurazione viene istanziato un \textit{thread} di scrittura.\\
+
+Un requisito fondamentale che \gls{tagupdater} soddisfa è la reattività alle richieste di scrittura. È importante infatti che le richieste inserite nella coda dedicate a ciascun \textit{thread}, contenute in \gls{tagupdaterrepository}, vengano elaborate nel più breve tempo possibile.\\
+Per questo il ciclo del \textit{task} di scrittura consiste in una continua richiesta per l'ottenimento di una \gls{tag} da scrivere. Il metodo \textit{run()} del \textit{task} è visibile nel listato in \ref{fig:tagupdater}.\\
+
+Per rendere efficiente la gestione delle richieste, tra \gls{tagupdater} e \gls{pollingtagrepository} avviene una sincronizzazione sulla coda prendendo spunto dal classico problema del produttore-consumatore\footnote{Più informazioni disponibili su \href{https://en.wikipedia.org/wiki/Producer\%E2\%80\%93consumer\_problem}{https://en.wikipedia.org/wiki/Producer\%E2\%80\%93consumer\_problem}}. Questo meccanismo verrà approfondito in \ref{subsec:scrittura}, dopo aver descritto la gestione delle richieste di scrittura.\\
+
+\begin{lstlisting}[language=java,caption={Metodo run() della classe TagUpdater},label={fig:tagupdater}]
+//TagUpdater
+@Override
+public void run() {
+ConnectionHandler.instantiateConnectionFor(driver, LOG_NAME);
+while (!Thread.interrupted()) {
+retrieveAndWriteTag();
+}
+Logger.log(LOG_NAME + " Thread interrupted");
+ConnectionHandler.interruptConnectionFor(driver);
+}
+\end{lstlisting}
+
+\clearpage
+
+\begin{lstlisting}[language=java,caption={Metodo run() della classe TagPoller},label={fig:tagpoller}]
 //TagPoller
 @Override
 public void run() {
@@ -338,60 +399,55 @@ public void run() {
 	}
 }
 \end{lstlisting}
-\label{fig:tagpoller}
 
 
 
-\begin{lstlisting}[language=java,caption={Metodo run() della classe TagUpdater}]
-//TagUpdater
-@Override
-public void run() {
-	ConnectionHandler.instantiateConnectionFor(driver, LOG_NAME);
-	while (!Thread.interrupted()) {
-		retrieveAndWriteTag();
-	}
-	Logger.log(LOG_NAME + " Thread interrupted");
-	ConnectionHandler.interruptConnectionFor(driver);
-}
-\end{lstlisting}
-\label{fig:tagupdater}
 
 \clearpage
 
-\paragraph{Store}
 
+\subsection{Gestione valori letti}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth]{figures/store}
-	\caption{Diagramma delle classi principali del componente \textit{Store}}
+	\caption{Diagramma delle classi principali del componente contenente le \textit{repository}}
 	\label{fig:store}
 \end{figure}
 
-All'interno del componente \textit{Store} sono contenute le classi che si occupano di gestire i dati da leggere e da scrivere. Queste collaborano con le classi del componente \textit{Engines}.
-
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.7\textwidth]{figures/polling_scheme}
-	\caption{Schema del ciclo di \textit{polling}}
-	\label{fig:polling_scheme}
-\end{figure}
 
 
-Per la gestione dei numerosi dati regolarmente aggiornati provenienti dai PLC è necessario appoggiarsi ad adeguati componenti che tengono traccia dei cambiamenti. Come detto nella sezione \ref{sec:benchmark}, la struttura dati di riferimento per i valori letti è una ConcurrentHashMap. 
+\clearpage
 
-Lo schema in figura \ref{fig:polling_scheme} mostra l'operazione di \textit{\gls{polling}} che avviene per la lettura delle \textit{Tag} M1, M2 e M3. Seguendo i passi principali evidenziali nella figura si comprende come i componenti delle due classi collaborino:
-\begin{enumerate}
-	\item il \textit{thread} che esegue il \textit{task} definito in \textit{TagPoller} (Engines) effettua il ciclo di lettura. Le \textit{Tag} lette vengono raccolte in una lista;
-	\item la lista viene mandata a \textit{OnRamPollingTagRepository} (Store) che si occupa di aggiornare i valori contenuti nell'oggetto \textit{storedTags}.
-\end{enumerate} 
-Questi passi vengono eseguiti ad ogni ciclo di \textit{\gls{polling}}.\\
 
-Per terminare la visione dell'integrazione tra i componenti \textit{Engines} e \textit{Store} viene ora descritta la gestione delle richieste di scrittura: per ottenere una bassa latenza tra il momento in cui viene richiesta una scrittura e quando viene presa in carico dal \textit{thread} di scrittura ho preso spunto dal classico \textbf{problema del produttore/consumatore}.
+
+
+
+
+
+
+\subsection{Gestione richieste di scrittura}\label{subsec:scrittura}
+
+
+
+%All'interno del componente \textit{Store} sono contenute le classi che si occupano di gestire i dati da leggere e da scrivere. Queste collaborano con le classi del componente \textit{Engines}.
+
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[width=0.7\textwidth]{figures/polling_scheme}
+%	\caption{Schema del ciclo di \textit{polling}}
+%	\label{fig:polling_scheme}
+%\end{figure}
+
+\textit{Spiegazione della gestione richieste di scrittura...}\\
+%Per terminare la visione dell'integrazione tra i componenti \textit{Engines} e \textit{Store} viene ora descritta la gestione delle richieste di scrittura: per ottenere una bassa latenza tra il momento in cui viene richiesta una scrittura e quando viene presa in carico dal \textit{thread} di scrittura ho preso spunto dal classico \textbf{problema del produttore/consumatore}.
 
 
 Il \textit{thread} di scrittura richiede al proprio oggetto \textit{OnRamTagUpdaterRepositoy} una \textit{Tag} che è in attesa di essere scritta. Il \textit{thread} svuota la coda di richieste. Se non ci sono richieste pendenti il \textit{thread} di scrittura viene messo in stato di \textit{wait}. Appena la \textit{repository} riceve una nuova richiesta di scrittura il \textit{thread} viene notificato. Questo riprenderà la sua esecuzione consumando la nuova richiesta.
 
-Questo meccanismo è stato semplificato dalla creazione della classe \textit{TagsToWriteQueue} che ingloba un \textit{ConcurrentLinkedDeque} utilizzato per gestire le richieste per ogni \textit{thread} di scrittura. Di seguito i metodi di \textit{TagsToWriteQueue} che utilizzano \textit{wait()} e \textit{notify()} per rispettivamente fermare e riattivare il consumo delle richieste.
+Questo meccanismo è stato semplificato dalla creazione della classe \textit{TagsToWriteQueue} che ingloba un \textit{ConcurrentLinkedDeque} utilizzato per gestire le richieste per ogni \textit{thread} di scrittura. Di seguito i metodi di \textit{TagsToWriteQueue} che utilizzano \textit{wait()} e \textit{notify()} per rispettivamente fermare e riattivare il consumo delle richieste.\\
+
+
+\textit{Aggiungere diagramma di sequenza per il funzionamento di wait/notify.}\\
 
 \begin{lstlisting}[language=java,caption={Metodi che implementano il problema produttore/consumatore per gestire le richieste di scrittura}]
 //TagsToWriteQueue
@@ -413,6 +469,7 @@ synchronized Pair<String, AbstractValue> popTagPair() {
 }
 \end{lstlisting}
 
+\clearpage
 
 \section{Verifica e validazione}
 
