@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.8.12)  18 SEP 2019 01:18
+This is XeTeX, Version 3.14159265-2.6-0.99999 (TeX Live 2019/dev/Debian) (preloaded format=xelatex 2019.8.12)  19 SEP 2019 11:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2590,7 +2590,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 55.
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 55.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 55.
 Package rerunfilecheck Info: File `dissertation.out' has not changed.
-(rerunfilecheck)             Checksum: FC62614F8E6B1AD0F0867A4AD864363C.
+(rerunfilecheck)             Checksum: 07CE65CB07B737A7065B7A624E3A4EB2.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -2606,7 +2606,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  53330 strings out of 494857
  1150232 string characters out of 6175136
- 1643462 words of memory out of 5000000
+ 1643463 words of memory out of 5000000
  56333 multiletter control sequences out of 15000+600000
  541106 words of font info for 101 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
