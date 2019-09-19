@@ -30,14 +30,16 @@
 \include{chapters/chapter3}
 \include{chapters/chapter4}
 \include{chapters/conclusion}
-\addcontentsline{toc}{chapter}{Riferimenti}
-\bibliographystyle{unstr}
-\bibliography{references}
+%\addcontentsline{toc}{chapter}{Riferimenti}
+\bibliographystyle{IEEEtran}
+%\bibliography{references}
 \cleardoublepage
 %\phantomsection
-%\addcontentsline{toc}{chapter}{Acknowledgments}
-%\acknowledgments
-\printglossaries
+\addcontentsline{toc}{chapter}{Ringraziamenti}
+\glsaddallunused
+\printacronyms[nonumberlist]
+\printglossary[nonumberlist]
+\acknowledgments
 
 %\begin{appendices}
 %	\include{chapters/appendixA}
@@ -46,7 +48,7 @@
 
 \clearpage
 \bibliography{references}
-\addcontentsline{toc}{chapter}{References}
+\addcontentsline{toc}{chapter}{Riferimenti}
 %\bibliographystyle{apalike2}
 %\include{endmatter/colophon}
 

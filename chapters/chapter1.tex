@@ -1,8 +1,5 @@
 %!TEX root = ../dissertation.tex
-\begin{savequote}[75mm]
-L’avvento e la crescita di internet hanno rivoluzionato il modo di fare impresa in particolare quella industriale. 
-Ciò che prima era un impianto isolato, con operatori  e responsabili, ora è parte di una catena produttrice interconnessa che genera non solo beni tangibili ma anche dati che, se ben gestiti, possono diventare informazione utilizzata per aumentare l’efficienza dell'intera impresa in un delicato ciclo di feedback.
-\end{savequote}
+
 
 \chapter{Introduzione}
 
@@ -18,18 +15,18 @@ L’azienda ha tra i suoi punti di forza quello della vicinanza ai clienti, che 
 
 Il \acrfull{crs} è situato a Grisignano di Zocco (VI), sede di lavoro per oltre 150 dipendenti. Questo è il fulcro dello sviluppo e della manutenzione dei prodotti software. Team di sviluppatori e sistemisti sono coordinati per garantire stabilità di servizio per i clienti, e un’alta personalizzazione dei prodotti offerti.\\
 La ricerca e l’innovazione sono di grande valore per \acrshort{smi}, con una media del 20\% di fatturato investito annualmente in ricerca e sviluppo.
-Sono anche numerose le risorse impiegate nella formazione e ricerca di talenti provenienti dall'Università di Padova. Un esempio di questo è il progetto \textit{Academy} che viene descritto nel seguente modo: "Lo scopo è quello di educare giovani allievi da inserire direttamente nel mondo lavorativo, attraverso un percorso di eccellenza che forma figure professionali altamente qualificate."\footnote{\href{www.sanmarcoacademy.com}{www.sanmarcoacademy.com}}.\\
-Il \acrshort{crs} è anche responsabile per l’erogazione dei servizi \textit{cloud} forniti da \acrshort{smi}. È infatti presente una sala server amministrata da tecnici sistemisti.\\
+Sono anche numerose le risorse impiegate nella formazione e ricerca di talenti provenienti dall'Università di Padova. Un esempio di questo è il progetto \textit{Academy} che viene descritto nel seguente modo: "Lo scopo è quello di educare giovani allievi da inserire direttamente nel mondo lavorativo, attraverso un percorso di eccellenza che forma figure professionali altamente qualificate."\cite{WEBSITE:sanmarcoacademy}.\\
+Il \acrshort{crs} è anche responsabile per l’erogazione dei servizi \textit{cloud} forniti da \acrshort{smi}. È infatti presente una sala \textit{server} amministrata da tecnici sistemisti.\\
 Tutta la proprietà operativa di \acrshort{smi} rimane in azienda, senza il bisogno di \textit{\gls{outsourcing}} ad aziende esterne.\\
 
 L’azienda è organizzata in \textit{\acrfull{bu}}, un sottoinsieme dell'impresa che rappresenta un \textit{business} specifico concentrato su una particolare linea di prodotti.\\
 
-\begin{wrapfigure}{r}[1pt]{0.25\textwidth}
+\begin{wrapfigure}[6]{r}[1pt]{0.25\textwidth}
 	\centering
 	\includegraphics[width=0.25\textwidth]{figures/logo_jmes}
 	\caption{Logo \acrshort{bu} Jmes}
 \end{wrapfigure}
-La {\acrshort{bu} interessata dallo stage è JMES, composta da 20 persone tra sistemisti e sviluppatori, che si occupa dell'omonimo applicativo MES utilizzato nell'ambito della \textit{\gls{digital industry}}. Questo software serve a gestire e supervisionare l'avanzamento della produzione all'interno della fabbrica.
+La {\acrshort{bu} interessata dallo stage è JMES, composta da venti persone tra sistemisti e sviluppatori, che si occupa di sviluppare e manutenere l'omonimo applicativo MES utilizzato nell'ambito della \textit{\gls{digital industry}}. Questo software serve a gestire e supervisionare l'avanzamento della produzione all'interno della fabbrica.
 %\begin{wrapfigure}{l}{0.3\textwidth}
 %	\caption{Albero delle \gls{business unit} di \acrshort{smi}}
 %	\centering
@@ -57,15 +54,16 @@ Come accennato nella sezione precedente esistono due squadre che lavorano in man
 
 Per il periodo dello stage sono stato inserito nel team di sviluppo JMES.\\
 
-La prima installazione di JMES risale a maggio 2018. È quindi un prodotto giovane che però è stato già apprezzato da 19 clienti attivi, ci sono inoltre 27 analisi per l’installazione in corso e altre 19 in via di pianificazione.
+La prima installazione di JMES risale a maggio 2018. È quindi un prodotto giovane che nonostante ciò ha riscontrato rapidamente successo. Sono attualmente presenti 19 clienti attivi, ci sono inoltre 27 analisi per l’installazione in corso e altre 19 in via di pianificazione.
 
 
 \subsubsection{Sviluppo agile e framework Scrum}
 Indipendentemente dalle \acrshort{bu} aziendali, la metodologia di lavoro per la gestione del ciclo di  sviluppo del software è Agile, implementata con il \textit{framework} Scrum.
 
 Agile è una disciplina per lo sviluppo di software che pone al primo posto tra i suoi principi la soddisfazione e il coinvolgimento del cliente e la distribuzione di software funzionante in maniera regolare e a distanza di brevi periodi, dalle due settimane ai due mesi.
+\clearpage
 
-Il \textit{framework} Scrum prevede di suddividere un periodo di lavoro, chiamato \textit{sprint cycle} in tre fasi principali:
+Il \textit{framework} Scrum prevede di suddividere un periodo di lavoro, chiamato \textit{sprint cycle}, in tre fasi principali:
 \begin{itemize}
 	\item \textit{Planning}: il team comunica con gli \textit{stakeholder} (rappresentati dal \textit{product owner}), analizza e comprende i requisiti creando lo \textit{sprint backlog}, composto di requisiti che il prodotto deve soddisfare entro la fine dello \textit{sprint}. Questi prendono il nome di \textit{story} se sono completabili entro uno sprint. Un insieme correlato di \textit{story} si chiama \textit{epic};
 	\item \textit{Implementation}: durante questa fase dello \textit{sprint} il team crea delle porzioni complete di prodotto. Le funzionalità implementate in uno \textit{sprint} provengono dallo \textit{sprint backlog}. La durata di questa fase è, nel caso del team JMES, quattro settimane;
@@ -79,14 +77,14 @@ Il \textit{framework} Scrum prevede di suddividere un periodo di lavoro, chiamat
 
 %Per lo sviluppo dell'applicazione è stato utilizzato il linguaggio Java. \\
 %Per l'interfacciamento con i PLC è stato utilizzato il protocollo ModBusTCP in un'implementazione proprietaria di \acrshort{smi}.\\
-Descritte le tecnologie di sviluppo del team JMES. \\
-Principalmente si paralerà del linguaggio Java e del framework sviluppato da \acrshort{smi} per lo sviluppo: \textit{Synergy}.
+%Descritte le tecnologie di sviluppo del team JMES. \\
+%Principalmente si paralerà del linguaggio Java e del framework sviluppato da \acrshort{smi} per lo sviluppo: \textit{Synergy}.
 
-Al centro degli strumenti per la gestione del flusso di lavoro del team JMES c'è uno strumento sviluppato da IBM, \acrfull{rtc}. Questo offre le seguenti funzionalità:
+Al centro degli strumenti per la gestione del flusso di lavoro del team JMES c'è uno strumento sviluppato da IBM, \acrfull{rtc}. Questo integra le seguenti funzionalità:
 \begin{itemize}
-	\item versionamento del codice;
-	\item gestione dei \textit{work item} provenienti dallo \textit{sprint backlog} (\textit{issue tracking system});
-	\item \textit{build tool}.
+	\item Versionamento del codice;
+	\item Gestione dei \textit{work item} provenienti dallo \textit{sprint backlog} (\textit{issue tracking system});
+	\item \textit{Build tool}.
 \end{itemize}
 \acrshort{rtc} si integra all'interno dell'ambiente di sviluppo del team grazie a un \textit{plug-in} completo per l'\acrshort{ide} Eclipse;\\
 
@@ -95,7 +93,7 @@ Al centro degli strumenti per la gestione del flusso di lavoro del team JMES c'�
 \section{La Digital Industry}
 
 \subsection{L'industria 4.0}
-L'avvento e la crescita di internet hanno rivoluzionato il modo di fare impresa in particolare quella industriale. \\
+L'avvento e la crescita di internet hanno rivoluzionato il modo di fare impresa in particolare nell'ambito industriale. \\
 Ciò che prima era un impianto isolato, con operatori  e responsabili, ora è parte di una catena produttrice interconnessa che genera non solo beni tangibili ma anche dati che, se ben gestiti, possono diventare informazione utilizzata per aumentare l’efficienza dell'intera impresa in un delicato ciclo di \textit{feedback}.\\
 La corretta gestione di questa informazione diventa fondamentale per il successo dell'impresa poiché mantiene alta la competitività.
 
@@ -115,10 +113,10 @@ Un software \acrshort{mes} in pratica si occupa di raccogliere, elaborare e cond
 
 
 Il controllo e la gestione dell'informazione consentono non solo di mantenere un piano generale del processo produttivo aziendale, ma anche di evidenziare possibili problemi in anticipo e ottenere quindi una migliore resa di produzione.\\
-Vediamo quali sono i principali benefici di un sistema \acrshort{mes}\footnote{[\textit{Five benefits of a MES}], \href{https://www.industryweek.com/companies-amp-executives/five-benefits-mes}{www.industryweek.com/companies-amp-executives/five-benefits-mes}}:
+Vediamo quali sono i principali benefici di un sistema \acrshort{mes}\cite{WEBSITE:mesbenefits}:
 \begin{enumerate}
 	\item \textbf{Riduzione di scarti e sprechi}. Grazie ad una visione in tempo reale della produzione, è possibile individuare con piccoli margini situazioni in cui le unità prodotte non sono conformi, fermando la produzione e limitando gli sprechi;
-	\item \textbf{Precisione nella definizione dei costi}. Con un sistema \acrshort{mes}, i tempi di lavoro, gli sprechi, i tempi di inattività, la manutenzione sono monitorati e registrati in tempo reale direttamente dalla fabbrica. Questo rende innanzitutto l’informazione più affidabile, e utilizzabile per riclassificare i costi e valutare criticamente situazioni con alto tasso di sprechi;
+	\item \textbf{Precisione nella definizione dei costi}. Con un sistema \acrshort{mes}, i tempi di lavoro, gli sprechi, i tempi di inattività, la manutenzione sono monitorati e registrati in tempo reale direttamente dalla fabbrica. Questo rende innanzitutto l’informazione più affidabile, è poi utilizzabile per riclassificare i costi e valutare criticamente situazioni con alto tasso di sprechi;
 	\item \textbf{Riduzione dei tempi di inattività}. Siccome una produzione ferma difficilmente porta a un guadagno, un \acrshort{mes} deve essere in grado di pianificare la produzione in modo che le risorse necessarie siano quelle disponibili, integrando anche i piani dei turni dei dipendenti, in modo da aumentare ulteriormente l’efficienza, riducendo quindi i costi;
 	\item \textbf{Riduzione del magazzino}. Le giacenze in magazzino costano, perché aumentano i costi logistici di gestione, oltre ai costi per produrre tali giacenze. Con un \acrshort{mes} si ha uno stato aggiornato della nuova produzione, degli scarti e dei prodotti non conformi. In questo modo chi si occupa di acquisto, spedizione e pianificazione sa esattamente cosa è disponibile e cosa bisogna ordinare;
 	\item \textbf{Riduzione di costi}. Con un controllo più stretto sui tempi e i costi necessari per la produzione, è possibile snellire ulteriormente processi a supporto, come la gestione logistica del magazzino, quindi ottenendo un disimpegno di persone e attrezzature.
@@ -137,7 +135,7 @@ Il progetto in cui sono stato inserito, una volta raccolti i requisiti, ha avuto
 
 \subsection{Gli obiettivi}
 
-Durante le riunioni di definizione del piano di lavoro dello stage sono emersi diversi punti evidenziati dal tutor dell'azienda come critici. Questi sono stati classificati in obbligatori e desiderabili. Obbligatori per indicare che il mancato soddisfacimento di tali bersagli porterebbe ad una valutazione non soddisfacente dell'esperienza. Desiderabili vengono intesi gli obiettivi che aiuterebbero ad elevare l'importanza del progetto.\\
+Durante le riunioni di definizione del piano di lavoro dello stage sono stati evidenziati dal tutor aziendale diversi punti critici. Questi sono stati classificati in obbligatori e desiderabili. Obbligatori per indicare che il mancato soddisfacimento di tali bersagli porterebbe ad una valutazione non soddisfacente dell'esperienza. Desiderabili vengono intesi gli obiettivi che aiuterebbero ad elevare l'importanza del progetto.\\
 Per comodità sono raccolti nella seguente tabella.
 
 \begin{center}
@@ -145,13 +143,13 @@ Per comodità sono raccolti nella seguente tabella.
 		\hline
 		Obiettivo & Tipologia \\ [0.5ex] 
 		\hline\hline
-		analisi dell'attuale infrastruttura e delle problematiche che hanno portato alla scelta di modificare l’architettura & obbligatorio\\ 
+		Analisi dell'attuale infrastruttura e delle problematiche che hanno portato alla scelta di modificare l’architettura & Obbligatorio\\ 
 		\hline
-		analisi omnicomprensiva della nuova architettura; & obbligatorio \\
+		Analisi omnicomprensiva della nuova architettura & Obbligatorio \\
 		\hline
-		studio di fattibilità in termini "tecnologici" (ossia reperimento e/o sviluppo di componentistica necessaria alla realizzazione) e relativi banchmark di confronto & obbligatorio \\
+		Studio di fattibilità in termini "tecnologici" (ossia reperimento e/o sviluppo di componentistica necessaria alla realizzazione) e relativi banchmark di confronto & Obbligatorio \\
 		\hline
-		sviluppo prototipo al fine di testare le soluzioni trovate e le performance effettive delle stesse (in termini di tempo di esecuzione, scalabilità e risorse impegnate). & desiderabile \\ [1ex]
+		Sviluppo prototipo al fine di testare le soluzioni trovate e le performance effettive delle stesse (in termini di tempo di esecuzione, scalabilità e risorse impegnate) & Desiderabile \\ [1ex]
 		\hline
 		\caption{Obiettivi obbligatori e desiderabili di progetto}
 		\label{tab:obiettivi}
@@ -168,15 +166,14 @@ Per comodità sono raccolti nella seguente tabella.
 
 \section{Organizzazione del Documento}
 
-\subsection{Contenuti}
 L'obiettivo di questo documento è di raccogliere e tradurre a parole l'esperienza fatta durante lo stage curricolare presso Sanmarco Informatica svolto nel periodo 10 giugno 2019 - 8 agosto 2019. A partire dal prossimo capitolo si toccheranno tutti gli argomenti tecnici trattati:
 
 \begin{itemize}
 	\item Nel capitolo \nameref{ch:background} verranno analizzate più nel dettaglio le tecnologie già citate in questo capitolo, come il software JMES. Sono introdotti i linguaggi di programmazione utilizzati e gli strumenti per lo sviluppo e la gestione del codice; 
 	
-	\item Il capitolo \nameref{ch:problematiche} intende presentare i problemi che hanno portato alla proposta di stage. Verrà analizzato il sistema precedentemente sviluppato da \acrshort{smi} e si presenteranno i requisiti estratti da questo. 
+	\item Nel capitolo \nameref{ch:problematiche} vengono presentate le difficoltà che hanno poi condotto alla ricerca di una soluzione attraverso il progetto di stage. Verrà analizzato il sistema precedentemente sviluppato da \acrshort{smi} e si presenteranno i requisiti estratti da questo;
 	
-	\item Il capitolo \ref{ch:analisi_progettazione_sviluppo} riassume l'attività di realizzazione del Proof of Concept (PoC) esplorativo utilizzato per effettuare \gls{benchmark} prestazionali sui requisiti chiave. Lo sviluppo prevede poi la progettazione e la codifica di un prototipo che servirà al termine dello stage come base per il team che continuerà lo sviluppo.
+	\item Il capitolo \ref{ch:analisi_progettazione_sviluppo} riassume l'attività di realizzazione del Proof of Concept (PoC) esplorativo utilizzato per effettuare \gls{benchmark} prestazionali sui requisiti chiave. Lo sviluppo prevede poi la progettazione e la codifica di un prototipo che servirà al termine dello stage come base per il team che continuerà lo sviluppo;
 	
 	\item Infine nel capitolo \ref{ch:retrospettiva} raccolgo le impressioni dell'esperienza di stage all'interno di \acrshort{smi}, di quale preparazione ho sentito la mancanza e per quali aspetti ho più apprezzato il corso di studi.
 	
@@ -196,8 +193,6 @@ L'obiettivo di questo documento è di raccogliere e tradurre a parole l'esperien
 
 %Infine nel capitolo \ref{ch:retrospettiva} raccolgo le impressioni dell'esperienza di stage all'interno di \acrshort{smi}, di quale preparazione ho sentito la mancanza e per quali aspetti ho più apprezzato il corso di studi.
 
-
-\subsection{Convenzioni tipografiche}
 
 Riguardo la stesura del testo, relativamente al documento sono state adottate le
 seguenti convenzioni tipografiche:

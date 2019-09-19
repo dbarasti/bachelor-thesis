@@ -1,47 +1,45 @@
 %acronimi
 \newacronym{crs}{CRS}{Centro Ricerca e Sviluppo}
 \newacronym{smi}{SMI}{Sanmarco Informatica}
-\newacronym{mes}{MES}{manufacturing execution system}
-\newacronym{bu}{BU}{business unit}
-\newacronym{rtc}{RTC}{Rational Team Concert}
-\newacronym{ide}{IDE}{Integrated Development Environment}
-\newacronym{tdd}{TDD}{Test Driven Development}
-\newacronym{wamp}{WAMP}{Web Application Messaging Protocol}
-\newacronym{rpc}{RPC}{Remote Procedure Call}
-\newacronym{poc}{PoC}{Proof of Concept}
+\newacronym{mes}{MES}{\textit{Manufacturing Execution System}}
+\newacronym{bu}{BU}{\textit{Business Unit}}
+\newacronym{rtc}{RTC}{\textit{Rational Team Concert}}
+\newacronym{ide}{IDE}{\textit{Integrated Development Environment}}
+\newacronym{tdd}{TDD}{\textit{Test Driven Development}}
+\newacronym{wamp}{WAMP}{\textit{Web Application Messaging Protocol}}
+\newacronym{rpc}{RPC}{\textit{Remote Procedure Call}}
+\newacronym{poc}{PoC}{\textit{Proof of Concept}}
 
 
 %definizioni
-\newglossaryentry{outsourcing}{name={outsourcing},description={L'appalto a una società esterna di determinate funzioni o servizi, o anche di interi processi produttivi.}}
-\newglossaryentry{business unit}{name={business unit},description={Un sottoinsieme dell'impresa che rappresenta un business specifico concentrato su una particolare linea di prodotti.}}
-\newglossaryentry{digital industry}{name={digital industry},description={Relativamente all'industria 4.0, ci si riferisce al concetto di fabbriche dove le macchine sono potenziate con connettività \textit{wireless} e sensori, connesse a un sistema che può tenere sotto controllo l'intera filiera produttiva e compiere delle decisioni sulla base dei dati raccolti autonomamente.}}
+\newglossaryentry{outsourcing}{name={\textit{outsourcing}},description={L'appalto a una società esterna di determinate funzioni o servizi, o anche di interi processi produttivi}}
+\newglossaryentry{business unit}{name={\textit{business unit}},description={Un sottoinsieme dell'impresa che rappresenta un business specifico concentrato su una particolare linea di prodotti}}
+\newglossaryentry{digital industry}{name={\textit{digital industry}},description={Relativamente all'industria 4.0, ci si riferisce al concetto di fabbriche dove le macchine sono potenziate con connettività \textit{wireless} e sensori, connesse a un sistema che può tenere sotto controllo l'intera filiera produttiva e compiere delle decisioni autonome sulla base dei dati raccolti}}
 
-\newglossaryentry{rational team concert}{name={Rational Team Concert},description={Sviluppato da IBM, è una tecnologia per il team management che centralizza le principali funzionalità fondamentali per un team di sviluppo software: versionamento del codice, issue tracking system e sistema di build del codice.}}
+\newglossaryentry{rational team concert}{name={\textit{Rational Team Concert}},description={Sviluppato da IBM, è una tecnologia per il \textit{team management} che centralizza le funzionalità fondamentali per un team di sviluppo software: versionamento del codice, \textit{issue tracking system} e sistema di \textit{build} del codice}}
 
-\newglossaryentry{websocket}{name={WebSocket},description={Protocollo di comunicazione che permette di comunicare in maniera \textit{full-duplex}, cioè a due direzioni, su una singola connessione TCP.}}
+\newglossaryentry{websocket}{name={\textit{WebSocket}},description={Protocollo di comunicazione che permette di comunicare in maniera \textit{full-duplex}, cioè a due direzioni, su una singola connessione TCP}}
 
-\newglossaryentry{driver}{name={\textit{driver}},description={Implementazione di uno specifico protocollo di comunicazione. È racchiuso in un componente ed espone un'interfaccia che rende semplici agli utenti operazioni come connessione, disconnessione e invio richieste.}}
-
-
-\newglossaryentry{polling}{name={\textit{polling}},description={Attività che viene effettuata ripetutamente per verificare il cambiamento di un certo stato. Nell'ambito del progetto l'attività di polling è quella effettuata nei confronti dei PLC per rilevare cambiamenti nei dati al suo interno.}}
+\newglossaryentry{driver}{name={\textit{driver}},description={Implementazione di uno specifico protocollo di comunicazione. È racchiuso in un componente ed espone un'interfaccia che rende semplici agli utenti operazioni come connessione, disconnessione e invio richieste}}
 
 
-\newglossaryentry{benchmark}{name={\textit{benchmark}},description={}}
+\newglossaryentry{polling}{name={\textit{polling}},description={Attività che viene effettuata ripetutamente per verificare il cambiamento di un certo stato. Nell'ambito del progetto l'attività di \textit{polling} è quella effettuata nei confronti dei PLC per rilevare cambiamenti nei dati al suo interno}}
 
-\newglossaryentry{thread}{name={\textit{thread}},description={description}}
 
-\newglossaryentry{engine}{name={\textit{Engine}},description={description}}
+\newglossaryentry{benchmark}{name={\textit{benchmark}},description={Esecuzione di un programma con lo scopo di misurare e valutare le sue prestazioni, eseguendo diversi test appositamente studiati}}
 
-\newglossaryentry{tagpoller}{name={\textit{TagPoller}},description={description}}
+\newglossaryentry{engine}{name={\textit{Engine}},description={\textit{Thread} che utilizza un \textit{\gls{driver}} per effettuare cicli di lettura su PLC a intervalli regolari. Utilizzato nel \acrshort{poc}}}
 
-\newglossaryentry{tagupdater}{name={\textit{TagUpdater}},description={description}}
+\newglossaryentry{tagpoller}{name={\textit{TagPoller}},description={Componente che utilizza il \gls{driver} per effettuare cicli di lettura su PLC a intervalli regolari. Un \gls{tagpoller} detiene la configurazione del PLC associato per conoscere le aree di memoria da leggere}}
 
-\newglossaryentry{tag}{name={\textit{Tag}},description={description}}
+\newglossaryentry{tagupdater}{name={\textit{TagUpdater}},description={Componente che utilizza il \gls{driver} per effettuare la scrittura su PLC quando richiesto}}
 
-\newglossaryentry{pollingtagrepository}{name={\textit{PollingTagRepository}},description={description}}
+\newglossaryentry{tag}{name={\textit{Tag}},description={Insieme di \gls{tagconfiguration} e il valore che essa assume (se si tratta di un valore letto) o che deve assumere (se di tratta di un valore da scrivere)}}
 
-\newglossaryentry{tagupdaterrepository}{name={\textit{TagUpdaterRepository}},description={description}}
+\newglossaryentry{pollingtagrepository}{name={\textit{PollingTagRepository}},description={Componente che raccoglie e mantiene aggiornati i valori delle \gls{tag} lette. Viene utilizzato dai \gls{tagpoller} per delegare la gestione dei dati letti}}
 
-\newglossaryentry{tagconfiguration}{name={\textit{TagConfiguration}},description={description}}
+\newglossaryentry{tagupdaterrepository}{name={\textit{TagUpdaterRepository}},description={Componente che gestisce le richieste di scrittura di una specifica \gls{tag}. Fornisce ad ogni \gls{tagupdater} i dati necessari per effettuare le scritture}}
 
-\newglossaryentry{configurator}{name={\textit{Configurator}},description={description}}
+\newglossaryentry{tagconfiguration}{name={\textit{TagConfiguration}},description={Rappresentazione dell'area di memoria di un PLC. In essa sono contenute le informazioni relative all'area di memoria rappresentata: indirizzo in memoria, tipo del dato, permessi di accesso in lettura/scrittura}}
+
+\newglossaryentry{configurator}{name={\textit{Configurator}},description={Componente che estrae dal file di configurazione in formato JSON le informazioni necessarie a creare ed avviare i componenti necessari al corretto funzionamento del sistema}}

@@ -5,31 +5,31 @@
 
 \chapter{Progettazione, Codifica e Test}\label{ch:analisi_progettazione_sviluppo}
 
-Prima di arrivare al prototipo finale ho realizzato un \textit{proof of concept} sul quale ho eseguito dei test per valutare le prestazioni che il futuro prototipo avrebbe avuto. Questo ha aiutato a fissare alcuni dei requisiti già raccolti durante l'analisi dell'applicativo precedente e di ricavarne nuovi. In seguito ho proceduto a progettare e realizzare il prototipo definitivo.
+Prima di arrivare al prototipo finale ho realizzato un \textit{proof of concept} sul quale ho eseguito dei test per valutare le prestazioni che il futuro prototipo avrebbe avuto. Questo ha aiutato a fissare alcuni dei requisiti già raccolti durante l'analisi dell'applicativo precedente e ricavarne di nuovi. In seguito ho proceduto nella progettazione e realizzazione del prototipo definitivo.
 
 \section{Realizzazione proof of concept}
 
-Il \acrshort{poc} doveva dimostrare che fosse possibile realizzare una versione puramente concorrente del vecchio applicativo JDI. Il \acrshort{poc} è stato realizzato in due iterazioni:
+Il \acrshort{poc} doveva dimostrare che fosse possibile realizzare una versione puramente concorrente del vecchio applicativo JDI. È stato realizzato in due iterazioni:
 
 \begin{itemize}
 	\item Prima iterazione: si doveva simulare il collegamento a diversi PLC. Ogni connessione simulata otteneva un proprio \textit{thread}.
-	Questi effettuavano un ciclo di lettura ad intervalli specificati. La lettura era simulata con dei valori generati casualmente. I valori venivano gestiti in maniera appropriata secondo il requisito RF6;
+	Questi effettuavano un ciclo di lettura ad intervalli specificati. La lettura era simulata con dei valori generati casualmente, i valori venivano gestiti in maniera appropriata secondo il requisito RF6;
 	\item Seconda iterazione: veniva effettivamente gestito il collegamento a dei veri PLC. Su questi venivano effettuate le stesse operazioni di lettura della prima iterazione, i valori erano ora realmente prodotti dal PLC. 
 \end{itemize}
 
 \subsection{Prima iterazione}\label{subsec:prima_iterazione}
-Prima di descrivere il processo per lo sviluppo della prima iterazione di \acrshort{poc} è necessario fare dei chiarimenti su alcuni termini utilizzati in seguito:
+Prima di descrivere il processo per lo sviluppo della prima iterazione del \acrshort{poc} è necessario fare dei chiarimenti su alcuni termini utilizzati in seguito:
 
 \begin{itemize}
-	\item \textit{\Gls{driver}}: implementazione di un protocollo. Viene utilizzato per effettuare operazioni sul PLC (e.g. connessione, letture, scritture). Nella prima iterazione il \textit{\gls{driver}} non implementa alcun protocollo ma simula l'operazione di lettura;
+	\item \textit{\Gls{driver}}: implementazione di un protocollo. Viene utilizzato per effettuare operazioni sul PLC (ad esempio connessione, letture, scritture). Nella prima iterazione il \textit{\gls{driver}} non implementa alcun protocollo ma simula l'operazione di lettura, generando valori casuali;
 	
-	\item \textit{Engine} (o \textit{DriverEngine}): \gls{thread} che utilizza un \textit{\gls{driver}} per effettuare cicli di lettura su PLC a intervalli regolari;
+	\item \textit{Engine} (o \textit{DriverEngine}): \textit{thread} che utilizza un \textit{\gls{driver}} per effettuare cicli di lettura su PLC a intervalli regolari;
 	
 	\item \textit{Tag}: rappresentazione di un'area di memoria letta dal PLC. In essa sono contenute le informazioni relative all'area di memoria rappresentata (vale a dire indirizzo in memoria, il tipo del dato, permessi di accesso in lettura/scrittura) e il valore che essa assume;
 	
-	\item \textit{Store} (o \textit{TagStore}): oggetto che raccoglie e aggiorna i valori delle \textit{tag};
+	\item \textit{Store} (o \textit{TagStore}): oggetto che raccoglie e aggiorna i valori delle \gls{tag};
 
-	\item Tempo di \textit{polling} (o \textit{PollingTime}): intervallo tra un ciclo di lettura e il successivo, spesso indicato in millisecondi (ms).
+	\item Tempo di \textit{polling} (o \textit{PollingTime}): intervallo tra un ciclo di lettura e il successivo, indicato in millisecondi.
 \end{itemize}
 
 Per ogni PLC che si intende simulare viene creato un \textit{Engine} a cui viene fornito:
@@ -56,25 +56,27 @@ La scelta della struttura dati che il \textit{TagStore} utilizza per mantenere i
 \begin{enumerate}
 	\item Fornire ogni \textit{Engine} di una \textit{HashMap} e lasciare quindi che ogni \textit{thread} gestisse i propri valori. Questo avrebbe evitato accessi concorrenti alle strutture dati, rendendo più difficoltosa il reperimento di una specifica \textit{Tag};
 	
-	\item Utilizzare una \textit{ConcurrentHashMap}\footnote{\href{https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html}{https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html}} condivisa da tutti gli \textit{Engine}. Questo avrebbe introdotto concorrenza negli accessi alla mappa, centralizzando però tutte le \textit{tag} lette.
+	\item Utilizzare una \textit{ConcurrentHashMap}\cite{WEBSITE:1} condivisa da tutti gli \textit{Engine}. Questo avrebbe introdotto concorrenza negli accessi alla mappa, centralizzando però tutte le \gls{tag} lette.
 \end{enumerate}
 
-Michał Siatkowski \footnote{\href{https://github.com/atais}{https://github.com/atais}} ha realizzato dei test di performance sulle due strutture dati prese in considerazione. In figura \ref{fig:performance_test_concurrenthashmap} il grafico relativo alle prestazioni dell'operazione \textit{add}. I dati interessanti per la scelta sono quelli delle due linee più in basso, ottenuti utilizzando un thread per \textit{core}\\
+%\footnote{\href{https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html}{https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ConcurrentHashMap.html}}
+
+Michał Siatkowski \footnote{\href{https://github.com/atais}{https://github.com/atais}} ha realizzato dei test di performance\cite{WEBSITE:performance} sulle due strutture dati prese in considerazione. In figura \ref{fig:performance_test_concurrenthashmap} è presente il grafico relativo alle prestazioni dell'operazione \textit{add}. I dati interessanti per la scelta sono quelli delle due linee più in basso, ottenuti utilizzando un \textit{thread} per \textit{core}\\
 
 \clearpage
 
-\label{fig:performance_test_concurrenthashmap}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1.1\textwidth]{figures/concurrenthashmap_hashmap_performance}
-	\caption[Test di performance per \textit{ConcurrentHashMap}. Nelle ordinate il tempo impiegato per l'operazione, nelle ascisse il numero di elementi scritti nelle mappe.]{Test di performance per \textit{ConcurrentHashMap}. Nelle ordinate il tempo impiegato per l'operazione, nelle ascisse il numero di elementi scritti nelle mappe. (Ulteriori risultati sono disponibili su \href{https://stackoverflow.com/questions/1378310/performance-concurrenthashmap-vs-hashmap}{https://stackoverflow.com/questions/1378310/performance-concurrenthashmap-vs-hashmap})} 
+	\caption[Test di performance per \textit{ConcurrentHashMap}. Nelle ordinate il tempo impiegato per l'operazione, nelle ascisse il numero di elementi scritti nelle mappe.]{Test di performance per \textit{ConcurrentHashMap}. Nelle ordinate il tempo impiegato per l'operazione, nelle ascisse il numero di elementi scritti nelle mappe.\cite{WEBSITE:performance}} 
+	\label{fig:performance_test_concurrenthashmap}
 \end{figure}
 
 
 Nelle sue conclusioni ha evidenziato:
 
 \begin{quote}
-	When operating on ConcurrentHashMap with many threads it is similarly effective to operating on separate HashMaps for each thread. So there is no need to partition your data in different structures.
+	\textit{When operating on ConcurrentHashMap with many threads it is similarly effective to operating on separate HashMaps for each thread. So there is no need to partition your data in different structures.}
 \end{quote}
 
 Rendendo quindi non necessario in caso di \textit{multithreading} distribuire informazione su multiple strutture dati.
@@ -121,9 +123,9 @@ Queste conseguenze sono state comunque largamente colmate dalle decine di ore di
 
 
 Come visto nella sezione precedente, per scegliere la struttura dati per la gestione dei valori letti mi sono affidato ai test eseguiti da Michał Siatkowski che confrontavano le prestazioni di \textit{HashMap} e \textit{ConcurrentHashMap} in diverse situazioni.\\
-Per fondare la scelta su basi ancora più solide ho sviluppato un ulteriore \gls{benchmark} per estrarre dei dati relativi all'accesso concorrente di più \gls{thread} alla \textit{ConcurrentHashMap} condivisa dai diversi \gls{engine}. Il test utilizza la logica del \gls{poc} realizzato alla prima iterazione. Lo logica di riferimento è quindi quella rappresentata in figura \ref{fig:poc_1_schema}.
+Per fondare la scelta su basi ancora più solide ho sviluppato un ulteriore \gls{benchmark} per estrarre dei dati relativi all'accesso concorrente di più \textit{thread} alla \textit{ConcurrentHashMap} condivisa dai diversi \gls{engine}. Il test utilizza la logica del \acrshort{poc} realizzato alla prima iterazione. Lo schema di riferimento è quindi quella rappresentata in figura \ref{fig:poc_1_schema}.
 
-Avendo realizzato diverse versioni di \gls{benchmark} è risultato utile utilizzare il versionamento di git per fermare nel tempo le diverse versioni sviluppate, utilizzando il sistema di \textit{tagging}\footnote{Più informazioni su \href{https://git-scm.com/book/en/v2/Git-Basics-Tagging}{https://git-scm.com/book/en/v2/Git-Basics-Tagging}}. In figura \ref{fig:gitkraken_benchmark} è presente una vista del software GitKraken che mostra come ogni versione di \textit{benchmark} abbia una \textit{tag} associata.\\
+Avendo realizzato diverse versioni di \gls{benchmark} è risultato utile utilizzare il versionamento di \textit{git} per fermare nel tempo le diverse versioni sviluppate, utilizzando il sistema di \textit{tagging}\footnote{Più informazioni su \href{https://git-scm.com/book/en/v2/Git-Basics-Tagging}{https://git-scm.com/book/en/v2/Git-Basics-Tagging}}. In figura \ref{fig:gitkraken_benchmark} è presente una vista del software GitKraken che mostra come ogni versione di \textit{benchmark} abbia una \textit{tag} di \textit{git} associata.\\
 
 
 \begin{figure}[h]
@@ -137,11 +139,11 @@ Il test aveva come scopo quello di simulare la presenza di molteplici PLC che fo
 la simulazione prevede un numero variabile di \textit{thread} \textit{Engine} che accedono concorrentemente alla mappa, contenuta all'interno di un \textit{TagStore} condiviso, per aggiornare i valori delle \textit{Tag} generati casualmente dal \textit{Driver}.\\ 
 Ogni \textit{Engine} ha nella propria configurazione 150 \textit{Tag}, corrispondenti quindi a 150 valori generati dal \textit{Driver}. \\
 Vengono eseguiti dieci cicli di aggiornamento alla fine dei quali sono rilevati i tempi di esecuzione. \\
-Questo \textit{benchmark} è eseguito cinque volte e viene infine fatta la media dei tempi di esecuzione rilevati. Il numero di \textit{thread} \textit{Engine} varia da 10 a 1000.\\
+Questo \textit{benchmark} è eseguito cinque volte e viene infine calcolata la media dei tempi di esecuzione rilevati. Il numero di \textit{thread} \textit{Engine} varia da 10 a 1000.\\
 
-L'obiettivo da raggiungere era una crescita lineare dei tempi di esecuzione fino ai 100 \gls{thread}.
+L'obiettivo da raggiungere era una crescita lineare dei tempi di esecuzione fino ai 100 \textit{thread} (simulazione di 100 PLC).
 
-La tabella \ref{tab:benchmark_1} mostra i tempi di esecuzione in relazione al numero  di \gls{thread}. Il grafico in figura \ref{fig:grafico_benchmark_1} mostra i risultati.
+La tabella \ref{tab:benchmark_1} mostra i tempi di esecuzione in relazione al numero  di \textit{thread}. Il grafico in figura \ref{fig:grafico_benchmark_1} aiuta a visualizzare i risultati.
 
 
 
@@ -200,7 +202,7 @@ I risultati ottenuti dal \textit{benchmark} hanno superato le aspettative. I tem
 \section{Progettazione prototipo}
 Per comodità riporto i termini già definiti in \ref{subsec:prima_iterazione} aggiornati per adattarsi al glossario del prototipo:
 \begin{itemize}
-	\item \Gls{driver}: implementazione di un protocollo. Viene utilizzato per effettuare operazioni sul PLC (e.g. connessione, letture, scritture). Il protocollo implementato dai \gls{driver}, quando non specificato, è Modbus TCP/IP;
+	\item \Gls{driver}: implementazione di un protocollo. Viene utilizzato per effettuare operazioni sul PLC (connessione, disconnessione, letture, scritture). Il protocollo implementato dai \gls{driver}, quando non specificato, è Modbus TCP/IP;
 	
 	\item \Gls{tagpoller}: componente che utilizza il \gls{driver} per effettuare cicli di lettura su PLC a intervalli regolari. Un \gls{tagpoller} detiene la configurazione del PLC associato per conoscere le aree di memoria da leggere;
 	
@@ -216,7 +218,7 @@ Per comodità riporto i termini già definiti in \ref{subsec:prima_iterazione} a
 	
 	\item \gls{tagupdaterrepository}: componente che gestisce le richieste di scrittura di una specifica \gls{tag}. Fornisce ad ogni \gls{tagupdater} i dati necessari per effettuare le scritture;
 	
-	\item Tempo di \textit{polling} (o \textit{PollingTime}): intervallo tra un ciclo di lettura e il successivo, spesso indicato in millisecondi (ms).
+	\item Tempo di \textit{polling} (o \textit{PollingTime}): intervallo tra un ciclo di lettura e il successivo, indicato in millisecondi.
 \end{itemize}
 
 %Per una lettura più chiara della seguente sezione si faccia riferimento ai termini definiti in \ref{subsec:prima_iterazione}.\\
@@ -226,7 +228,7 @@ L'architettura ottenuta dal prototipo doveva rappresentare una solida base per p
 Per ottenere un'architettura solida e manutenibile ho scelto di gestire separatamente le operazioni di lettura e scrittura. Nella soluzione sviluppata, per ogni PLC saranno utilizzati due componenti: \gls{tagpoller} e \gls{tagupdater}.
 \begin{itemize}
 	\item Il primo si occupa di effettuare la lettura (grazie al proprio \textit{\gls{driver}}) di tutte le aree di memoria definite nel file di configurazione (queste sono le \gls{tag}). Questa operazione avviene ad intervalli regolari definiti anch'essi nella configurazione. L'intervallo è il tempo di \gls{polling};
-	\item Il secondo si affida al \gls{tagupdaterrepository} per consumare la coda di richieste di scrittura che sono a lui indirizzate.
+	\item Il secondo si affida al componente \gls{tagupdaterrepository} per consumare la coda di richieste di scrittura che sono a lui indirizzate.
 \end{itemize}
 
 I componenti già in parte descritti nel glossario a inizio sezione e le loro interazioni sono rappresentati nell'architettura in seguito riportata.\\
@@ -258,21 +260,22 @@ Nel seguito, seguendo un approccio \textit{top-down}, verranno analizzate le com
 \clearpage
 
 \subsection{File di configurazione}
-Verrà di seguito descritto il formato del file di configurazione utilizzato per definire con quali PLC JDI deve effettuare il collegamento e per ognuno le aree di memoria interessate dalle operazioni di lettura e scrittura.\\
+Verrà qui descritto il formato del file di configurazione utilizzato per definire con quali PLC JDI debba effettuare il collegamento e per ognuno vengono specificate le aree di memoria interessate dalle operazioni di lettura e scrittura.\\
 
 Il livello più alto è il PLC. Per questo vengono definiti:
 \begin{itemize}
 	\item Impostazioni generali della macchina: Indirizzo IP, porta, identificativo univoco macchina e tempo di \gls{polling};
-	\item Elenco delle \gls{tag}. Per ognuna viene fornito: tipo del dato, indirizzo in memoria, permesso di lettura/scrittura. Per ogni PLC possono essere definite molteplici \gls{tag}. Queste vengono identificate dalla stringa nome-macchina.nome-tag. 
+	\item Elenco delle \gls{tag}. Per ognuna viene fornito: tipo del dato, indirizzo in memoria, permessi di lettura/scrittura. Per ogni PLC possono essere definite molteplici \gls{tag}. Queste vengono identificate dalla stringa nome-macchina.nome-tag. 
 \end{itemize}
 
 In un file di configurazione possono essere presenti diverse definizioni di PLC, identificate univocamente dal nome.\\
-Nel listato in figura \ref{lst:json} un esempio di file di configurazione con un solo PLC definito. Le due aree di memoria definite sono identificabili dalle stringhe \textit{plc-taglio-laser.counter} e \textit{plc-taglio-laser.watchdog}.
+Nel listato in \ref{lst:json} un esempio di file di configurazione con un solo PLC definito. Le due aree di memoria definite sono identificabili dalle stringhe \textit{plc-taglio-laser.counter} e \textit{plc-taglio-laser.watchdog}.
 
 \clearpage
 
 \begin{lstlisting}[language=json,firstnumber=1, caption={Esempio di una configurazione in formato JSON. È presente una sola macchina denominata "plc-fisico". Per questa sono definite due aree di memoria con diversi permessi.},label={lst:json}]
-{"machines": {
+{
+"machines": {
   "plc-taglio-laser": {
     "settings": {
       "PollingTime": "1000",
@@ -295,7 +298,8 @@ Nel listato in figura \ref{lst:json} un esempio di file di configurazione con un
       }
     }
   }
-}}
+}
+}
 \end{lstlisting}
 
 \clearpage
@@ -309,17 +313,14 @@ Nel listato in figura \ref{lst:json} un esempio di file di configurazione con un
 	\label{fig:configurators}
 \end{figure}
 
-Il componente \gls{configurator} racchiude le classi che effettuano le operazioni di creazione dei \textit{thread} per la lettura e per la scrittura, rappresentati rispettivamente in \gls{tagpoller} e \gls{tagupdater}. Utilizzano la libreria \textit{Jackson}\footnote{Ulteriori informazioni disponibili su \href{https://github.com/FasterXML/jackson}{https://github.com/FasterXML/jackson}} per processare il file JSON di configurazione. Nella pagina seguente viene raffigurato il formato del file di configurazione.
-
+Il componente \gls{configurator} racchiude le classi che effettuano le operazioni di creazione dei \textit{thread} per la lettura e per la scrittura, rappresentati rispettivamente in \gls{tagpoller} e \gls{tagupdater}. Utilizzano la libreria \textit{Jackson}\footnote{Ulteriori informazioni disponibili su \href{https://github.com/FasterXML/jackson}{https://github.com/FasterXML/jackson}} per processare il file JSON di configurazione.\\
 La classe base \textit{Configuration} effettua le operazioni di basso livello con la configurazione  caricata da \textit{file system} per ottenere, per ogni PLC specificato, il \textit{\gls{driver}} adatto. Ricava poi le \textit{TagConfiguration} per ogni area di memoria interessata da lettura e scrittura.
 
 \textit{ReadingConfiguration} grazie al lavoro svolto dalla classe padre \textit{Configuration} estrae i \textit{thread} per la lettura fornendo loro la lista di \textit{TagConfiguration} con i permessi di lettura.
 
 \textit{WritingConfiguration} fornisce lo stesso servizio ma ricavando le configurazioni sulla base dei permessi di scrittura.
-
-
 \begin{lstlisting}[language=java, caption={Le configurazioni delle tag da leggere per un dato PLC vengono filtrate usando gli Stream Java}]
-//ReadingConfiguration.java
+//ReadingConfiguration
 private List<TagConfiguration> filterReadableConfigurations(
 		List<TagConfiguration> tagConfigurations) {
 	return tagConfigurations.stream()
@@ -342,11 +343,13 @@ private List<TagConfiguration> filterReadableConfigurations(
 Rappresenta il \textit{task} che il \textit{thread} di lettura svolge.\\ 
 Come detto, ad ogni PLC definito nella configurazione corrispondono un \textit{thread} di lettura e uno di scrittura. Saranno istanziati quindi $n$ \gls{tagpoller}, con $n$ il numero di PLC nella configurazione.\\
 
-Il funzionamento di \gls{tagpoller} è semplice: ad ogni ciclo utilizza la propria istanza di \gls{driver} per richiedere al PLC i valori di tutte le \gls{tag} specificate nella configurazione di \gls{tagpoller}. Questa configurazione viene fornita da \textit{ReadingConfiguration} alla creazione del \gls{thread}. I nuovi valori delle \gls{tag} vengono inviati alla \textit{repository} condivisa tra i \gls{thread} di lettura che si occupa di aggiornare i valori precedentemente letti.
+Il funzionamento di \gls{tagpoller} è semplice: ad ogni ciclo utilizza la propria istanza di \gls{driver} per richiedere al PLC i valori di tutte le \gls{tag} specificate nella configurazione di \gls{tagpoller}. Questa configurazione viene fornita da \textit{ReadingConfiguration} alla creazione del \textit{thread}. I nuovi valori delle \gls{tag} vengono inviati alla \textit{repository} condivisa tra i \textit{thread} di lettura che si occupa di aggiornare i valori precedentemente letti.
 
-Nel metodo \textit{run} della classe \gls{tagpoller} nel listato in \ref{fig:tagpoller} viene descritto ad alto livello il comportamento del \gls{thread} di lettura. Vengono effettuate le letture verso il PLC di tutte le \textit{Tag} etichettate come "da leggere". Il \textit{thread} che sta svolgendo il \textit{task} viene mandato in \textit{sleep()} per il tempo di \textit{\gls{polling}} specificato all'interno della configurazione. Si tratta di un'esecuzione che termina solo quando il \textit{thread} corrente viene interrotto in caso di errore. \\
-\newline
+Nel metodo \textit{run} della classe \gls{tagpoller} nel listato in \ref{fig:tagpoller} viene descritto ad alto livello il comportamento del \textit{thread} di lettura. Vengono effettuate le letture verso il PLC di tutte le \textit{Tag} etichettate come "da leggere". Il \textit{thread} che sta svolgendo il \textit{task} viene mandato in \textit{sleep()} per il tempo di \textit{\gls{polling}} specificato all'interno della configurazione. Si tratta di un'esecuzione che termina solo quando il \textit{thread} corrente viene interrotto in caso di errore. \\
+
+
 \begin{figure}[h]
+	\vspace{30pt}
 	\setlength{\belowcaptionskip}{15pt}
 	\centering
 	\includegraphics[width=0.8\textwidth]{figures/engines}
@@ -358,24 +361,24 @@ Nel metodo \textit{run} della classe \gls{tagpoller} nel listato in \ref{fig:tag
 \clearpage
 
 \subsection{Scrittura}
-\gls{tagupdater} è una classe che estende l'interfaccia \textit{Runnable}. Si occupa di portare a termine le richieste di scrittura accumulare in \gls{tagupdaterrepository}. Rappresenta il \textit{task} che il \gls{thread} di scrittura svolge.\\ 
+\gls{tagupdater} è una classe che estende l'interfaccia \textit{Runnable}. Si occupa di portare a termine le richieste di scrittura accumulate in \gls{tagupdaterrepository}. Rappresenta il \textit{task} che il \textit{thread} di scrittura svolge.\\ 
 Anche in questo caso per ogni PLC presente nella configurazione viene istanziato un \textit{thread} di scrittura.\\
 
 Un requisito fondamentale che \gls{tagupdater} soddisfa è la reattività alle richieste di scrittura. È importante infatti che le richieste inserite nella coda dedicate a ciascun \textit{thread}, contenute in \gls{tagupdaterrepository}, vengano elaborate nel più breve tempo possibile.\\
 Per questo il ciclo del \textit{task} di scrittura consiste in una continua richiesta per l'ottenimento di una \gls{tag} da scrivere. Il metodo \textit{run()} del \textit{task} è visibile nel listato in \ref{fig:tagupdater}.\\
 
-Per rendere efficiente la gestione delle richieste, tra \gls{tagupdater} e \gls{pollingtagrepository} avviene una sincronizzazione sulla coda prendendo spunto dal classico problema del produttore-consumatore\footnote{Più informazioni disponibili su \href{https://en.wikipedia.org/wiki/Producer\%E2\%80\%93consumer\_problem}{https://en.wikipedia.org/wiki/Producer\%E2\%80\%93consumer\_problem}}. Questo meccanismo verrà approfondito in \ref{subsec:scrittura}, dopo aver descritto la gestione delle richieste di scrittura.\\
+Per rendere efficiente la gestione delle richieste, tra \gls{tagupdater} e \gls{tagupdaterrepository} avviene una sincronizzazione sulla coda prendendo spunto dal classico problema del produttore-consumatore\cite{WEBSITE:producerconsumer}. Questo meccanismo verrà approfondito in \ref{subsec:scrittura}, dopo aver descritto la gestione delle richieste di scrittura.\\
 
 \begin{lstlisting}[language=java,caption={Metodo run() della classe TagUpdater},label={fig:tagupdater}]
 //TagUpdater
 @Override
 public void run() {
-ConnectionHandler.instantiateConnectionFor(driver, LOG_NAME);
-while (!Thread.interrupted()) {
-retrieveAndWriteTag();
-}
-Logger.log(LOG_NAME + " Thread interrupted");
-ConnectionHandler.interruptConnectionFor(driver);
+	ConnectionHandler.instantiateConnectionFor(driver, LOG_NAME);
+	while (!Thread.interrupted()) {
+		retrieveAndWriteTag();
+	}
+	Logger.log(LOG_NAME + " Thread interrupted");
+	ConnectionHandler.interruptConnectionFor(driver);
 }
 \end{lstlisting}
 
@@ -415,8 +418,9 @@ public void run() {
 \end{figure}
 
 
+I dati letti dai PLC devono essere mantenuti in memoria e aggiornati. Ogni \textit{thread} \gls{tagpoller}, una volta terminato il proprio ciclo di lettura, invia le \gls{tag} accumulate alla istanza comune di \textit{OnRamPollingTagRepository}. Questo componente utilizza la \textit{ConcurrentHashMap} scelta durante lo sviluppo del \acrshort{poc}.
 
-\clearpage
+Le \gls{tag} ricevute dai \textit{thread} sono elaborate singolarmente. I valori precedentemente salvati nella mappa vengono aggiornati, se non era disponibile nessun valore allora la \gls{tag} viene inserita per la prima volta.
 
 
 
@@ -438,16 +442,15 @@ public void run() {
 %	\label{fig:polling_scheme}
 %\end{figure}
 
-\textit{Spiegazione della gestione richieste di scrittura...}\\
+%\textit{Spiegazione della gestione richieste di scrittura...}\\
 %Per terminare la visione dell'integrazione tra i componenti \textit{Engines} e \textit{Store} viene ora descritta la gestione delle richieste di scrittura: per ottenere una bassa latenza tra il momento in cui viene richiesta una scrittura e quando viene presa in carico dal \textit{thread} di scrittura ho preso spunto dal classico \textbf{problema del produttore/consumatore}.
 
+Per gestire in maniera efficiente le richieste di scrittura è fondamentale che ad ogni \textit{thread} \gls{tagupdater} venga associata una coda di richieste. Per poter avere una propria coda, ogni \textit{thread} chiama il metodo \textit{subscribe} della \textit{repository} e questa provvede ad inizializzare una coda vuota.\\
+Per inserire una nuova richiesta, l'interfaccia della \textit{repository} espone il metodo \textit{addTagPairToWrite} che si occupa di inserire la richiesta nella coda corretta.
 
-Il \textit{thread} di scrittura richiede al proprio oggetto \textit{OnRamTagUpdaterRepositoy} una \textit{Tag} che è in attesa di essere scritta. Il \textit{thread} svuota la coda di richieste. Se non ci sono richieste pendenti il \textit{thread} di scrittura viene messo in stato di \textit{wait}. Appena la \textit{repository} riceve una nuova richiesta di scrittura il \textit{thread} viene notificato. Questo riprenderà la sua esecuzione consumando la nuova richiesta.
+Il meccanismo realizzato per consumare le richieste con attenzione ai tempi di reazione del \textit{thread} di scrittura è il seguente: il \textit{thread} di scrittura richiede al proprio oggetto \textit{OnRamTagUpdaterRepositoy} una \textit{Tag} che è in attesa di essere scritta. Il \textit{thread} svuota la coda di richieste portando a termine la scrittura. Se non ci sono richieste pendenti il \textit{thread} di scrittura viene messo in stato di \textit{wait}. Appena la \textit{repository} riceve una nuova richiesta di scrittura il \textit{thread} viene notificato. Questo riprenderà la sua esecuzione consumando la nuova richiesta.
 
 Questo meccanismo è stato semplificato dalla creazione della classe \textit{TagsToWriteQueue} che ingloba un \textit{ConcurrentLinkedDeque} utilizzato per gestire le richieste per ogni \textit{thread} di scrittura. Di seguito i metodi di \textit{TagsToWriteQueue} che utilizzano \textit{wait()} e \textit{notify()} per rispettivamente fermare e riattivare il consumo delle richieste.\\
-
-
-\textit{Aggiungere diagramma di sequenza per il funzionamento di wait/notify.}\\
 
 \begin{lstlisting}[language=java,caption={Metodi che implementano il problema produttore/consumatore per gestire le richieste di scrittura}]
 //TagsToWriteQueue
@@ -478,14 +481,14 @@ I processi di verifica e validazione si occupano di controllare che il software 
 \textit{Barry Boehm} espresse in breve la differenza tra verifica e validazione nel seguente modo:
 \begin{quote}
 	\begin{itemize}
-		\item Validation: Are we building the right product?
-		\item Verification: Are we building the product right?
+		\item \textit{Validation: Are we building the right product?}
+		\item \textit{Verification: Are we building the product right?}
 	\end{itemize}
 \end{quote}
 
 L'obiettivo della verifica è controllare che il software soddisfi i requisiti funzionali e non funzionali definiti durante l'attività di analisi.
 
-La validazione riguarda invece un punto di vista più ampio: il suo scopo è di assicurarsi che il software soddisfi le aspettative del cliente. Risulta essenziale poiché non sempre i bisogni di chi ha richiesto il software sono perfettamente rispecchiati nell'analisi dei requisiti.\\
+La validazione considera invece una panoramica più ampia: il suo scopo è di assicurarsi che il software soddisfi le aspettative del cliente. Tale passaggio risulta essenziale poiché non sempre i bisogni di chi ha richiesto il software sono perfettamente rispecchiati nell'analisi dei requisiti.\\
 
 
 
@@ -501,20 +504,20 @@ Gli strumenti utilizzati per effettuare l'analisi statica erano integrati nell'I
 
 Per effettuare analisi dinamica invece sono stati implementati test di unità con il \textit{framework} JUnit per rilevare la presenza di difetti nelle classi più delicate:
 \begin{itemize}
-	\item \textit{TagUpdaterRepository};
+	\item \textit{OnRamTagUpdaterRepository};
 	\item \textit{TagsToWriteQueue}.
 \end{itemize}
-Per questi due moduli è stato utilizzato il \acrfull{tdd}. Una pratica che prevede di scrivere codice solamente per far passare un test che fallisce. I passi seguiti per lo sviluppo dei moduli è sono stati i seguenti:
+Per questi due moduli è stato utilizzato il \acrfull{tdd}. Una pratica che prevede di scrivere codice solamente per far passare un test che fallisce. I passi seguiti per lo sviluppo dei moduli sono stati i seguenti:
 \begin{enumerate}
-	\item pensare ad un test per verificare una funzionalità del modulo;
-	\item eseguire il test. Inizialmente questo fallirà;
-	\item scrivere il codice per soddisfare il test scritto;
-	\item verificare che il codice non abbia introdotto regressioni. I test scritti precedente devono passare;
-	\item riorganizzare il codice scritto;
-	\item ripetere i passi precedenti.
+	\item Pensare ad un test per verificare una funzionalità del modulo;
+	\item Eseguire il test. Inizialmente questo fallirà;
+	\item Scrivere il codice per soddisfare il test scritto;
+	\item Verificare che il codice non abbia introdotto regressioni. I test scritti precedente devono sempre essere soddisfatti;
+	\item Riorganizzare il codice scritto;
+	\item Ripetere i passi precedenti.
 \end{enumerate}
 
-Per rispettare i vicoli sul consumo della memoria sono stati eseguiti test di \textit{performance} che prevedevano l'esecuzione del sistema in condizioni simili di stress. I dati rilevato sono stati analizzati e approvati dal tutor \acrshort{smi}. I risultati si sono attestati al di sotto dei 2GB vincolati dall'analisi.\\
+Per rispettare i vicoli sul consumo della memoria sono stati eseguiti test di \textit{performance} che prevedevano l'esecuzione del sistema in condizioni di stress. I dati rilevati sono stati analizzati e approvati dal responsabile tecnico e tutor aziendale Alex Beggiato. I risultati si sono attestati al di sotto dei 2GB vincolati dall'analisi.\\
 
 La validazione del sistema ha accertato che il software prodotto rispettasse i requisiti elaborati da \acrshort{smi}. Per valutare oggettivamente il prodotto sviluppato si sono svolte numerose riunioni in presenza del tutor Alex Beggiato e dei membri del team di sviluppo JMES. L'esito è stato estremamente positivo, avendo raggiunto tutti gli obiettivi posti a inizio stage e i requisiti raccolti durante l'attività di analisi.
 

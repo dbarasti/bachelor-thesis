@@ -395,11 +395,12 @@
 	  \@advisor \hfill \@author\\
 	  Università di Padova \\
 	  \vspace{6pt}
-	  \textit{Tutor esterno} \\
-	  \@coadvisorOne \\
-	  \@coadvisorOneUniversity
+%	  \textit{Tutor esterno} \\
+%	  \@coadvisorOne \\
+%	  \@coadvisorOneUniversity
 	  \vspace{10pt}
 	\end{flushleft}
+	\textbf{Anno Accademico 2018-2019}
 	\end{normalsize}
 	
 	\end{center}
@@ -441,7 +442,7 @@
 
 \newcommand{\acknowledgments}{
 	\phantomsection
-	\chapter*{Acknowledgments}
+	\chapter*{Ringraziamenti}
 	\noindent
 	\input{frontmatter/thanks}
 	\vspace*{\fill} \newpage
@@ -477,7 +478,7 @@
     \clearpage
     \bibliography{riferimenti}
     \addcontentsline{toc}{chapter}{Riferimenti}
-    \bibliographystyle{apalike2}
+%    \bibliographystyle{apalike2}
     \include{endmatter/colophon}
 }
 

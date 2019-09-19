@@ -1,25 +1,22 @@
 \glossaryentry{\textit {Configurator}?\glossentry{configurator}|setentrycounter[]{page}\glsnumberformat}{ix}
-\glossaryentry{outsourcing?\glossentry{outsourcing}|setentrycounter[]{page}\glsnumberformat}{2}
-\glossaryentry{digital industry?\glossentry{digital industry}|setentrycounter[]{page}\glsnumberformat}{2}
+\glossaryentry{\textit {outsourcing}?\glossentry{outsourcing}|setentrycounter[]{page}\glsnumberformat}{2}
+\glossaryentry{\textit {digital industry}?\glossentry{digital industry}|setentrycounter[]{page}\glsnumberformat}{2}
 \glossaryentry{\textit {benchmark}?\glossentry{benchmark}|setentrycounter[]{page}\glsnumberformat}{9}
-\glossaryentry{WebSocket?\glossentry{websocket}|setentrycounter[]{page}\glsnumberformat}{21}
-\glossaryentry{WebSocket?\glossentry{websocket}|setentrycounter[]{page}\glsnumberformat}{22}
+\glossaryentry{\textit {WebSocket}?\glossentry{websocket}|setentrycounter[]{page}\glsnumberformat}{22}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{24}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{24}
-\glossaryentry{WebSocket?\glossentry{websocket}|setentrycounter[]{page}\glsnumberformat}{25}
-\glossaryentry{WebSocket?\glossentry{websocket}|setentrycounter[]{page}\glsnumberformat}{25}
-\glossaryentry{WebSocket?\glossentry{websocket}|setentrycounter[]{page}\glsnumberformat}{26}
+\glossaryentry{\textit {WebSocket}?\glossentry{websocket}|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{\textit {WebSocket}?\glossentry{websocket}|setentrycounter[]{page}\glsnumberformat}{25}
+\glossaryentry{\textit {WebSocket}?\glossentry{websocket}|setentrycounter[]{page}\glsnumberformat}{26}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{28}
 \glossaryentry{\textit {polling}?\glossentry{polling}|setentrycounter[]{page}\glsnumberformat}{33}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{33}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{33}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{33}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{33}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{36}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{36}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{36}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{36}
+\glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{36}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{36}
+\glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{37}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{39}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{39}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{40}
@@ -27,11 +24,8 @@
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{40}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{40}
 \glossaryentry{\textit {benchmark}?\glossentry{benchmark}|setentrycounter[]{page}\glsnumberformat}{41}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{41}
 \glossaryentry{\textit {Engine}?\glossentry{engine}|setentrycounter[]{page}\glsnumberformat}{41}
 \glossaryentry{\textit {benchmark}?\glossentry{benchmark}|setentrycounter[]{page}\glsnumberformat}{41}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{42}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{42}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{44}
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{44}
 \glossaryentry{\textit {TagPoller}?\glossentry{tagpoller}|setentrycounter[]{page}\glsnumberformat}{44}
@@ -71,17 +65,31 @@
 \glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{49}
 \glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{49}
 \glossaryentry{\textit {TagPoller}?\glossentry{tagpoller}|setentrycounter[]{page}\glsnumberformat}{49}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{49}
 \glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{49}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{49}
 \glossaryentry{\textit {TagPoller}?\glossentry{tagpoller}|setentrycounter[]{page}\glsnumberformat}{49}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{49}
 \glossaryentry{\textit {polling}?\glossentry{polling}|setentrycounter[]{page}\glsnumberformat}{49}
 \glossaryentry{\textit {TagUpdater}?\glossentry{tagupdater}|setentrycounter[]{page}\glsnumberformat}{50}
 \glossaryentry{\textit {TagUpdaterRepository}?\glossentry{tagupdaterrepository}|setentrycounter[]{page}\glsnumberformat}{50}
-\glossaryentry{\textit {thread}?\glossentry{thread}|setentrycounter[]{page}\glsnumberformat}{50}
 \glossaryentry{\textit {TagUpdater}?\glossentry{tagupdater}|setentrycounter[]{page}\glsnumberformat}{50}
 \glossaryentry{\textit {TagUpdaterRepository}?\glossentry{tagupdaterrepository}|setentrycounter[]{page}\glsnumberformat}{50}
 \glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{50}
 \glossaryentry{\textit {TagUpdater}?\glossentry{tagupdater}|setentrycounter[]{page}\glsnumberformat}{50}
-\glossaryentry{\textit {PollingTagRepository}?\glossentry{pollingtagrepository}|setentrycounter[]{page}\glsnumberformat}{50}
+\glossaryentry{\textit {TagUpdaterRepository}?\glossentry{tagupdaterrepository}|setentrycounter[]{page}\glsnumberformat}{50}
+\glossaryentry{\textit {TagPoller}?\glossentry{tagpoller}|setentrycounter[]{page}\glsnumberformat}{52}
+\glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{52}
+\glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{52}
+\glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{52}
+\glossaryentry{\textit {TagUpdater}?\glossentry{tagupdater}|setentrycounter[]{page}\glsnumberformat}{52}
+\glossaryentry{\textit {benchmark}?\glossentry{benchmark}|setentrycounter[]{page}\glsnumberformat}{58}
+\glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{59}
+\glossaryentry{\textit {business unit}?\glossentry{business unit}|setentrycounter[]{page}\glsignore}{61}
+\glossaryentry{\textit {Rational Team Concert}?\glossentry{rational team concert}|setentrycounter[]{page}\glsignore}{61}
+\glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{65}
+\glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{65}
+\glossaryentry{\textit {TagPoller}?\glossentry{tagpoller}|setentrycounter[]{page}\glsnumberformat}{65}
+\glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{65}
+\glossaryentry{\textit {TagPoller}?\glossentry{tagpoller}|setentrycounter[]{page}\glsnumberformat}{65}
+\glossaryentry{\textit {Tag}?\glossentry{tag}|setentrycounter[]{page}\glsnumberformat}{65}
+\glossaryentry{\textit {TagUpdater}?\glossentry{tagupdater}|setentrycounter[]{page}\glsnumberformat}{65}
+\glossaryentry{\textit {driver}?\glossentry{driver}|setentrycounter[]{page}\glsnumberformat}{65}
+\glossaryentry{\textit {TagConfiguration}?\glossentry{tagconfiguration}|setentrycounter[]{page}\glsnumberformat}{65}
